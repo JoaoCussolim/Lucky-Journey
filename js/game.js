@@ -1,27 +1,26 @@
-let canvas = document.querySelector('canvas')
-let ctx = canvas.getContext('2d')
+let canvas = document.querySelector('canvas');
+let ctx = canvas.getContext('2d');
 
 
 let dice = new Dice({
-    sides: 6
+    sides: 20
 });
 
 
-canvas.width = window.innerWidth
-canvas.height = window.innerHeight
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
 
 let animate = () => {
     requestAnimationFrame(animate)
-    ctx.clearRect(0, 0, canvas.width, canvas.height)
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-    ctx.fillStyle = 'white'
-    ctx.fillRect(0, 0, canvas.width, canvas.height)
+    ctx.fillStyle = 'white';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-    player.update()
-    dice.update()
-    dice.roll()
-}
+    player.update();
+    dice.update();
+};
 
 setTimeout(() => {
-    animate()
+    animate();
 }, 500);
