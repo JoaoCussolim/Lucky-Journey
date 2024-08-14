@@ -19,7 +19,6 @@ class Dice {
 
     update() {
         this.draw();
-        console.log(this.rollInterval, this.rollTimer)
     }
 
     roll() {
@@ -34,7 +33,4 @@ class Dice {
         }
     }
 
-
 }
-
-

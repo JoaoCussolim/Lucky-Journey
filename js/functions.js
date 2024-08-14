@@ -1,11 +1,10 @@
 //wait function
 
-function wait(millis)
-{
+function wait(millis) {
     var date = new Date();
     var curDate = null;
     do { curDate = new Date(); }
-    while(curDate-date < millis);
+    while (curDate - date < millis);
 }
 
 
@@ -29,28 +28,28 @@ function line(x, y, fx, fy) {
 
 
 
-    // Mouse Colide Function
+// Mouse Colide Function
 
-    let mouse = {
-      x: undefined,
-      y: undefined
-  }
-  
+let mouse = {
+    x: undefined,
+    y: undefined
+}
 
-  canvas.onmousemove = function (e) {
+
+canvas.onmousemove = function (e) {
     mouse.x = e.clientX
     mouse.y = e.clientY
 }
-  
-  
-  let isInsideButton = (rect = { x: 0, y: 0, width: 0, height: 0 }) => {
-      return mouse.x > rect.x && mouse.x < rect.x + rect.width && mouse.y < rect.y + rect.height && mouse.y > rect.y
-  }
 
 
-  // Colide Circle Function
+let isInsideButton = (rect = { x: 0, y: 0, width: 0, height: 0 }) => {
+    return mouse.x > rect.x && mouse.x < rect.x + rect.width && mouse.y < rect.y + rect.height && mouse.y > rect.y
+}
 
-  let circleCollision = (circle1, circle2) => {
+
+// Colide Circle Function
+
+let circleCollision = (circle1, circle2) => {
     let xDiff = circle2.pos.x - circle1.pos.x;
     let yDiff = circle2.pos.y - circle1.pos.y;
 

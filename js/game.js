@@ -18,10 +18,10 @@ let animate = () => {
     ctx.fillRect(0, 0, canvas.width, canvas.height)
 
     player.update()
-    dice.update();
-    dice.roll();
+    dice.update()
+    dice.roll()
 }
 
-animate()
-
-
+setTimeout(() => {
+    animate()
+}, 500);
