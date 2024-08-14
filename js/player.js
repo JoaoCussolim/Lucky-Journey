@@ -1,53 +1,38 @@
+let lockCamera
+
 class Player extends Sprite{
     constructor({position = {x: 0, y: 0}, dimensions = {width: 0, height: 0}}){
         super({position, dimensions});
-        this.cameraBox = {
-            x: this.position.x,
-            y: this.position.y,
-            width: this.dimensions.width * 2,
-            height: this.dimensions.height * 2
-        };
-    };
-    updateCameraBox(){
-        this.cameraBox = {
-            x: this.position.x - (this.dimensions.width * 1.5),
-            y: this.position.y - (this.dimensions.height * 1.5),
-            width: this.dimensions.width * 4,
-            height: this.dimensions.height * 4
-        };
     };
 
     shouldPanCameraVertical(){
-        let cameraBoxRightSide = this.cameraBox.x + this.cameraBox.width
-
-        if(cameraBoxRightSide > canvas.width) {camera.x -= 1}
-
-        if(cameraBoxRightSide > scaledCanvas.width + Math.abs(camera.x)) camera.x -= this.velocity.x
-
-        //if(camera.x < scaledCanvas.width) camera.x -= this.velocity.x        
+        let translateVar = backgroundPositions.x <= -canvas.width + scaledCanvas.width === true ? -1 : 1 
+        if(backgroundPositions.x <= -canvas.width + scaledCanvas.width || backgroundPositions.x >= 0) backgroundPositions.x -= translateVar
+        else backgroundPositions.x -= this.velocity.x
     }
 
     shouldPanCameraHorizontal(){
-        let cameraBoxRightSide = this.cameraBox.y + this.cameraBox.height
 
-        if(cameraBoxRightSide > canvas.height) {camera.y -= 1}
+        //Futuramente será utilizado blocos de colisão, basicamente, na criação de um mapa você pode exportar o modelo de blocos
+        //Estes blocos da camada colisão serão utilizados para localização do mapa e conseguir saber até onde o player pode ir
+        //Isso vai fazer com que mesmo que o mapa mude sua camera ou seja posicionado, o player só vai parar quando bater no bloco de colisao
+        //Que na maioria das vezes estará presente nas bordas do mapa ou então em cercas, árvores, qualquer coisa colidivel
+        //Na teoria parece mais complicado porém com esse modelo de código, qualquer bloco de colisão vai fazer o player colidir
+        //Sendo assim, da pra fazer colisões aleatorias que não tem a ver com a borda do mapa em si, melhorando o sistema
 
-        if(cameraBoxRightSide > scaledCanvas.height + Math.abs(camera.y)){
-            camera.y -= this.velocity.y
-        }
-        //if(camera.y < scaledCanvas.height) camera.y -= this.velocity.y
-        //else if(this.cameraBox.y - this.cameraBox.height < canvas.height) camera.y -= this.velocity.y
+        let translateVar = backgroundPositions.y <= 0 === true ? -1 : 1 
+        if(backgroundPositions.y + this.dimensions.height <= 0 || backgroundPositions.y + this.dimensions.height >= canvas.height/1.46) backgroundPositions.y -= translateVar
+        else backgroundPositions.y -= this.velocity.y
     }
 
     update(){
         this.draw();
         this.shouldPanCameraHorizontal();
         this.shouldPanCameraVertical();
-        this.updateCameraBox();
     };
 };
 
-let player = new Player({ position: { x: 500, y: 300 }, dimensions: { width: 100, height: 100 } });
+let player = new Player({ position: { x: 100, y: 500 }, dimensions: { width: 100, height: 100 } });
 
 let acceptedKeys = {
     ArrowUp(player) {

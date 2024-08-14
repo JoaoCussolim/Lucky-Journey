@@ -1,5 +1,5 @@
-class Sprite{
-    constructor({position = {x: 0, y: 0}, dimensions = {width: 0, height: 0}}){
+class Sprite {
+    constructor({ position = { x: 0, y: 0 }, dimensions = { width: 0, height: 0 } }) {
         this.position = position;
         this.dimensions = dimensions;
         this.velocity = {
@@ -8,17 +8,17 @@ class Sprite{
         };
     };
 
-    draw(){
+    draw() {
         ctx.fillStyle = 'black';
         ctx.fillRect(this.position.x, this.position.y, this.dimensions.width, this.dimensions.height);
     };
 
-    applyVelocity(){
+    applyVelocity() {
         this.position.x += this.velocity.x;
         this.position.y += this.velocity.y;
     };
 
-    update(){
+    update() {
         this.applyVelocity();
         this.draw();
     };

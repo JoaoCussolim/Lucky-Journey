@@ -13,16 +13,14 @@ let scaledCanvas = {
     height: canvas.height/scale
 }
 
-let camera = {
+let backgroundPositions = {
     x: 0,
     y: 0
 }
 
-
 let dice = new Dice({
     sides: 20
 });
-
 
 let animate = () => {
     requestAnimationFrame(animate)
@@ -30,9 +28,8 @@ let animate = () => {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     ctx.save();
     ctx.scale(scale, scale);
-    ctx.translate(camera.x, camera.y - scaledCanvas.width - 100);
-    ctx.fillStyle = 'white';
-    ctx.drawImage(background, 0, 0, canvas.width, canvas.height);
+    ctx.translate(0, -scaledCanvas.width - 100);
+    ctx.drawImage(background, backgroundPositions.x, backgroundPositions.y, canvas.width, canvas.height);
     ctx.restore();
 
 
