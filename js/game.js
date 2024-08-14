@@ -19,6 +19,7 @@ let animate = () => {
 
     player.update();
     dice.update();
+    testEnemy.update();
 };
 
 setTimeout(() => {
