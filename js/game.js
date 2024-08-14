@@ -1,6 +1,12 @@
 let canvas = document.querySelector('canvas')
 let ctx = canvas.getContext('2d')
 
+
+let dice = new Dice({
+    sides: 6
+});
+
+
 canvas.width = window.innerWidth
 canvas.height = window.innerHeight
 
@@ -12,6 +18,10 @@ let animate = () => {
     ctx.fillRect(0, 0, canvas.width, canvas.height)
 
     player.update()
+    dice.update();
+    dice.roll();
 }
 
 animate()
+
+
