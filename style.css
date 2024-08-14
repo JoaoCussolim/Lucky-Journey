@@ -1,0 +1,16 @@
+*{
+    user-select: none;
+    overflow: hidden;
+}
+
+body{
+    background-color: black;
+    margin: 0;
+}
+
+canvas{
+    bottom: 0;
+    right: 0;
+    left: 0;
+    top: 0;
+}
