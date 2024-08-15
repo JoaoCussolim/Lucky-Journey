@@ -32,7 +32,7 @@ class Player extends Sprite{
     };
 };
 
-let player = new Player({ position: { x: 100, y: 500 }, dimensions: { width: 100, height: 100 } });
+let player = new Player({ position: { x: 950, y: 500 }, dimensions: { width: 100, height: 100 } });
 
 let acceptedKeys = {
     ArrowUp(player) {
