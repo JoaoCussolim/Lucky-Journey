@@ -1,17 +1,27 @@
 let lockCamera
 
-class Player extends Sprite{
-    constructor({position = {x: 0, y: 0}, dimensions = {width: 0, height: 0}}){
-        super({position, dimensions});
+class Player extends Sprite {
+    constructor({ position = { x: 0, y: 0 }, dimensions = { width: 0, height: 0 } }) {
+        super({ position, dimensions });
+        this.center = {
+            x: this.position.x + this.dimensions.width/2,
+            y: this.position.y + this.dimensions.height/2,
+        };
     };
 
-    shouldPanCameraVertical(){
-        let translateVar = backgroundPositions.x <= -canvas.width + scaledCanvas.width === true ? -1 : 1 
-        if(backgroundPositions.x <= -canvas.width + scaledCanvas.width || backgroundPositions.x >= 0) backgroundPositions.x -= translateVar
-        else backgroundPositions.x -= this.velocity.x
+    shouldPanCameraVertical() {
+        let translateVar = backgroundPositions.x <= -canvas.width + scaledCanvas.width === true ? -1 : 1
+        if (backgroundPositions.x <= -canvas.width + scaledCanvas.width || backgroundPositions.x >= 0){
+            backgroundPositions.x -= translateVar;
+            backgroundVelocity.x = translateVar;
+        }
+        else{
+            backgroundPositions.x -= this.velocity.x;
+            backgroundVelocity.x = this.velocity.x;
+        };
     }
 
-    shouldPanCameraHorizontal(){
+    shouldPanCameraHorizontal() {
 
         //Futuramente será utilizado blocos de colisão, basicamente, na criação de um mapa você pode exportar o modelo de blocos
         //Estes blocos da camada colisão serão utilizados para localização do mapa e conseguir saber até onde o player pode ir
@@ -20,12 +30,27 @@ class Player extends Sprite{
         //Na teoria parece mais complicado porém com esse modelo de código, qualquer bloco de colisão vai fazer o player colidir
         //Sendo assim, da pra fazer colisões aleatorias que não tem a ver com a borda do mapa em si, melhorando o sistema
 
-        let translateVar = backgroundPositions.y <= 0 === true ? -1 : 1 
-        if(backgroundPositions.y + this.dimensions.height <= 0 || backgroundPositions.y + this.dimensions.height >= canvas.height/1.46) backgroundPositions.y -= translateVar
-        else backgroundPositions.y -= this.velocity.y
+        let translateVar = backgroundPositions.y <= 0 === true ? -1 : 1
+        if (backgroundPositions.y + this.dimensions.height <= 0 || backgroundPositions.y + this.dimensions.height >= canvas.height / 1.46){
+            backgroundPositions.y -= translateVar;
+            backgroundVelocity.y = translateVar
+        }
+        else{
+            backgroundPositions.y -= this.velocity.y;
+            backgroundVelocity.y = this.velocity.y
+        }
     }
 
-    update(){
+    draw() {
+        this.center = {
+            x: this.position.x + this.dimensions.width/2,
+            y: this.position.y + this.dimensions.height/2,
+        }
+        ctx.fillStyle = 'white';
+        ctx.fillRect(this.center.x, this.center.y, this.dimensions.width, this.dimensions.height);
+    };
+
+    update() {
         this.draw();
         this.shouldPanCameraHorizontal();
         this.shouldPanCameraVertical();
@@ -55,24 +80,26 @@ let acceptedKeys = {
 
 let keyUpKeys = {
     ArrowUp(player) {
-        if(player.velocity.y < 0) player.velocity.y = 0;
+        if (player.velocity.y < 0) player.velocity.y = 0;
     },
     ArrowDown(player) {
-        if(player.velocity.y > 0) player.velocity.y = 0;
+        if (player.velocity.y > 0) player.velocity.y = 0;
     },
     ArrowLeft(player) {
-        if(player.velocity.x < 0) player.velocity.x = 0;
+        if (player.velocity.x < 0) player.velocity.x = 0;
     },
     ArrowRight(player) {
-        if(player.velocity.x > 0) player.velocity.x = 0;
+        if (player.velocity.x > 0) player.velocity.x = 0;
     }
 };
 
+let projectiles = [];
+
 addEventListener('keydown', (e) => {
-    if(acceptedKeys[e.key]) acceptedKeys[e.key](player);
-    if(e.key === 'k') dice.rollable = true;
+    if (acceptedKeys[e.key]) acceptedKeys[e.key](player);
+    if (e.key === 'k') dice.rollable = true;
 });
 
 addEventListener('keyup', (e) => {
-    if(acceptedKeys[e.key]) keyUpKeys[e.key](player);
+    if (acceptedKeys[e.key]) keyUpKeys[e.key](player);
 });

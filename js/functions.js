@@ -41,6 +41,15 @@ canvas.onmousemove = function (e) {
     mouse.y = e.clientY;
 };
 
+let shootAngle;
+
+let getMouseAngle = () => {
+    if (mouse.x > player.position.x) {
+        shootAngle = Math.atan((mouse.y - player.center.y) / (mouse.x - player.center.x));
+    } else {
+        shootAngle = (Math.atan((mouse.y - player.center.y) / (mouse.x - player.center.x))) + Math.PI;
+    }
+}
 
 let isInsideButton = (rect = { x: 0, y: 0, width: 0, height: 0 }) => {
     return mouse.x > rect.x && mouse.x < rect.x + rect.width && mouse.y < rect.y + rect.height && mouse.y > rect.y;

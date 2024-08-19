@@ -11,11 +11,16 @@ canvas.height = window.innerHeight;
 let scale = 4
 
 let scaledCanvas = {
-    width: canvas.width/scale,
-    height: canvas.height/scale
+    width: canvas.width / scale,
+    height: canvas.height / scale
 }
 
 let backgroundPositions = {
+    x: 0,
+    y: 0
+}
+
+let backgroundVelocity = {
     x: 0,
     y: 0
 }
@@ -34,13 +39,25 @@ let animate = () => {
     ctx.drawImage(background, backgroundPositions.x, backgroundPositions.y, canvas.width, canvas.height);
     ctx.restore();
 
+    getMouseAngle();
+
+    for (let i = projectiles.length - 1; i >= 0; i--) {
+        projectile = projectiles[i]
+        projectile.update()
+        console.log(projectile)
+        if (projectile.shouldRemove) projectiles.splice(i, 1)
+    }
 
     player.update();
-    //dice.update();
-    //testEnemy.update();
 
-    characterSelection();
-    button.update();
+    for(let i = enemies.length - 1; i >= 0; i--){
+        enemy = enemies[i]
+        enemy.update()
+    }
+    //dice.update();
+
+    //characterSelection();
+    //button.update();
 };
 
 setTimeout(() => {
