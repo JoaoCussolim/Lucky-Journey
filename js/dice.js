@@ -1,5 +1,5 @@
 class Dice {
-    constructor({ sides }) {
+    constructor({ sides,addiction,pos = { x: (window.innerWidth / 2) - 100, y: (window.innerHeight / 2) - 100 }}) {
         this.sides = sides;
         this.numberDisplay = 0;
         this.pos = { x: (window.innerWidth / 2) - 100, y: (window.innerHeight / 2) - 100 };
@@ -7,6 +7,7 @@ class Dice {
         this.rollInterval = 0;
         this.rollTimer = this.rollInterval;
         this.rolledNumber = 0;
+        this.addiction = addiction;
     };
 
     draw() {
@@ -34,6 +35,11 @@ class Dice {
                 this.rollTimer -= 1;
             }
         } else{
+            if(this.addiction != undefined){
+                if(RandomInt(1,this.addiction.rate) != 1){
+                    this.numberDisplay = this.addiction.number
+                }
+            }
             this.rolledNumber = this.numberDisplay;
             this.rolling = false;
             this.rollInterval = 0;
@@ -42,3 +48,10 @@ class Dice {
     };
     };
 };
+
+
+let dice = new Dice({
+    sides: 20,
+    pos:{x:600, y:200},
+    
+});

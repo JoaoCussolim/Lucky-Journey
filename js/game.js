@@ -25,9 +25,7 @@ let backgroundVelocity = {
     y: 0
 }
 
-let dice = new Dice({
-    sides: 20
-});
+
 
 let spawnedEnemies = false;
 let canSpawnEnemies = false;
@@ -85,8 +83,8 @@ let animate = () => {
     };
 
 
-    //characterSelection();
-    //button.update();
+    // characterSelection();
+    // button.update();
 };
 
 setTimeout(() => {

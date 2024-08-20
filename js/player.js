@@ -111,19 +111,19 @@ let player = new Player({ position: { x: 950, y: 500 }, dimensions: { width: 100
 let acceptedKeys = {
     ArrowUp(player) {
         player.velocity.x = 0;
-        player.velocity.y = -5;
+        player.velocity.y = -5
     },
     ArrowDown(player) {
         player.velocity.x = 0;
-        player.velocity.y = 5;
+        player.velocity.y = 5
     },
     ArrowLeft(player) {
         player.velocity.y = 0;
-        player.velocity.x = -5;
+        player.velocity.x = -5
     },
     ArrowRight(player) {
         player.velocity.y = 0;
-        player.velocity.x = 5;
+        player.velocity.x = 5
     }
 };
 
@@ -144,11 +144,3 @@ let keyUpKeys = {
 
 let projectiles = [];
 
-addEventListener('keydown', (e) => {
-    if (acceptedKeys[e.key]) acceptedKeys[e.key](player);
-    if (e.key === 'k') dice.rolling = true;
-});
-
-addEventListener('keyup', (e) => {
-    if (acceptedKeys[e.key]) keyUpKeys[e.key](player);
-});
