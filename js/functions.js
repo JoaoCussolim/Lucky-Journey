@@ -70,3 +70,11 @@ let circleCollision = (circle1, circle2) => {
     }
     return false;
 };
+
+
+let makeEnemies = (quantity) => {
+    for(let i = 0; i < quantity; i++){
+        let cordinatesValue = RandomInt(100, 500)
+        enemies.push(new Enemy({position: {x: cordinatesValue, y: cordinatesValue}, dimensions: {width: 100, height: 100}}))
+    };
+};

@@ -7,10 +7,30 @@ class Player extends Sprite {
             x: this.position.x + this.dimensions.width/2,
             y: this.position.y + this.dimensions.height/2,
         };
+        this.hitbox = {
+            position: {
+                x: 0,
+                y: 0,
+            },
+            dimensions:{
+                width: 0,
+                height: 0,
+            }
+        };
+        this.attackbox = {
+            position: {
+                x: 0,
+                y: 0,
+            },
+            dimensions:{
+                width: 0,
+                height: 0,
+            }
+        }
     };
 
     shouldPanCameraVertical() {
-        let translateVar = backgroundPositions.x <= -canvas.width + scaledCanvas.width === true ? -1 : 1
+        let translateVar = backgroundPositions.x <= -canvas.width + scaledCanvas.width === true ? -1 : 1;
         if (backgroundPositions.x <= -canvas.width + scaledCanvas.width || backgroundPositions.x >= 0){
             backgroundPositions.x -= translateVar;
             backgroundVelocity.x = translateVar;
@@ -19,7 +39,7 @@ class Player extends Sprite {
             backgroundPositions.x -= this.velocity.x;
             backgroundVelocity.x = this.velocity.x;
         };
-    }
+    };
 
     shouldPanCameraHorizontal() {
 
@@ -30,14 +50,37 @@ class Player extends Sprite {
         //Na teoria parece mais complicado porém com esse modelo de código, qualquer bloco de colisão vai fazer o player colidir
         //Sendo assim, da pra fazer colisões aleatorias que não tem a ver com a borda do mapa em si, melhorando o sistema
 
-        let translateVar = backgroundPositions.y <= 0 === true ? -1 : 1
+        let translateVar = backgroundPositions.y <= 0 === true ? -1 : 1;
         if (backgroundPositions.y + this.dimensions.height <= 0 || backgroundPositions.y + this.dimensions.height >= canvas.height / 1.46){
             backgroundPositions.y -= translateVar;
-            backgroundVelocity.y = translateVar
+            backgroundVelocity.y = translateVar;
         }
         else{
             backgroundPositions.y -= this.velocity.y;
-            backgroundVelocity.y = this.velocity.y
+            backgroundVelocity.y = this.velocity.y;
+        };
+    };
+
+    updateBoxes(){
+        this.hitbox = {
+            position: {
+                x: this.center.x - 20,
+                y: this.center.y - 20,
+            },
+            dimensions:{
+                width: this.dimensions.width + 20 * 2,
+                height: this.dimensions.height + 20 * 2,
+            }
+        };
+        this.attackbox = {
+            position: {
+                x: this.center.x - 50,
+                y: this.center.y - 50,
+            },
+            dimensions:{
+                width: this.dimensions.width + 50 * 2,
+                height: this.dimensions.height + 50 * 2,
+            }
         }
     }
 
@@ -46,12 +89,18 @@ class Player extends Sprite {
             x: this.position.x + this.dimensions.width/2,
             y: this.position.y + this.dimensions.height/2,
         }
+        
+        //ctx.fillStyle = 'green';    
+        //ctx.fillRect(this.attackbox.position.x, this.attackbox.position.y, this.attackbox.dimensions.width, this.attackbox.dimensions.height)
+        //ctx.fillStyle = 'purple';
+        //ctx.fillRect(this.hitbox.position.x, this.hitbox.position.y, this.hitbox.dimensions.width, this.hitbox.dimensions.height)
         ctx.fillStyle = 'white';
         ctx.fillRect(this.center.x, this.center.y, this.dimensions.width, this.dimensions.height);
     };
 
     update() {
         this.draw();
+        this.updateBoxes();
         this.shouldPanCameraHorizontal();
         this.shouldPanCameraVertical();
     };
@@ -97,7 +146,7 @@ let projectiles = [];
 
 addEventListener('keydown', (e) => {
     if (acceptedKeys[e.key]) acceptedKeys[e.key](player);
-    if (e.key === 'k') dice.rollable = true;
+    if (e.key === 'k') dice.rolling = true;
 });
 
 addEventListener('keyup', (e) => {

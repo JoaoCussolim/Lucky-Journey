@@ -3,7 +3,7 @@ class Dice {
         this.sides = sides;
         this.numberDisplay = 0;
         this.pos = { x: (window.innerWidth / 2) - 100, y: (window.innerHeight / 2) - 100 };
-        this.rollable = true;
+        this.rolling = true;
         this.rollInterval = 0;
         this.rollTimer = this.rollInterval;
         this.rolledNumber = 0;
@@ -24,7 +24,7 @@ class Dice {
     };
 
     roll() {
-        if(this.rollable){
+        if(this.rolling){
         if (this.rollInterval < 35) {
             if (this.rollTimer === 0) {
                 this.numberDisplay = RandomInt(1, this.sides);
@@ -35,7 +35,7 @@ class Dice {
             }
         } else{
             this.rolledNumber = this.numberDisplay;
-            this.rollable = false;
+            this.rolling = false;
             this.rollInterval = 0;
             this.rollTimer = 0;
         };
