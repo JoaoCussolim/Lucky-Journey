@@ -3,8 +3,8 @@ class Enemy extends Sprite{
         super({position, dimensions});
         this.health = 100;
         this.center = {
-            x: this.position.x + this.dimensions.width/2,
-            y: this.position.y + this.dimensions.height/2,
+            x: this.position.x - this.dimensions.width/2,
+            y: this.position.y - this.dimensions.height/2,
         };
         this.hitbox = {
             position: {
@@ -92,8 +92,8 @@ class Enemy extends Sprite{
 
     draw(){
         this.center = {
-            x: this.position.x + this.dimensions.width/2,
-            y: this.position.y + this.dimensions.height/2,
+            x: this.position.x - this.dimensions.width/2,
+            y: this.position.y - this.dimensions.height/2,
         };
         //ctx.fillStyle = 'blue';
         //ctx.fillRect(this.hitbox.position.x, this.hitbox.position.y, this.hitbox.dimensions.width, this.hitbox.dimensions.height);

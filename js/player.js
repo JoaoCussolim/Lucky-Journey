@@ -4,8 +4,8 @@ class Player extends Sprite {
     constructor({ position = { x: 0, y: 0 }, dimensions = { width: 0, height: 0 } }) {
         super({ position, dimensions });
         this.center = {
-            x: this.position.x + this.dimensions.width/2,
-            y: this.position.y + this.dimensions.height/2,
+            x: this.position.x - this.dimensions.width/2,
+            y: this.position.y - this.dimensions.height/2,
         };
         this.hitbox = {
             position: {
@@ -86,8 +86,8 @@ class Player extends Sprite {
 
     draw() {
         this.center = {
-            x: this.position.x + this.dimensions.width/2,
-            y: this.position.y + this.dimensions.height/2,
+            x: this.position.x - this.dimensions.width/2,
+            y: this.position.y - this.dimensions.height/2,
         }
         
         //ctx.fillStyle = 'green';    

@@ -5,8 +5,8 @@ class Projectile extends Sprite{
         this.shouldRemove = false;
         this.velocity = velocity;
         this.center = {
-            x: this.position.x + this.dimensions.width/2,
-            y: this.position.y + this.dimensions.height/2,
+            x: this.position.x - this.dimensions.width/2,
+            y: this.position.y - this.dimensions.height/2,
         };
         this.hitbox = {
             position: {
@@ -27,8 +27,8 @@ class Projectile extends Sprite{
 
     updateHitbox(){
         this.center = {
-            x: this.position.x + this.dimensions.width/2,
-            y: this.position.y + this.dimensions.height/2,
+            x: this.position.x - this.dimensions.width/2,
+            y: this.position.y - this.dimensions.height/2,
         };
         this.hitbox = {
             position: {

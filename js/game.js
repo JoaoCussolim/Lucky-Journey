@@ -68,6 +68,9 @@ let animate = (currentTime) => {
     };
 
     player.update();
+    if(player){
+        playerPosition = {x: backgroundPositions.x, y: backgroundPositions.y}
+    }
 
     for(let i = enemies.length - 1; i >= 0; i--){
         enemy = enemies[i];
