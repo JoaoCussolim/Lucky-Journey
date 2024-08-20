@@ -101,8 +101,9 @@ class Player extends Sprite {
     update() {
         this.draw();
         this.updateBoxes();
-        this.shouldPanCameraHorizontal();
-        this.shouldPanCameraVertical();
+        //this.shouldPanCameraHorizontal();
+        //this.shouldPanCameraVertical();
+        this.applyVelocity()
     };
 };
 
