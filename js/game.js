@@ -43,8 +43,8 @@ let animate = (currentTime) => {
     ctx.save();
     ctx.scale(scale, scale);
     ctx.translate(0, -scaledCanvas.width);
-    //ctx.drawImage(background, backgroundPositions.x, backgroundPositions.y, canvas.width, canvas.height);
-    updateChunks();
+    ctx.drawImage(background, backgroundPositions.x, backgroundPositions.y, canvas.width, canvas.height);
+    // updateChunks();
     ctx.restore();
 
     getMouseAngle();
