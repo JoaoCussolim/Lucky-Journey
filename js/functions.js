@@ -74,7 +74,8 @@ let circleCollision = (circle1, circle2) => {
 
 let makeEnemies = (quantity) => {
     for(let i = 0; i < quantity; i++){
-        let cordinatesValue = RandomInt(100, 500)
-        enemies.push(new Enemy({position: {x: cordinatesValue, y: cordinatesValue}, dimensions: {width: 100, height: 100}}))
+        let cordinatesValuex = RandomInt(0,canvas.width);
+        let cordinatesValuey = RandomInt(0,canvas.height);
+        enemies.push(new Enemy({position: {x: cordinatesValuex, y: cordinatesValuey}, dimensions: {width: 100, height: 100}}))
     };
 };

@@ -111,19 +111,19 @@ let player = new Player({ position: { x: 950, y: 500 }, dimensions: { width: 100
 let acceptedKeys = {
     ArrowUp(player) {
         player.velocity.x = 0;
-        player.velocity.y = -5
+        player.velocity.y = -5 * deltaTime_Mult;
     },
     ArrowDown(player) {
         player.velocity.x = 0;
-        player.velocity.y = 5
+        player.velocity.y = 5 * deltaTime_Mult;
     },
     ArrowLeft(player) {
         player.velocity.y = 0;
-        player.velocity.x = -5
+        player.velocity.x = -5 * deltaTime_Mult;
     },
     ArrowRight(player) {
         player.velocity.y = 0;
-        player.velocity.x = 5
+        player.velocity.x = 5 * deltaTime_Mult;
     }
 };
 

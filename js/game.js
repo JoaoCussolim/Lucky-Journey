@@ -30,8 +30,16 @@ let backgroundVelocity = {
 let spawnedEnemies = false;
 let canSpawnEnemies = false;
 
-let animate = () => {
-    requestAnimationFrame(animate)
+let fps = 60;
+let frameInterval = 1000 / fps;
+let deltaTime_Mult = 1;
+let deltaTime = 0;
+let lastTime = performance.now();
+
+let animate = (currentTime) => {
+    deltaTime =  (currentTime - lastTime);
+    deltaTime_Mult = deltaTime / frameInterval;
+
     ctx.imageSmoothingEnabled = false;
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     ctx.save();
@@ -85,6 +93,9 @@ let animate = () => {
 
     // characterSelection();
     // button.update();
+
+    lastTime = currentTime;
+    requestAnimationFrame(animate)
 };
 
 setTimeout(() => {

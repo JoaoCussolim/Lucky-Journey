@@ -30,11 +30,11 @@ class Enemy extends Sprite{
 
     applyVelocity(){
         if(this.velocity.x === 0 && this.velocity.y === 0){
-            this.position.x += this.velocity.x - backgroundVelocity.x * 5;
-            this.position.y += this.velocity.y - backgroundVelocity.y * 5;
+            this.position.x += this.velocity.x - backgroundVelocity.x * 5 * deltaTime_Mult;
+            this.position.y += this.velocity.y - backgroundVelocity.y * 5 * deltaTime_Mult;
         }else{
-            this.position.x += this.velocity.x - backgroundVelocity.x * 2;
-            this.position.y += this.velocity.y - backgroundVelocity.y * 2;
+            this.position.x += this.velocity.x - backgroundVelocity.x * 2 * deltaTime_Mult;
+            this.position.y += this.velocity.y - backgroundVelocity.y * 2 * deltaTime_Mult;
         };
     };
 

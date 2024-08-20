@@ -21,8 +21,8 @@ class Projectile extends Sprite{
     };
 
     aim(){
-        this.position.x += this.velocity.x - backgroundVelocity.x;
-        this.position.y += this.velocity.y - backgroundVelocity.y;
+        this.position.x += this.velocity.x - backgroundVelocity.x * deltaTime_Mult;
+        this.position.y += this.velocity.y - backgroundVelocity.y * deltaTime_Mult;
     };
 
     updateHitbox(){
