@@ -90,12 +90,14 @@ class Player extends Sprite {
             y: this.position.y - this.dimensions.height/2,
         }
         
-        //ctx.fillStyle = 'green';    
+        // ctx.fillStyle = 'green'; 
         //ctx.fillRect(this.attackbox.position.x, this.attackbox.position.y, this.attackbox.dimensions.width, this.attackbox.dimensions.height)
         //ctx.fillStyle = 'purple';
         //ctx.fillRect(this.hitbox.position.x, this.hitbox.position.y, this.hitbox.dimensions.width, this.hitbox.dimensions.height)
         ctx.fillStyle = 'white';
         ctx.fillRect(this.center.x, this.center.y, this.dimensions.width, this.dimensions.height);
+
+        
     };
 
     update() {
@@ -106,7 +108,7 @@ class Player extends Sprite {
     };
 };
 
-let player = new Player({ position: { x: 950, y: 500 }, dimensions: { width: 100, height: 100 } });
+let player = new Player({ position: { x: 950, y: 600 }, dimensions: { width: 100, height: 100 } });
 
 let acceptedKeys = {
     ArrowUp(player) {
