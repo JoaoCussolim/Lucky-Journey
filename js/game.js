@@ -6,8 +6,6 @@ background.src = "./assets/background.png"
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
-
-
 let scale = 4
 
 let scaledCanvas = {

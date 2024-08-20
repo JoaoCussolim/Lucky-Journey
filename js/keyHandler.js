@@ -1,8 +1,7 @@
 addEventListener('keydown', (e) => {
     if (acceptedKeys[e.key]) acceptedKeys[e.key](player);
     if (e.key === 'k'){
-        diceMe.rollable = true;
-        dice.rollable = true;
+        dice.rolling = true;
     }
 });
 
