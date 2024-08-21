@@ -31,7 +31,7 @@ updateValues({pos,health}){
 
 update(){
     this.draw();
-    console.table({health: this.health, healthBefore:this.healthBefore})
+    //console.table({health: this.health, healthBefore:this.healthBefore})
     if(!(this.health < this.healthBefore)){
         if(this.healthTaken > this.health){
             this.healthTaken -= 1;
@@ -42,8 +42,4 @@ update(){
     this.healthBefore = this.health;
 
 }
-
-
-
-
 }

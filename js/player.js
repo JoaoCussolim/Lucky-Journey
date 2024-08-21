@@ -30,15 +30,8 @@ class Player extends Sprite {
     };
 
     shouldPanCameraVertical() {
-        let translateVar = backgroundPositions.x <= -canvas.width + scaledCanvas.width === true ? -1 : 1;
-        if (backgroundPositions.x <= -canvas.width + scaledCanvas.width || backgroundPositions.x >= 0){
-            backgroundPositions.x -= translateVar;
-            backgroundVelocity.x = translateVar;
-        }
-        else{
-            backgroundPositions.x -= this.velocity.x;
-            backgroundVelocity.x = this.velocity.x;
-        };
+        backgroundPositions.x -= this.velocity.x;
+        backgroundVelocity.x = this.velocity.x;
     };
 
     shouldPanCameraHorizontal() {
@@ -50,15 +43,8 @@ class Player extends Sprite {
         //Na teoria parece mais complicado porém com esse modelo de código, qualquer bloco de colisão vai fazer o player colidir
         //Sendo assim, da pra fazer colisões aleatorias que não tem a ver com a borda do mapa em si, melhorando o sistema
 
-        let translateVar = backgroundPositions.y <= 0 === true ? -1 : 1;
-        if (backgroundPositions.y + this.dimensions.height <= 0 || backgroundPositions.y + this.dimensions.height >= canvas.height / 1.46){
-            backgroundPositions.y -= translateVar;
-            backgroundVelocity.y = translateVar;
-        }
-        else{
-            backgroundPositions.y -= this.velocity.y;
-            backgroundVelocity.y = this.velocity.y;
-        };
+        backgroundPositions.y -= this.velocity.y;
+        backgroundVelocity.y = this.velocity.y;
     };
 
     updateBoxes(){
@@ -113,19 +99,19 @@ let player = new Player({ position: { x: 950, y: 600 }, dimensions: { width: 100
 let acceptedKeys = {
     ArrowUp(player) {
         player.velocity.x = 0;
-        player.velocity.y = -5 * deltaTime_Mult;
+        player.velocity.y = -1 * deltaTime_Mult;
     },
     ArrowDown(player) {
         player.velocity.x = 0;
-        player.velocity.y = 5 * deltaTime_Mult;
+        player.velocity.y = 1 * deltaTime_Mult;
     },
     ArrowLeft(player) {
         player.velocity.y = 0;
-        player.velocity.x = -5 * deltaTime_Mult;
+        player.velocity.x = -1 * deltaTime_Mult;
     },
     ArrowRight(player) {
         player.velocity.y = 0;
-        player.velocity.x = 5 * deltaTime_Mult;
+        player.velocity.x = 1 * deltaTime_Mult;
     }
 };
 

@@ -47,7 +47,6 @@ class Projectile extends Sprite{
         ctx.fillRect(this.center.x, this.center.y, this.dimensions.width, this.dimensions.height);
         // ctx.fillStyle = 'yellow';
         // ctx.fillRect(this.hitbox.position.x, this.hitbox.position.y, this.hitbox.dimensions.width, this.hitbox.dimensions.height);
-     
     };
 
     autoRemove(){

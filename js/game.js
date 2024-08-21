@@ -6,7 +6,7 @@ background.src = "./assets/background.png"
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
-let scale = 4
+let scale = 2
 
 let scaledCanvas = {
     width: canvas.width / scale,
@@ -43,8 +43,8 @@ let animate = (currentTime) => {
     ctx.save();
     ctx.scale(scale, scale);
     ctx.translate(0, -scaledCanvas.width);
-    ctx.drawImage(background, backgroundPositions.x, backgroundPositions.y, canvas.width, canvas.height);
-    // updateChunks();
+    //ctx.drawImage(background, backgroundPositions.x, backgroundPositions.y, canvas.width, canvas.height);
+    movePlayer(backgroundPositions.x, backgroundPositions.y);
     ctx.restore();
 
     getMouseAngle();
@@ -69,9 +69,7 @@ let animate = (currentTime) => {
     };
 
     player.update();
-    if(player){
-        playerPosition = {x: backgroundPositions.x, y: backgroundPositions.y}
-    }
+    
 
     for(let i = enemies.length - 1; i >= 0; i--){
         enemy = enemies[i];
