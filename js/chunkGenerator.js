@@ -1,58 +1,62 @@
-let chunkWidth = 40;
-let chunkHeight = 40;
-let viewDistanceWidth = 1;
-let viewDistanceHeight = 1;
+const chunkSize = 20; // Size of each chunk
+const viewDistance = 0.5;
 
-let playerPosition = {x: 0, y:0}
+// Number of chunks to load around the player
 
-let chunks = {};
+let chunks = {}; // Object to store generated chunks
 
-let generateChunk = (x, y) => {
+function generateChunk(x, y) {
+    // Placeholder for chunk generation logic
     let chunk = [];
-    for (let i = 0; i < chunkWidth; i++) {
+    for (let i = 0; i < chunkSize; i++) {
         chunk[i] = [];
-        for (let j = 0; j < chunkHeight; j++) {
-            chunk[i][j] = Math.random() > 0.5 ? 1 : 0;
+        for (let j = 0; j < chunkSize; j++) {
+            chunk[i][j] = Math.random() > 0.5 ? 1 : 0; // Simple example: 1 or 0
         }
     }
     return chunk;
 }
 
-let drawChunk = (chunk, x, y) => {
-    for (let i = 0; i < chunkWidth; i++) {
-        for (let j = 0; j < chunkHeight; j++) {
-            if (chunk[i][j] === 1) ctx.fillStyle = 'green';
-            else ctx.fillStyle = 'blue';
-            ctx.fillRect((x * chunkWidth + i) * 10, (y * chunkHeight + j) * 10, 10, 10);
+function drawChunk(chunk, x, y) {
+    // Draw the chunk on the canvas
+    for (let i = 0; i < chunkSize; i++) {
+        for (let j = 0; j < chunkSize; j++) {
+            if (chunk[i][j] === 1) {
+                ctx.fillStyle = 'green';
+                ctx.fillRect((x * chunkSize + i) * 10, (y * chunkSize + j) * 10, 10, 10);
+            }
         }
     }
 }
 
-let updateChunks = () => {
-    let startX = Math.floor(playerPosition.x / chunkWidth - viewDistanceWidth);
-    let startY = Math.floor(playerPosition.y / chunkHeight - viewDistanceWidth);
-    let endX = Math.floor(playerPosition.x / chunkWidth + viewDistanceHeight);
-    let endY = Math.floor(playerPosition.y / chunkHeight + viewDistanceHeight);
+function updateChunks() {
+    let startX = Math.floor(player.position.x - viewDistance);
+    let startY = Math.floor(player.position.y - viewDistance);
+    let endX = Math.floor(player.position.x + viewDistance);
+    let endY = Math.floor(player.position.y + viewDistance);
 
     console.log('Loading chunks from', startX, startY, 'to', endX, endY);
 
+    // Load new chunks
     for (let x = startX; x <= endX; x++) {
         for (let y = startY; y <= endY; y++) {
             if (!chunks[`${x},${y}`]) {
                 chunks[`${x},${y}`] = generateChunk(x, y);
             }
-            drawChunk(chunks[`${x},${y}`], x, y);
-            console.table({position: `${x},${y}`})
+        }
+    }
+
+    // Draw chunks
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    for (let x = startX; x <= endX; x++) {
+        for (let y = startY; y <= endY; y++) {
+            if (chunks[`${x},${y}`]) {
+                drawChunk(chunks[`${x},${y}`], x, y);
+            }
         }
     }
 }
-    
-let movePlayer = (newX, newY) =>{
-    if(newX != playerPosition.x){
-        playerPosition.x = newX;
-    }
-    if(newY != playerPosition.y){
-        playerPosition.y = newY;
-    }
-    updateChunks()
-}
+
+
+
+// KJADSFHBAILJSDHALIJSDH BALDHBALIUS
