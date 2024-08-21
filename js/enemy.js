@@ -105,7 +105,7 @@ class Enemy extends Sprite{
         //ctx.fillRect(this.hitbox.position.x, this.hitbox.position.y, this.hitbox.dimensions.width, this.hitbox.dimensions.height);
         //ctx.fillStyle = 'brown';
         //ctx.fillRect(this.attackbox.position.x, this.attackbox.position.y, this.attackbox.dimensions.width, this.attackbox.dimensions.height);
-        ctx.fillStyle = 'red';
+        ctx.fillStyle = 'cyan';
         ctx.fillRect(this.center.x, this.center.y, this.dimensions.width, this.dimensions.height);
 
         //healthBar

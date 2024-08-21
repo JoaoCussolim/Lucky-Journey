@@ -2,10 +2,11 @@ class Healthbar{
 constructor({maxHealth, pos, size}){
 this.maxHealth = maxHealth;
 this.health = maxHealth;
-this.healthTaken = 0;
+this.healthTaken = maxHealth;
 this.pos = pos;
 this.size = size;
 this.healthBefore = this.health;
+this.delay = 30;
 }
 
 draw(){
@@ -15,11 +16,11 @@ draw(){
     ctx.fillRect(this.pos.x - 1,this.pos.y - 1,this.size.w + 2,this.size.h + 2);
     
     //damage bar
-    ctx.fillStyle = "yellow";
+    ctx.fillStyle = "rgb(255,255,55)";
     ctx.fillRect(this.pos.x,this.pos.y,this.size.w * (this.healthTaken/this.maxHealth),this.size.h);
 
     //current life bar
-    ctx.fillStyle = "green";
+    ctx.fillStyle = "red";
     ctx.fillRect(this.pos.x,this.pos.y,this.size.w * (this.health/this.maxHealth),this.size.h);
 }
 
@@ -34,7 +35,9 @@ update(){
     console.table({health: this.health, healthBefore:this.healthBefore})
     if(!(this.health < this.healthBefore)){
         if(this.healthTaken > this.health){
-            this.healthTaken -= 1;
+            if(this.delay <= 0){
+            this.healthTaken -= 2;
+            }else this.delay --;
         }
     }
     
