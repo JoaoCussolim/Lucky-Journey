@@ -1,23 +1,25 @@
-class Enemy extends Sprite{
-    constructor({position = {x: 0, y: 0}, dimensions = {width: 0, height: 0}}){
-        super({position, dimensions});
+class Enemy extends Sprite {
+    constructor({ position = { x: 0, y: 0 }, dimensions = { width: 0, height: 0 } }) {
+        super({ position, dimensions });
+        this.dead = false;
+        this.playerOnRange = false;
         this.health = 100;
         this.healthbar = new Healthbar({
-            maxHealth:100,
-            pos:{x:this.position.x, y:this.position.y - 50},
-            size: {w:this.dimensions.width, h:20}
-            
+            maxHealth: 100,
+            pos: { x: this.position.x, y: this.position.y - 50 },
+            size: { w: this.dimensions.width, h: 20 }
+
         });
         this.center = {
-            x: this.position.x - this.dimensions.width/2,
-            y: this.position.y - this.dimensions.height/2,
+            x: this.position.x - this.dimensions.width / 2,
+            y: this.position.y - this.dimensions.height / 2,
         };
         this.hitbox = {
             position: {
                 x: 0,
                 y: 0,
             },
-            dimensions:{
+            dimensions: {
                 width: 0,
                 height: 0,
             }
@@ -27,59 +29,79 @@ class Enemy extends Sprite{
                 x: 0,
                 y: 0,
             },
-            dimensions:{
+            dimensions: {
                 width: 0,
                 height: 0,
             }
         }
     };
 
-    applyVelocity(){
-        if(this.velocity.x === 0 && this.velocity.y === 0){
+    applyVelocity() {
+        if (this.velocity.x === 0 && this.velocity.y === 0) {
             this.position.x += this.velocity.x - backgroundVelocity.x * 5 * deltaTime_Mult;
             this.position.y += this.velocity.y - backgroundVelocity.y * 5 * deltaTime_Mult;
-        }else{
+        } else {
             this.position.x += this.velocity.x - backgroundVelocity.x * 2 * deltaTime_Mult;
             this.position.y += this.velocity.y - backgroundVelocity.y * 2 * deltaTime_Mult;
         };
     };
 
-    receivingDamage(damage){
+    receivingDamage(damage) {
         this.health -= damage;
-        if(this.health <= 0){
-            let eIndex = enemies.findIndex(enemy => {
-                return enemy.position.x === this.position.x && enemy.position.y === this.position.y
-            })
-            enemies.splice(eIndex, 1)
+        if (this.health <= 0) {
+
+            this.health = 0;
+            this.dead = true;
         }
     }
 
-    followPlayer(){
-        if(player.position.x > this.position.x + this.dimensions.width){
-            this.velocity.y = 0;
-            this.velocity.x = 5;
-        };
-        if(player.position.x < this.position.x - this.dimensions.width){
-            this.velocity.y = 0;
-            this.velocity.x = -5;
-        };
-        if(player.position.y > this.position.y + this.dimensions.width){
-            this.velocity.x = 0;
-            this.velocity.y = 5;
-        };
-        if(player.position.y < this.position.y - this.dimensions.width){
-            this.velocity.x = 0;
-            this.velocity.y = -5;
+    detectPlayer(){
+        if(this.position.x + this.dimensions.width/2 < 0 ||
+            this.position.x - this.dimensions.width/2 > canvas.width||
+            this.position.y + this.dimensions.height/2 < 0 ||
+            this.position.y - this.dimensions.height/2 > canvas.height
+        ) this.playerOnRange = false
+        else this.playerOnRange = true
+    }
+
+    followPlayer() {
+        if (!this.dead & this.playerOnRange) {
+            if (player.position.x > this.position.x + this.dimensions.width) {
+                this.velocity.y = 0;
+                this.velocity.x = 5;
+            };
+            if (player.position.x < this.position.x - this.dimensions.width) {
+                this.velocity.y = 0;
+                this.velocity.x = -5;
+            };
+            if (player.position.y > this.position.y + this.dimensions.width) {
+                this.velocity.x = 0;
+                this.velocity.y = 5;
+            };
+            if (player.position.y < this.position.y - this.dimensions.width) {
+                this.velocity.x = 0;
+                this.velocity.y = -5;
+            };
         };
     };
 
-    updateBoxes(){
+
+    DestroyEnemies(){
+        if (this.healthbar.healthTaken <= 0) {
+            let eIndex = enemies.findIndex(enemy => {
+                return enemy.position.x === this.position.x && enemy.position.y === this.position.y
+            })
+            enemies.splice(eIndex, 1);
+        }
+    }
+
+    updateBoxes() {
         this.hitbox = {
             position: {
                 x: this.center.x - 20,
                 y: this.center.y - 20,
             },
-            dimensions:{
+            dimensions: {
                 width: this.dimensions.width + 20 * 2,
                 height: this.dimensions.height + 20 * 2,
             }
@@ -89,17 +111,17 @@ class Enemy extends Sprite{
                 x: this.center.x - 50,
                 y: this.center.y - 50,
             },
-            dimensions:{
+            dimensions: {
                 width: this.dimensions.width + 50 * 2,
                 height: this.dimensions.height + 50 * 2,
             }
         }
     }
 
-    draw(){
+    draw() {
         this.center = {
-            x: this.position.x - this.dimensions.width/2,
-            y: this.position.y - this.dimensions.height/2,
+            x: this.position.x - this.dimensions.width / 2,
+            y: this.position.y - this.dimensions.height / 2,
         };
         //ctx.fillStyle = 'blue';
         //ctx.fillRect(this.hitbox.position.x, this.hitbox.position.y, this.hitbox.dimensions.width, this.hitbox.dimensions.height);
@@ -113,14 +135,16 @@ class Enemy extends Sprite{
 
     };
 
-    update(){
+    update() {
         this.velocity.x = 0;
         this.velocity.y = 0;
         this.updateBoxes()
         this.draw();
+        this.detectPlayer()
         this.followPlayer()
         this.applyVelocity();
-        this.healthbar.updateValues({pos:{x:this.position.x - 50,y:this.position.y - 100}, health: this.health});
+        this.DestroyEnemies()
+        this.healthbar.updateValues({ pos: { x: this.position.x - 50, y: this.position.y - 100 }, health: this.health });
     };
 };
 

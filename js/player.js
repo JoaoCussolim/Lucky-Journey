@@ -89,9 +89,9 @@ class Player extends Sprite {
     update() {
         this.draw();
         this.updateBoxes();
-        //this.shouldPanCameraHorizontal();
-        //this.shouldPanCameraVertical();
-        this.applyVelocity()
+        this.shouldPanCameraHorizontal();
+        this.shouldPanCameraVertical();
+        // this.applyVelocity()
     };
 };
 
@@ -100,19 +100,19 @@ let player = new Player({ position: { x: 950, y: 600 }, dimensions: { width: 100
 let acceptedKeys = {
     ArrowUp(player) {
         player.velocity.x = 0;
-        player.velocity.y = -1 * deltaTime_Mult;
+        player.velocity.y = -5 * deltaTime_Mult;
     },
     ArrowDown(player) {
         player.velocity.x = 0;
-        player.velocity.y = 1 * deltaTime_Mult;
+        player.velocity.y = 5 * deltaTime_Mult;
     },
     ArrowLeft(player) {
         player.velocity.y = 0;
-        player.velocity.x = -1 * deltaTime_Mult;
+        player.velocity.x = -5 * deltaTime_Mult;
     },
     ArrowRight(player) {
         player.velocity.y = 0;
-        player.velocity.x = 1 * deltaTime_Mult;
+        player.velocity.x = 5 * deltaTime_Mult;
     }
 };
 

@@ -6,7 +6,7 @@ background.src = "./assets/background.png"
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
-let scale = 2
+let scale = 5
 
 let scaledCanvas = {
     width: canvas.width / scale,
@@ -42,9 +42,9 @@ let animate = (currentTime) => {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     ctx.save();
     ctx.scale(scale, scale);
-    ctx.translate(0, -scaledCanvas.width);
-    //ctx.drawImage(background, backgroundPositions.x, backgroundPositions.y, canvas.width, canvas.height);
-    movePlayer(backgroundPositions.x, backgroundPositions.y);
+    ctx.translate(0, -scaledCanvas.width - 200);
+    ctx.drawImage(background, backgroundPositions.x, backgroundPositions.y, canvas.width, canvas.height);
+    // movePlayer(backgroundPositions.x, backgroundPositions.y);
     ctx.restore();
 
     getMouseAngle();
@@ -89,6 +89,8 @@ let animate = (currentTime) => {
         makeEnemies(dice.rolledNumber);
         spawnedEnemies = true;
     };
+    
+    
 
 
     // characterSelection();
