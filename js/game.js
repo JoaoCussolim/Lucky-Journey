@@ -6,13 +6,6 @@ background.src = "./assets/background.png"
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
-let scale = 5
-
-let scaledCanvas = {
-    width: canvas.width / scale,
-    height: canvas.height / scale
-}
-
 let backgroundPositions = {
     x: 0,
     y: 0
@@ -23,6 +16,7 @@ let backgroundVelocity = {
     y: 0
 }
 
+let started = false
 
 
 let spawnedEnemies = false;
@@ -34,24 +28,38 @@ let deltaTime_Mult = 1;
 let deltaTime = 0;
 let lastTime = performance.now();
 
-let animate = (currentTime) => {
+let menu = (currentTime) => {
     deltaTime =  (currentTime - lastTime);
     deltaTime_Mult = deltaTime / frameInterval;
 
     ctx.imageSmoothingEnabled = false;
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    ctx.save();
-    ctx.scale(scale, scale);
-    ctx.translate(0, -scaledCanvas.width - 200);
-    ctx.drawImage(background, backgroundPositions.x, backgroundPositions.y, canvas.width, canvas.height);
-    // movePlayer(backgroundPositions.x, backgroundPositions.y);
-    ctx.restore();
+    ctx.textAlign = 'center';
+    mainMenu();
+
+    lastTime = currentTime;
+    
+    
+    let frame = requestAnimationFrame(menu);
+    if(started){
+        cancelAnimationFrame(frame);
+        requestAnimationFrame(game);
+    }
+}
+
+let game = (currentTime) => {
+    deltaTime =  (currentTime - lastTime);
+    deltaTime_Mult = deltaTime / frameInterval;
+
+    ctx.imageSmoothingEnabled = false;
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    drawInfiniteGrid();
 
     getMouseAngle();
 
     for (let i = projectiles.length - 1; i >= 0; i--) {
-        projectile = projectiles[i]
-        projectile.update()
+        projectile = projectiles[i];
+        projectile.update();
         if(enemies.length > 0){
             let hittedEnemies = enemies.filter(enemy => {
                 return  projectile.hitbox.position.x + projectile.hitbox.dimensions.width >= enemy.hitbox.position.x 
@@ -61,7 +69,7 @@ let animate = (currentTime) => {
             });
             if(hittedEnemies.length > 0){
                 for(let i = hittedEnemies.length - 1; i >= 0; i--){
-                    hittedEnemies[i].receivingDamage(projectile.damage)
+                    hittedEnemies[i].receivingDamage(projectile.damage);
                 };
             };
         };
@@ -87,19 +95,20 @@ let animate = (currentTime) => {
     
     if(!spawnedEnemies && dice.rolledNumber != 0) {
         makeEnemies(dice.rolledNumber);
-        spawnedEnemies = true;
+        spawnedEnemies = true;  
     };
-    
-    
 
 
+
+    
     // characterSelection();
     // button.update();
 
     lastTime = currentTime;
-    requestAnimationFrame(animate)
+    requestAnimationFrame(game);
 };
 
 setTimeout(() => {
-    animate();
+    menu();
 }, 500);
+

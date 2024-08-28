@@ -33,7 +33,7 @@ class Button {
             ctx.fillRect(this.position.x, this.position.y, this.size.w, this.size.h);
             ctx.fillStyle = this.text.color;
             ctx.font = this.text.size + 'px arial';
-            ctx.fillText(this.text.writing, this.position.x + this.size.w / 2, this.position.y + this.size.h / 2);
+            ctx.fillText(this.text.writing, this.position.x + this.size.w / 2, (this.position.y + this.size.h / 2) + this.text.size /3);
         }
         //if its img type button
         else {
@@ -127,6 +127,39 @@ let button = new Button({
 
 });
 
+let playbtn = new Button({
+    txtType: true,
+    color: 'white',
+    color2: 'rgb(200,200,200',
+    position: { x: window.innerWidth/2 - 150, y: window.innerHeight/4 },
+    size: { w: 300, h: 100 },
+    originalSz: { w: 150, h: 150 },
+    border: 5,
+    text: { writing: 'PLAY', size: 70, color: "black" },
+})
+
+
+let controlsbtn = new Button({
+    txtType: true,
+    color: 'white',
+    color2: 'rgb(200,200,200',
+    position: { x: window.innerWidth/2 - 150, y: window.innerHeight/2 },
+    size: { w: 300, h: 100 },
+    originalSz: { w: 150, h: 150 },
+    border: 5,
+    text: { writing: 'CONTROLS', size: 50, color: "black" },
+})
+
+let creditsbtn = new Button({
+    txtType: true,
+    color: 'white',
+    color2: 'rgb(200,200,200',
+    position: { x: window.innerWidth/2 - 150, y: window.innerHeight/1.325 },
+    size: { w: 300, h: 100 },
+    originalSz: { w: 150, h: 150 },
+    border: 5,
+    text: { writing: 'CREDITS', size: 60, color: "black" },
+})
 
 
 

@@ -3,6 +3,10 @@ if(button.mouseOn){
     buttonClicked()
 }
 
+if(playbtn.mouseOn){
+    playbtnClicked()
+}
+
 projectiles.push(new Projectile({ 
     position: { x: player.position.x, y: player.position.y }, 
     dimensions: { width: 100, height: 100 }, 
@@ -10,6 +14,12 @@ projectiles.push(new Projectile({
 }))
 
 })
+
+let playbtnClicked = () =>{
+    playbtn.mouseOn = false;
+    started = true;
+    console.log("PLAPLAPLAPLPALPALY")
+}
 
 
 let buttonClicked = () =>{

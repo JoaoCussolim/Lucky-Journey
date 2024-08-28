@@ -1,3 +1,10 @@
+function RandomInt(min, max) {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+};
+
+
 let characterSelection = () =>{
 ctx.fillStyle = "rgba(0,0,0,0.5)";
 ctx.fillRect(0,0,canvas.width,canvas.height);
@@ -9,4 +16,36 @@ ctx.textAlign = "center";
 ctx.fillText("Escolha Seu Personagem",canvas.width/2,100)
 ctx.font= "25px arial";
 ctx.fillText("Mago",200,700)
+}
+
+
+backgroundColor = RandomInt(1,4)
+
+let mainMenu = () =>{
+    switch (backgroundColor){
+        case 1:
+            ctx.fillStyle = "rgb(255, 253, 74)";
+        break;
+
+        case 2:
+            ctx.fillStyle = "pink";
+        break;
+
+        case 3:
+            ctx.fillStyle = "lightblue"
+        break;
+
+        case 4:
+            ctx.fillStyle = "lightgreen";
+        break;
+    }
+    ctx.fillRect(0,0,canvas.width,canvas.height)
+    playbtn.update()
+    controlsbtn.update()
+    creditsbtn.update()
+
+
+
+    
+
 }

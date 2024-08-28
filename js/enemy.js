@@ -41,8 +41,8 @@ class Enemy extends Sprite {
             this.position.x += this.velocity.x - backgroundVelocity.x * 5 * deltaTime_Mult;
             this.position.y += this.velocity.y - backgroundVelocity.y * 5 * deltaTime_Mult;
         } else {
-            this.position.x += this.velocity.x - backgroundVelocity.x * 2 * deltaTime_Mult;
-            this.position.y += this.velocity.y - backgroundVelocity.y * 2 * deltaTime_Mult;
+            this.position.x += this.velocity.x - backgroundVelocity.x * 1 * deltaTime_Mult;
+            this.position.y += this.velocity.y - backgroundVelocity.y * 1 * deltaTime_Mult;
         };
     };
 
@@ -68,19 +68,19 @@ class Enemy extends Sprite {
         if (!this.dead & this.playerOnRange) {
             if (player.position.x > this.position.x + this.dimensions.width) {
                 this.velocity.y = 0;
-                this.velocity.x = 5;
+                this.velocity.x = 5 * deltaTime_Mult;
             };
             if (player.position.x < this.position.x - this.dimensions.width) {
                 this.velocity.y = 0;
-                this.velocity.x = -5;
+                this.velocity.x = -5 * deltaTime_Mult;
             };
             if (player.position.y > this.position.y + this.dimensions.width) {
                 this.velocity.x = 0;
-                this.velocity.y = 5;
+                this.velocity.y = 5 * deltaTime_Mult;
             };
             if (player.position.y < this.position.y - this.dimensions.width) {
                 this.velocity.x = 0;
-                this.velocity.y = -5;
+                this.velocity.y = -5 * deltaTime_Mult;
             };
         };
     };
