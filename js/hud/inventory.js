@@ -4,8 +4,8 @@ function drawBorder(x, y, width, height, borderSize, borderColor) {
     ctx.save()
 
     ctx.fillStyle = borderColor;
-    ctx.fillRect(x - borderSize, y - borderSize, width + borderSize*2, height + borderSize*2);
-    
+    ctx.fillRect(x - borderSize, y - borderSize, width + borderSize * 2, height + borderSize * 2);
+
     ctx.restore()
     ctx.closePath()
 }
@@ -29,7 +29,7 @@ class inventory {
         this.itemHeight = 150; // Height of each item
         this.scrollY = 0; // Vertical scroll offset
 
-        
+
 
     }
 
@@ -48,10 +48,10 @@ class inventory {
             const y = (i - startIndex) * this.itemHeight - (this.scrollY % this.itemHeight);
 
             if (y > this.listHeight) break; // Stop drawing if it's beyond the visible area
-            
+
             ctx.fillStyle = 'black';
-            
-            
+
+
             ctx.fillRect(this.listX, this.listY + y, this.listWidth, this.itemHeight);
             ctx.fillStyle = 'white';
             ctx.font = '20px Arial';
@@ -59,10 +59,10 @@ class inventory {
             ctx.fillText(this.items[itemIndex], this.listX + 40, this.listY + y + this.itemHeight / 2);
 
             ctx.fillStyle = 'white';
-            
 
-            ctx.fillRect(930,650,500,150)
-            ctx.fillRect(930,100,500,150)
+
+            ctx.fillRect(930, 650, 500, 150)
+            ctx.fillRect(930, 100, 500, 150)
         }
 
         // Draw the scrollbar
@@ -80,10 +80,11 @@ class inventory {
 
         ctx.fillStyle = '#333';
         ctx.fillRect(this.listX + this.listWidth, scrollbarTop, scrollbarWidth, scrollbarHeight); // Scrollbar itself
+    }
 
-
-        
-
+    open(){
+        const isVisible = this.visible === true ? false : true
+        this.visible = isVisible
     }
 
     updateScrollbarPosition() {
@@ -97,7 +98,7 @@ class inventory {
             ctx.fillStyle = "rgb(255, 255, 255)";
             ctx.fillRect(this.pos.x, this.pos.y, this.size.width, this.size.height); //antes
             this.drawItems(); //depois
-            
+
         }
     }
 
@@ -108,8 +109,6 @@ class inventory {
 
     update() {
         this.draw();
-
-
     }
 
 }

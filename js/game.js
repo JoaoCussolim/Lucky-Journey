@@ -17,11 +17,11 @@ let backgroundVelocity = {
 }
 
 let started = false
-let SPnum1 = new SpinningNumber({x:400,y:400},"P",50,400)
-let SPnum2 = new SpinningNumber({x:475,y:400},"L",50,400)
-let SPnum3 = new SpinningNumber({x:550,y:400},"A",50,400)
-let SPnum4 = new SpinningNumber({x:625,y:400},"Y",50,400)
-let SPnum5 = new SpinningNumber({x:700,y:400},"!",50,400)
+let SPnum1 = new SpinningNumber({ x: 400, y: 400 }, "P", 50, 400)
+let SPnum2 = new SpinningNumber({ x: 475, y: 400 }, "L", 50, 400)
+let SPnum3 = new SpinningNumber({ x: 550, y: 400 }, "A", 50, 400)
+let SPnum4 = new SpinningNumber({ x: 625, y: 400 }, "Y", 50, 400)
+let SPnum5 = new SpinningNumber({ x: 700, y: 400 }, "!", 50, 400)
 
 
 let spawnedEnemies = false;
@@ -92,6 +92,7 @@ let game = (currentTime) => {
     testNpc.draw();
     if (dialogActive) actualDialogBox.draw()
     if (canvasPromptActive) loadCanvasPrompt()
+    if (player.inventory.visible) player.inventory.draw()
 
 
     for (let i = enemies.length - 1; i >= 0; i--) {

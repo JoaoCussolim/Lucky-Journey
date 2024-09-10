@@ -6,6 +6,9 @@ addEventListener('keydown', (e) => {
     if(e.key === 'f'){
         testNpc.talk()
     }
+    if(e.key.toLowerCase() === 'e'){
+        player.inventory.open()
+    }
 
     if (canvasPromptActive) {
         if (e.key === 'Backspace') {
