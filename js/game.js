@@ -16,7 +16,7 @@ let backgroundVelocity = {
     y: 0
 }
 
-let started = false
+let started = true
 
 
 let spawnedEnemies = false;
@@ -33,8 +33,8 @@ let menu = (currentTime) => {
     deltaTime_Mult = deltaTime / frameInterval;
 
     ctx.imageSmoothingEnabled = false;
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
     ctx.textAlign = 'center';
+    if(!played) ctx.clearRect(0, 0, canvas.width, canvas.height);
     mainMenu();
 
     lastTime = currentTime;

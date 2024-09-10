@@ -3,6 +3,14 @@ addEventListener('keydown', (e) => {
     if (e.key === 'k'){
         dice.rolling = true;
     }
+
+    if (e.key.toLowerCase() === 'e'){
+        if (player.inventory.visible)
+        player.inventory.visible = false;
+        else player.inventory.visible = true;
+    }
+
+
 });
 
 addEventListener('keyup', (e) => {

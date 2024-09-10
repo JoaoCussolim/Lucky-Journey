@@ -1,4 +1,4 @@
-let lockCamera
+let lockCamera;
 
 class Player extends Sprite {
     constructor({ position = { x: 0, y: 0 }, dimensions = { width: 0, height: 0 } }) {
@@ -27,6 +27,8 @@ class Player extends Sprite {
                 height: 0,
             }
         }
+
+        this.inventory = new inventory()
     };
 
     shouldPanCameraVertical() {
@@ -91,6 +93,7 @@ class Player extends Sprite {
         this.updateBoxes();
         this.shouldPanCameraHorizontal();
         this.shouldPanCameraVertical();
+        this.inventory.update()
         // this.applyVelocity()
     };
 };
