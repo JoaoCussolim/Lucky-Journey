@@ -38,7 +38,7 @@ let mouse = {
 
 canvas.onmousemove = function (e) {
     mouse.x = e.clientX;
-    mouse.y = e.clientY;
+    mouse.y = e.clientY;    
 };
 
 let shootAngle;
@@ -79,3 +79,27 @@ let makeEnemies = (quantity) => {
         enemies.push(new Enemy({position: {x: cordinatesValuex, y: cordinatesValuey}, dimensions: {width: 100, height: 100}}))
     };
 };
+
+function drawBorder(x, y, width, height, borderSize, borderColor) {
+    // Draw the outer border using stroke
+    ctx.beginPath();
+    ctx.save()
+    ctx.strokeStyle = borderColor;
+    ctx.lineWidth = borderSize;
+
+    // Draw the rectangle border
+    ctx.rect(x, y, width, height);
+    ctx.stroke();
+    ctx.restore()
+    ctx.closePath()
+}
+
+function drawTriangle(x1, y1, x2, y2, x3, y3) {
+    ctx.beginPath();
+    ctx.moveTo(x1, y1); // Move to the first vertex
+    ctx.lineTo(x2, y2); // Draw a line to the second vertex
+    ctx.lineTo(x3, y3); // Draw a line to the third vertex
+    ctx.closePath(); // Close the path to create the triangle shape
+    ctx.stroke(); // Draw the outline of the triangle
+    ctx.fill();   // Fill the triangle (optional)
+}

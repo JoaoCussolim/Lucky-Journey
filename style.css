@@ -1,3 +1,16 @@
+@font-face {
+    font-family: 'Pixeloid';
+    src: url('./assets/fonts/PixeloidMono-d94EV.ttf');
+    font-weight: 300;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Tales';
+    src: url('./assets/fonts/AncientModernTales-a7Po.ttf');
+    font-weight: 300;
+    font-style: normal;
+}
+
 *{
     user-select: none;
     overflow: hidden;

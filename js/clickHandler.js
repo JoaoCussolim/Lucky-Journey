@@ -13,6 +13,14 @@ projectiles.push(new Projectile({
     velocity: {x: Math.cos(shootAngle) * 5, y: Math.sin(shootAngle) * 5}  
 }))
 
+if(dialogActive){
+    if(canvasPrompResponse != ''){
+        actualDialogBox.updateDialog()
+        canvasPrompResponse = ''
+    }
+    //actualDialogBox.updateDialog()
+}
+
 })
 
 let playbtnClicked = () =>{

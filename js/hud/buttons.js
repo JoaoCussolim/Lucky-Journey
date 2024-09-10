@@ -32,7 +32,7 @@ class Button {
             ctx.fillStyle = this.colorUsed;
             ctx.fillRect(this.position.x, this.position.y, this.size.w, this.size.h);
             ctx.fillStyle = this.text.color;
-            ctx.font = this.text.size + 'px arial';
+            ctx.font = this.text.size + 'px Pixeloid';
             ctx.fillText(this.text.writing, this.position.x + this.size.w / 2, (this.position.y + this.size.h / 2) + this.text.size /3);
         }
         //if its img type button
