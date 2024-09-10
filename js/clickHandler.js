@@ -7,6 +7,10 @@ if(playbtn.mouseOn){
     playbtnClicked()
 }
 
+if(controlsbtn.mouseOn){
+    controlsbtnClicked()
+}
+
 projectiles.push(new Projectile({ 
     position: { x: player.position.x, y: player.position.y }, 
     dimensions: { width: 100, height: 100 }, 
@@ -78,6 +82,16 @@ let playbtnClicked = () =>{
     playbtn.mouseOn = false;
     console.log("CLICKED")
     played = true;
+}
+
+let controlsbtnClicked = () =>{
+    controlsbtn.mouseOn = false;
+    SPnum1.stop()
+    SPnum2.stop()
+    SPnum3.stop()
+    SPnum4.stop()
+    SPnum5.stop()
+
 }
 
 

@@ -16,7 +16,12 @@ let backgroundVelocity = {
     y: 0
 }
 
-let started = true
+let started = false
+let SPnum1 = new SpinningNumber({x:400,y:400},"P",50,400)
+let SPnum2 = new SpinningNumber({x:475,y:400},"L",50,400)
+let SPnum3 = new SpinningNumber({x:550,y:400},"A",50,400)
+let SPnum4 = new SpinningNumber({x:625,y:400},"Y",50,400)
+let SPnum5 = new SpinningNumber({x:700,y:400},"!",50,400)
 
 
 let spawnedEnemies = false;
@@ -36,6 +41,11 @@ let menu = (currentTime) => {
     ctx.textAlign = 'center';
     if(!played) ctx.clearRect(0, 0, canvas.width, canvas.height);
     mainMenu();
+    SPnum1.update()
+    SPnum2.update()
+    SPnum3.update()
+    SPnum4.update()
+    SPnum5.update()
 
     lastTime = currentTime;
     
@@ -53,6 +63,7 @@ let game = (currentTime) => {
 
     ctx.imageSmoothingEnabled = false;
     ctx.clearRect(0, 0, canvas.width, canvas.height);
+
     drawInfiniteGrid();
 
     getMouseAngle();

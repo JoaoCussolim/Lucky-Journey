@@ -48,9 +48,10 @@ class inventory {
             const y = (i - startIndex) * this.itemHeight - (this.scrollY % this.itemHeight);
 
             if (y > this.listHeight) break; // Stop drawing if it's beyond the visible area
-
+            
             ctx.fillStyle = 'black';
-
+            
+            
             ctx.fillRect(this.listX, this.listY + y, this.listWidth, this.itemHeight);
             ctx.fillStyle = 'white';
             ctx.font = '20px Arial';
@@ -58,8 +59,10 @@ class inventory {
             ctx.fillText(this.items[itemIndex], this.listX + 40, this.listY + y + this.itemHeight / 2);
 
             ctx.fillStyle = 'white';
-            ctx.fillRect(930,100,500,150)
+            
+
             ctx.fillRect(930,650,500,150)
+            ctx.fillRect(930,100,500,150)
         }
 
         // Draw the scrollbar
@@ -88,13 +91,13 @@ class inventory {
     }
 
 
-
     draw() {
         // Draw the inventory box
         if (this.visible) {
             ctx.fillStyle = "rgb(255, 255, 255)";
-            ctx.fillRect(this.pos.x, this.pos.y, this.size.width, this.size.height);
-            this.drawItems();
+            ctx.fillRect(this.pos.x, this.pos.y, this.size.width, this.size.height); //antes
+            this.drawItems(); //depois
+            
         }
     }
 
