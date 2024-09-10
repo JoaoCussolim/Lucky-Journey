@@ -39,13 +39,21 @@ let mainMenu = () =>{
             ctx.fillStyle = "lightgreen";
         break;
     }
-    ctx.fillRect(0,0,canvas.width,canvas.height)
-    playbtn.update()
-    controlsbtn.update()
-    creditsbtn.update()
-
-
-
+    ctx.fillRect(0,0,canvas.width,canvas.height);    
+    playbtn.update();
+    controlsbtn.update();
+    creditsbtn.update();
     
+    if(played) playedClicked_UI();
+}
+
+let played = false;
+let alphaColor = 0
+
+let playedClicked_UI = () =>{
+    ctx.fillStyle = `rgba(255,255,255,${alphaColor})`
+    ctx.fillRect(0,0,innerWidth,innerHeight)
+    alphaColor += 0.01
+    if(alphaColor >= 1.5) started = true
 
 }

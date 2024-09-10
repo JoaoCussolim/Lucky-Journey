@@ -53,7 +53,7 @@ class Dice {
 let dice = new Dice({
     sides: 20,
     pos:{x:600, y:200},
-    addiction:{rate:Infinity,number: 1
-    }
+    
+    
     
 });
