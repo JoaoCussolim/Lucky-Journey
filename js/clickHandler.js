@@ -12,7 +12,7 @@ if(controlsbtn.mouseOn){
 }
 
 projectiles.push(new Projectile({ 
-    position: { x: player.position.x, y: player.position.y }, 
+    position: { x: screenToWorldX(player.position.x), y: screenToWorldY(player.position.y) }, 
     dimensions: { width: 100, height: 100 }, 
     velocity: {x: Math.cos(shootAngle) * 5, y: Math.sin(shootAngle) * 5}  
 }))
@@ -22,7 +22,7 @@ if(dialogActive){
         actualDialogBox.updateDialog()
         canvasPrompResponse = ''
     }
-    //actualDialogBox.updateDialog()
+    actualDialogBox.updateDialog()
 }
 
 })

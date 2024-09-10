@@ -15,6 +15,7 @@ class DialogBox {
         this.passY = 135
         this.dialogIndex = 0;
         this.actualDialog = this.dialog[this.dialogIndex];
+        this.generic = false;
     }
 
     drawText() {
@@ -112,7 +113,7 @@ class DialogBox {
 
     updateDialog() {
         //dialogosAleatorios.push(gerarFrase())
-        if (this.dialogIndex < this.dialog.length - 1) this.dialogIndex += 1
+        if (this.dialogIndex < this.dialog.length - 1 && !this.generic) this.dialogIndex += 1
         else this.closeDialog()
         this.actualDialog = this.dialog[this.dialogIndex]
     }

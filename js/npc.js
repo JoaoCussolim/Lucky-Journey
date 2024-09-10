@@ -6,14 +6,23 @@ class NonPlayableCharacter extends Sprite {
         this.image = new Image()
         this.image.src = src
         this.talking = false
+        this.talked = false
     }
     talk() {
-        dialogActive = true
-        this.talking = true
-        actualDialogBox = new DialogBox({ dialog: this.dialog, speaker: this.name, src: this.image.src });
+        if (!this.talked) {
+            dialogActive = true
+            this.talking = true
+            this.talked = true
+            actualDialogBox = new DialogBox({ dialog: this.dialog, speaker: this.name, src: this.image.src });
+        }else{
+            this.talking = true
+            dialogActive = true
+            actualDialogBox = new DialogBox({ dialog: this.dialog, speaker: this.name, src: this.image.src });
+            actualDialogBox.generic = true
+        }
     }
     draw() {
-        ctx.drawImage(this.image, screenToWorldX(this.position.x), screenToWorldY(this.position.y), 100, 100)
+        ctx.drawImage(this.image, worldToScreenX(this.position.x), worldToScreenY(this.position.y), 100, 100)
     }
 }
 

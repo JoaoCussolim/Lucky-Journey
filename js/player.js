@@ -32,18 +32,12 @@ class Player extends Sprite {
     };
 
     shouldPanCameraVertical() {
+    
         backgroundPositions.x -= this.velocity.x;
         backgroundVelocity.x = this.velocity.x;
     };
 
     shouldPanCameraHorizontal() {
-
-        //Futuramente será utilizado blocos de colisão, basicamente, na criação de um mapa você pode exportar o modelo de blocos
-        //Estes blocos da camada colisão serão utilizados para localização do mapa e conseguir saber até onde o player pode ir
-        //Isso vai fazer com que mesmo que o mapa mude sua camera ou seja posicionado, o player só vai parar quando bater no bloco de colisao
-        //Que na maioria das vezes estará presente nas bordas do mapa ou então em cercas, árvores, qualquer coisa colidivel
-        //Na teoria parece mais complicado porém com esse modelo de código, qualquer bloco de colisão vai fazer o player colidir
-        //Sendo assim, da pra fazer colisões aleatorias que não tem a ver com a borda do mapa em si, melhorando o sistema
 
         backgroundPositions.y -= this.velocity.y;
         backgroundVelocity.y = this.velocity.y;
@@ -52,8 +46,8 @@ class Player extends Sprite {
     updateBoxes(){
         this.hitbox = {
             position: {
-                x: this.center.x - 20,
-                y: this.center.y - 20,
+                x: screenToWorldX(this.center.x - 20),
+                y: screenToWorldY(this.center.y - 20),
             },
             dimensions:{
                 width: this.dimensions.width + 20 * 2,
@@ -62,8 +56,8 @@ class Player extends Sprite {
         };
         this.attackbox = {
             position: {
-                x: this.center.x - 50,
-                y: this.center.y - 50,
+                x: screenToWorldX(this.center.x - 50),
+                y: screenToWorldY(this.center.y - 50),
             },
             dimensions:{
                 width: this.dimensions.width + 50 * 2,
@@ -83,7 +77,7 @@ class Player extends Sprite {
         //ctx.fillStyle = 'purple';
         //ctx.fillRect(this.hitbox.position.x, this.hitbox.position.y, this.hitbox.dimensions.width, this.hitbox.dimensions.height)
         ctx.fillStyle = 'white';
-        ctx.fillRect(this.center.x, this.center.y, this.dimensions.width, this.dimensions.height);
+        ctx.fillRect(screenToWorldX(this.center.x), screenToWorldY(this.center.y), this.dimensions.width, this.dimensions.height);
 
         
     };

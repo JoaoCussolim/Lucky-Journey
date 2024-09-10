@@ -1,21 +1,22 @@
 addEventListener('keydown', (e) => {
+    const pressedKey = e.key.toLowerCase()
     if (acceptedKeys[e.key]) acceptedKeys[e.key](player);
-    if (e.key === 'k') {
+    if (pressedKey === 'k') {
         dice.rolling = true;
     }
-    if(e.key === 'f'){
+    if(pressedKey === 'f' && !dialogActive){
         testNpc.talk()
     }
-    if(e.key.toLowerCase() === 'e'){
+    if(pressedKey === 'e'){
         player.inventory.open()
     }
 
     if (canvasPromptActive) {
-        if (e.key === 'Backspace') {
+        if (pressedKey === 'backspace') {
             canvasPrompText = canvasPrompText.slice(0, -1);
         }
-        if(e.key.length < 2) canvasPrompText += e.key
-        if(e.key === 'Enter'){
+        if(pressedKey.length < 2) canvasPrompText += e.key
+        if(pressedKey === 'enter'){
             canvasPromptActive = false;
             query({"inputs": canvasPrompText}).then((response) => {
                 canvasPrompResponse = response
@@ -27,7 +28,7 @@ addEventListener('keydown', (e) => {
         }
     }
 
-    if(e.key === 'p'){
+    if(pressedKey === 'p'){
         question = canvasPrompt('Ask a question: ');
     }
 });

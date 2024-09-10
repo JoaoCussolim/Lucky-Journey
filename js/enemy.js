@@ -49,17 +49,16 @@ class Enemy extends Sprite {
     receivingDamage(damage) {
         this.health -= damage;
         if (this.health <= 0) {
-
             this.health = 0;
             this.dead = true;
         }
     }
 
-    detectPlayer(){
-        if(this.position.x + this.dimensions.width/2 < 0 ||
-            this.position.x - this.dimensions.width/2 > canvas.width||
-            this.position.y + this.dimensions.height/2 < 0 ||
-            this.position.y - this.dimensions.height/2 > canvas.height
+    detectPlayer() {
+        if (this.position.x + this.dimensions.width / 2 < 0 ||
+            this.position.x - this.dimensions.width / 2 > canvas.width ||
+            this.position.y + this.dimensions.height / 2 < 0 ||
+            this.position.y - this.dimensions.height / 2 > canvas.height
         ) this.playerOnRange = false
         else this.playerOnRange = true
     }
@@ -86,7 +85,7 @@ class Enemy extends Sprite {
     };
 
 
-    DestroyEnemies(){
+    DestroyEnemies() {
         if (this.healthbar.healthTaken <= 0) {
             let eIndex = enemies.findIndex(enemy => {
                 return enemy.position.x === this.position.x && enemy.position.y === this.position.y
@@ -98,8 +97,8 @@ class Enemy extends Sprite {
     updateBoxes() {
         this.hitbox = {
             position: {
-                x: this.center.x - 20,
-                y: this.center.y - 20,
+                x: screenToWorldX(this.center.x - 20),
+                y: screenToWorldY(this.center.y - 20),
             },
             dimensions: {
                 width: this.dimensions.width + 20 * 2,
@@ -108,8 +107,8 @@ class Enemy extends Sprite {
         };
         this.attackbox = {
             position: {
-                x: this.center.x - 50,
-                y: this.center.y - 50,
+                x: screenToWorldX(this.center.x - 50),
+                y: screenToWorldY(this.center.y - 50),
             },
             dimensions: {
                 width: this.dimensions.width + 50 * 2,
@@ -128,7 +127,7 @@ class Enemy extends Sprite {
         //ctx.fillStyle = 'brown';
         //ctx.fillRect(this.attackbox.position.x, this.attackbox.position.y, this.attackbox.dimensions.width, this.attackbox.dimensions.height);
         ctx.fillStyle = 'cyan';
-        ctx.fillRect(this.center.x, this.center.y, this.dimensions.width, this.dimensions.height);
+        ctx.fillRect(screenToWorldX(this.center.x), screenToWorldY(this.center.y), this.dimensions.width, this.dimensions.height);
 
         //healthBar
         this.healthbar.update();
@@ -144,7 +143,7 @@ class Enemy extends Sprite {
         this.followPlayer()
         this.applyVelocity();
         this.DestroyEnemies()
-        this.healthbar.updateValues({ pos: { x: this.position.x - 50, y: this.position.y - 100 }, health: this.health });
+        this.healthbar.updateValues({ pos: { x: screenToWorldX(this.position.x - 50), y: screenToWorldY(this.position.y - 100) }, health: this.health });
     };
 };
 
