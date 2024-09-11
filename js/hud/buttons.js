@@ -33,7 +33,7 @@ class Button {
             ctx.fillRect(this.position.x, this.position.y, this.size.w, this.size.h);
             ctx.fillStyle = this.text.color;
             ctx.font = this.text.size + 'px Pixeloid';
-            ctx.fillText(this.text.writing, this.position.x + this.size.w / 2, (this.position.y + this.size.h / 2) + this.text.size /3);
+            ctx.fillText(this.text.writing, this.position.x + this.size.w / 2, (this.position.y + this.size.h / 2) + this.text.size / 3);
         }
         //if its img type button
         else {
@@ -73,13 +73,13 @@ class Button {
             if (isInsideButton({ x: this.position.x, y: this.position.y, width: this.size.w, height: this.size.h })) {
                 //do if mouse on button
                 if (this.size.w < this.effect.w) {
-                    this.size.w += (this.effect.w - this.originalSz.w)/10;
-                    this.position.x -= (this.effect.w - this.originalSz.w)/20;
+                    this.size.w += (this.effect.w - this.originalSz.w) / 10;
+                    this.position.x -= (this.effect.w - this.originalSz.w) / 20;
                 }
 
                 if (this.size.h < this.effect.h) {
-                    this.size.h += (this.effect.h - this.originalSz.h)/10;
-                    this.position.y -= (this.effect.h - this.originalSz.h)/20;
+                    this.size.h += (this.effect.h - this.originalSz.h) / 10;
+                    this.position.y -= (this.effect.h - this.originalSz.h) / 20;
                 }
                 this.mouseOn = true;
 
@@ -88,13 +88,13 @@ class Button {
             else {
                 //do if mouse not on button
                 if (this.size.w > this.originalSz.w) {
-                    this.size.w -= (this.effect.w - this.originalSz.w)/10;
-                    this.position.x += (this.effect.w - this.originalSz.w)/20;
+                    this.size.w -= (this.effect.w - this.originalSz.w) / 10;
+                    this.position.x += (this.effect.w - this.originalSz.w) / 20;
                 }
 
                 if (this.size.h > this.originalSz.h) {
-                    this.size.h -= (this.effect.h - this.originalSz.h)/10;
-                    this.position.y += (this.effect.h - this.originalSz.h)/20;
+                    this.size.h -= (this.effect.h - this.originalSz.h) / 10;
+                    this.position.y += (this.effect.h - this.originalSz.h) / 20;
                 }
                 this.mouseOn = false;
             }
@@ -131,7 +131,7 @@ let playbtn = new Button({
     txtType: true,
     color: 'white',
     color2: 'rgb(200,200,200',
-    position: { x: window.innerWidth/2 - 150, y: window.innerHeight/4 },
+    position: { x: window.innerWidth / 2 - 150, y: window.innerHeight / 4 },
     size: { w: 300, h: 100 },
     originalSz: { w: 150, h: 150 },
     border: 5,
@@ -143,7 +143,7 @@ let controlsbtn = new Button({
     txtType: true,
     color: 'white',
     color2: 'rgb(200,200,200',
-    position: { x: window.innerWidth/2 - 150, y: window.innerHeight/2 },
+    position: { x: window.innerWidth / 2 - 150, y: window.innerHeight / 2 },
     size: { w: 300, h: 100 },
     originalSz: { w: 150, h: 150 },
     border: 5,
@@ -154,7 +154,7 @@ let creditsbtn = new Button({
     txtType: true,
     color: 'white',
     color2: 'rgb(200,200,200',
-    position: { x: window.innerWidth/2 - 150, y: window.innerHeight/1.325 },
+    position: { x: window.innerWidth / 2 - 150, y: window.innerHeight / 1.325 },
     size: { w: 300, h: 100 },
     originalSz: { w: 150, h: 150 },
     border: 5,

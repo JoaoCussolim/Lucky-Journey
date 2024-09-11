@@ -4,15 +4,15 @@ class Player extends Sprite {
     constructor({ position = { x: 0, y: 0 }, dimensions = { width: 0, height: 0 } }) {
         super({ position, dimensions });
         this.center = {
-            x: this.position.x - this.dimensions.width/2,
-            y: this.position.y - this.dimensions.height/2,
+            x: this.position.x - this.dimensions.width / 2,
+            y: this.position.y - this.dimensions.height / 2,
         };
         this.hitbox = {
             position: {
                 x: 0,
                 y: 0,
             },
-            dimensions:{
+            dimensions: {
                 width: 0,
                 height: 0,
             }
@@ -22,7 +22,7 @@ class Player extends Sprite {
                 x: 0,
                 y: 0,
             },
-            dimensions:{
+            dimensions: {
                 width: 0,
                 height: 0,
             }
@@ -33,21 +33,23 @@ class Player extends Sprite {
 
     shouldPanCameraVertical() {
         backgroundPositions.x -= this.velocity.x;
+        this.position.x -= this.velocity.x;
         backgroundVelocity.x = this.velocity.x;
     };
 
     shouldPanCameraHorizontal() {
         backgroundPositions.y -= this.velocity.y;
+        this.position.y -= this.velocity.y;
         backgroundVelocity.y = this.velocity.y;
     };
 
-    updateBoxes(){
+    updateBoxes() {
         this.hitbox = {
             position: {
                 x: screenToWorldX(this.center.x - 20),
                 y: screenToWorldY(this.center.y - 20),
             },
-            dimensions:{
+            dimensions: {
                 width: this.dimensions.width + 20 * 2,
                 height: this.dimensions.height + 20 * 2,
             }
@@ -57,7 +59,7 @@ class Player extends Sprite {
                 x: screenToWorldX(this.center.x - 50),
                 y: screenToWorldY(this.center.y - 50),
             },
-            dimensions:{
+            dimensions: {
                 width: this.dimensions.width + 50 * 2,
                 height: this.dimensions.height + 50 * 2,
             }
@@ -66,10 +68,10 @@ class Player extends Sprite {
 
     draw() {
         this.center = {
-            x: this.position.x - this.dimensions.width/2,
-            y: this.position.y - this.dimensions.height/2,
+            x: this.position.x - this.dimensions.width / 2,
+            y: this.position.y - this.dimensions.height / 2,
         }
-        
+
         // ctx.fillStyle = 'green'; 
         //ctx.fillRect(this.attackbox.position.x, this.attackbox.position.y, this.attackbox.dimensions.width, this.attackbox.dimensions.height)
         //ctx.fillStyle = 'purple';
@@ -77,7 +79,7 @@ class Player extends Sprite {
         ctx.fillStyle = 'white';
         ctx.fillRect(screenToWorldX(this.center.x), screenToWorldY(this.center.y), this.dimensions.width, this.dimensions.height);
 
-        
+
     };
 
     update() {

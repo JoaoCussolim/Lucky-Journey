@@ -58,4 +58,4 @@ class NonPlayableCharacter extends Sprite {
     }
 }
 
-let actualNpc = new NonPlayableCharacter({ position: { x: player.position.x - 100, y: player.position.y - 300 }, dimensions: { width: 200, height: 200 }, dialog: ['Eu sou um npc de teste', 'Eu sou uma criação de Deus', 'Agora calma'], name: 'Test', src: './assets/mage/idle/forward.png' })
+let actualNpc = new NonPlayableCharacter({ position: { x: player.position.x - 100, y: player.position.y - 1200 }, dimensions: { width: 200, height: 200 }, dialog: ['Eu sou um npc de teste', 'Eu sou uma criação de Deus', 'Agora calma'], name: 'Test', src: './assets/mage/idle/forward.png' })

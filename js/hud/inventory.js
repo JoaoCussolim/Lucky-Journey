@@ -16,7 +16,7 @@ class inventory {
         this.pos = { x: 450, y: 100 };
         this.size = { width: 1000, height: 750 };
         this.visible = false;
-        this.totalItems = 100
+        this.totalItems = 5
         this.items = [];
         for (let i = 0; i < this.totalItems; i++) {
             this.items.push(`Item ${i + 1}`);
@@ -82,7 +82,7 @@ class inventory {
         ctx.fillRect(this.listX + this.listWidth, scrollbarTop, scrollbarWidth, scrollbarHeight); // Scrollbar itself
     }
 
-    open(){
+    open() {
         const isVisible = this.visible === true ? false : true
         this.visible = isVisible
     }

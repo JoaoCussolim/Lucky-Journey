@@ -38,7 +38,7 @@ let mouse = {
 
 canvas.onmousemove = function (e) {
     mouse.x = e.clientX;
-    mouse.y = e.clientY;    
+    mouse.y = e.clientY;
 };
 
 let shootAngle;
@@ -73,10 +73,10 @@ let circleCollision = (circle1, circle2) => {
 
 
 let makeEnemies = (quantity) => {
-    for(let i = 0; i < quantity; i++){
-        let cordinatesValuex = RandomInt(0,canvas.width);
-        let cordinatesValuey = RandomInt(0,canvas.height);
-        enemies.push(new Enemy({position: {x: cordinatesValuex, y: cordinatesValuey}, dimensions: {width: 100, height: 100}}))
+    for (let i = 0; i < quantity; i++) {
+        let cordinatesValuex = RandomInt(0, canvas.width);
+        let cordinatesValuey = RandomInt(0, canvas.height);
+        enemies.push(new Enemy({ position: { x: cordinatesValuex, y: cordinatesValuey }, dimensions: { width: 100, height: 100 } }))
     };
 };
 

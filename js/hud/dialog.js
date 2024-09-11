@@ -19,6 +19,7 @@ class DialogBox {
     }
 
     drawText() {
+        ctx.textBaseline = 'alphabetic'
         const borderSize = 10
         const borderColor = 'rgba(237, 172, 74, 1)'
         drawBorder(this.position.x + 300, this.position.y + 5, this.dimensions.width - 500, this.dimensions.height, borderSize, borderColor);
@@ -112,7 +113,6 @@ class DialogBox {
     }
 
     updateDialog() {
-        //dialogosAleatorios.push(gerarFrase())
         if (this.dialogIndex < this.dialog.length - 1 && !this.generic) this.dialogIndex += 1
         else this.closeDialog()
         this.actualDialog = this.dialog[this.dialogIndex]
@@ -135,18 +135,18 @@ let canvasPrompText = ''
 let canvasPrompQuestion = ''
 let canvasPrompResponse = ''
 
-function canvasPrompt(text){
+function canvasPrompt(text) {
     canvasPromptActive = true
     canvasPrompQuestion = text
 }
 
-function loadCanvasPrompt(){
+function loadCanvasPrompt() {
     ctx.font = `60px Tales`
     ctx.fillStyle = 'black'
-    ctx.fillRect(canvas.width/2 - 400, canvas.height/2 - 400, 800, 800)
+    ctx.fillRect(canvas.width / 2 - 400, canvas.height / 2 - 400, 800, 800)
     ctx.fillStyle = 'white'
-    ctx.fillText(canvasPrompQuestion, canvas.width/2 - 250, canvas.height/2 - 300)
-    ctx.fillText(canvasPrompText, canvas.width/2 - 250, canvas.height/2)
+    ctx.fillText(canvasPrompQuestion, canvas.width / 2 - 250, canvas.height / 2 - 300)
+    ctx.fillText(canvasPrompText, canvas.width / 2 - 250, canvas.height / 2)
 }
 
 const API_TOKEN = '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';
