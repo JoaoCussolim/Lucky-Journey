@@ -44,10 +44,10 @@ canvas.onmousemove = function (e) {
 let shootAngle;
 
 let getMouseAngle = () => {
-    if (mouse.x >= player.position.x) {
-        shootAngle = Math.atan((mouse.y - player.position.y) / (mouse.x - player.position.x));
+    if (mouse.x >= screenToWorldX(player.position.x)) {
+        shootAngle = Math.atan((mouse.y - screenToWorldY(player.position.y)) / (mouse.x - screenToWorldX(player.position.x)));
     } else {
-        shootAngle = (Math.atan((mouse.y - player.position.y) / (mouse.x - player.position.x))) + Math.PI;
+        shootAngle = (Math.atan((mouse.y - screenToWorldY(player.position.y)) / (mouse.x - screenToWorldX(player.position.x)))) + Math.PI;
     }
 }
 
