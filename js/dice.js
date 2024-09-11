@@ -15,7 +15,7 @@ class Dice {
         ctx.fillStyle = 'black';
         ctx.fillRect(this.pos.x, this.pos.y, 100, 100);
         ctx.fillStyle = 'white';
-        ctx.font = "50px Arial";
+        ctx.font = "50px Pixeloid";
         ctx.fillText(this.numberDisplay, this.pos.x + 50, this.pos.y + 65);
     };
 
