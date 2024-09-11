@@ -16,7 +16,7 @@ let backgroundVelocity = {
     y: 0
 }
 
-let started = false
+let started = true
 let SPnum1 = new SpinningNumber({ x: 400, y: 400 }, "P", 50, 400)
 let SPnum2 = new SpinningNumber({ x: 475, y: 400 }, "L", 50, 400)
 let SPnum3 = new SpinningNumber({ x: 550, y: 400 }, "A", 50, 400)
@@ -89,7 +89,7 @@ let game = (currentTime) => {
     };
 
     player.update();
-    testNpc.draw();
+    actualNpc.update();
     if (dialogActive) actualDialogBox.draw()
     if (canvasPromptActive) loadCanvasPrompt()
     if (player.inventory.visible) player.inventory.draw()

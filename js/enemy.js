@@ -55,29 +55,29 @@ class Enemy extends Sprite {
     }
 
     detectPlayer() {
-        if (this.position.x + this.dimensions.width / 2 < 0 ||
-            this.position.x - this.dimensions.width / 2 > canvas.width ||
-            this.position.y + this.dimensions.height / 2 < 0 ||
-            this.position.y - this.dimensions.height / 2 > canvas.height
+        if (screenToWorldX(this.position.x + this.dimensions.width / 2) < 0 ||
+            screenToWorldX(this.position.x - this.dimensions.width / 2) > canvas.width ||
+            screenToWorldY(this.position.y + this.dimensions.height / 2) < 0 ||
+            screenToWorldY(this.position.y - this.dimensions.height / 2) > canvas.height
         ) this.playerOnRange = false
         else this.playerOnRange = true
     }
 
     followPlayer() {
         if (!this.dead & this.playerOnRange) {
-            if (player.position.x > this.position.x + this.dimensions.width) {
+            if (screenToWorldX(player.position.x) > screenToWorldX(this.position.x + this.dimensions.width)) {
                 this.velocity.y = 0;
                 this.velocity.x = 5 * deltaTime_Mult;
             };
-            if (player.position.x < this.position.x - this.dimensions.width) {
+            if (screenToWorldX(player.position.x) < screenToWorldX(this.position.x - this.dimensions.width)) {
                 this.velocity.y = 0;
                 this.velocity.x = -5 * deltaTime_Mult;
             };
-            if (player.position.y > this.position.y + this.dimensions.width) {
+            if (screenToWorldY(player.position.y) > screenToWorldY(this.position.y + this.dimensions.height)) {
                 this.velocity.x = 0;
                 this.velocity.y = 5 * deltaTime_Mult;
             };
-            if (player.position.y < this.position.y - this.dimensions.width) {
+            if (screenToWorldY(player.position.y) < screenToWorldY(this.position.y - this.dimensions.height)) {
                 this.velocity.x = 0;
                 this.velocity.y = -5 * deltaTime_Mult;
             };

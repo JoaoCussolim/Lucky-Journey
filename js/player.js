@@ -32,13 +32,11 @@ class Player extends Sprite {
     };
 
     shouldPanCameraVertical() {
-    
         backgroundPositions.x -= this.velocity.x;
         backgroundVelocity.x = this.velocity.x;
     };
 
     shouldPanCameraHorizontal() {
-
         backgroundPositions.y -= this.velocity.y;
         backgroundVelocity.y = this.velocity.y;
     };

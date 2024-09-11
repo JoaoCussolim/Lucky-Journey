@@ -4,8 +4,8 @@ addEventListener('keydown', (e) => {
     if (pressedKey === 'k') {
         dice.rolling = true;
     }
-    if(pressedKey === 'f' && !dialogActive){
-        testNpc.talk()
+    if(pressedKey === 'f' && !dialogActive && actualNpc.talkable){
+        actualNpc.talk()
     }
     if(pressedKey === 'e'){
         player.inventory.open()

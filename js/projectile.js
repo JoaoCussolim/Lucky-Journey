@@ -1,41 +1,41 @@
- class Projectile extends Sprite{
-    constructor({ position = { x: 0, y: 0 }, dimensions = { width: 0, height: 0 }, velocity = {x: 0, y: 0} }){
-        super({position, dimensions});
+class Projectile extends Sprite {
+    constructor({ position = { x: 0, y: 0 }, dimensions = { width: 0, height: 0 }, velocity = { x: 0, y: 0 } }) {
+        super({ position, dimensions });
         this.damage = 1;
         this.shouldRemove = false;
         this.velocity = velocity;
         this.center = {
-            x: this.position.x - this.dimensions.width/2,
-            y: this.position.y - this.dimensions.height/2,
+            x: this.position.x - this.dimensions.width / 2,
+            y: this.position.y - this.dimensions.height / 2,
         };
         this.hitbox = {
             position: {
                 x: this.center.x - 20,
                 y: this.center.y - 20,
             },
-            dimensions:{
+            dimensions: {
                 width: this.dimensions.width + 20 * 2,
                 height: this.dimensions.height + 20 * 2,
             }
         };
     };
 
-    aim(){
+    aim() {
         this.position.x += this.velocity.x - backgroundVelocity.x * deltaTime_Mult;
         this.position.y += this.velocity.y - backgroundVelocity.y * deltaTime_Mult;
     };
 
-    updateHitbox(){
+    updateHitbox() {
         this.center = {
-            x: this.position.x - this.dimensions.width/2,
-            y: this.position.y - this.dimensions.height/2,
+            x: this.position.x - this.dimensions.width / 2,
+            y: this.position.y - this.dimensions.height / 2,
         };
         this.hitbox = {
             position: {
                 x: this.center.x - 20,
                 y: this.center.y - 20,
             },
-            dimensions:{
+            dimensions: {
                 width: this.dimensions.width + 20 * 2,
                 height: this.dimensions.height + 20 * 2,
             }
@@ -49,15 +49,15 @@
         // ctx.fillRect(this.hitbox.position.x, this.hitbox.position.y, this.hitbox.dimensions.width, this.hitbox.dimensions.height);
     };
 
-    autoRemove(){
-        if(!this.shouldRemove){
+    autoRemove() {
+        if (!this.shouldRemove) {
             setTimeout(() => {
                 this.shouldRemove = true;
             }, 5000);
         };
     };
 
-    update(){
+    update() {
         this.updateHitbox();
         this.applyVelocity();
         this.draw();
