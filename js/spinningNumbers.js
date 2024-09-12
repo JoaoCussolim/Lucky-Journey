@@ -1,16 +1,18 @@
 possiveisValores = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 69, '🎰', '🍋', 'B', '♀', '♪', '💀']
 
 class SpinningNumber {
-    constructor(pos, finalValue, size, finalY) {
+    constructor({pos, finalValue, size, limit, restartY, stopY,delay}) {
         this.value = [0, 0, 0];
         this.finalValue = finalValue;
-        this.finalY = finalY;
+        this.stopY = stopY;
+        this.restartY = restartY;
         this.pos = pos;
         this.stoped = false;
         this.size = size;
         this.pos2 = { x: pos.x, y: pos.y + 150 }
         this.pos3 = { x: pos.x, y: pos.y - 150 }
-        this.limit = 650
+        this.limit = limit;
+        this.delay = delay;
         this.randomizeValue(0);
         this.randomizeValue(2);
         this.randomizeValue(1);
@@ -24,7 +26,9 @@ class SpinningNumber {
     }
 
     stop() {
-        this.stoped = true;
+        if(this.delay > 0){
+            this.delay -= 1;
+        }else this.stoped = true;
     }
 
     draw() {
@@ -45,20 +49,20 @@ class SpinningNumber {
             this.pos3.y += 25;
 
             if (this.pos.y + this.size >= this.limit) {
-                this.pos.y = 100;
+                this.pos.y = this.restartY;
                 this.randomizeValue(0);
             }
             if (this.pos2.y + this.size >= this.limit) {
-                this.pos2.y = 100;
+                this.pos2.y = this.restartY;
                 this.randomizeValue(1);
             }
             if (this.pos3.y + this.size >= this.limit) {
-                this.pos3.y = 100;
+                this.pos3.y = this.restartY;
                 this.randomizeValue(3);
             }
         }
         else {
-            this.pos.y = this.finalY;
+            this.pos.y = this.stopY;
             this.value[0] = this.finalValue;
         }
 

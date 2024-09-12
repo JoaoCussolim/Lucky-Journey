@@ -17,11 +17,56 @@ let backgroundVelocity = {
 }
 
 let started = false
-let SPnum1 = new SpinningNumber({ x: 400, y: 400 }, "P", 50, 400)
-let SPnum2 = new SpinningNumber({ x: 475, y: 400 }, "L", 50, 400)
-let SPnum3 = new SpinningNumber({ x: 550, y: 400 }, "A", 50, 400)
-let SPnum4 = new SpinningNumber({ x: 625, y: 400 }, "Y", 50, 400)
-let SPnum5 = new SpinningNumber({ x: 700, y: 400 }, "!", 50, 400)
+let SPnum1 = new SpinningNumber({
+    pos: { x: 755, y: 450 }, 
+    finalValue: "P", 
+    size: 50, 
+    restartY: 200,
+    stopY: 425,
+    limit: 700,
+    delay: 50,
+})
+
+let SPnum2 = new SpinningNumber({
+    pos: { x: 855, y: 425 }, 
+    finalValue: "L", 
+    size: 50, 
+    restartY: 200,
+    stopY: 425,
+    limit: 700,
+    delay: 100,
+})
+
+let SPnum3 = new SpinningNumber({
+    pos: { x: 955, y: 425 }, 
+    finalValue: "A", 
+    size: 50, 
+    restartY: 200,
+    stopY: 425,
+    limit: 700,
+    delay: 150,
+})
+
+let SPnum4 = new SpinningNumber({
+    pos: { x: 1055, y: 425 }, 
+    finalValue: "Y", 
+    size: 50, 
+    restartY: 200,
+    stopY: 425,
+    limit: 700,
+    delay: 200
+})
+
+let SPnum5 = new SpinningNumber({
+    pos: { x: 1155, y: 425 }, 
+    finalValue: "!", 
+    size: 50, 
+    restartY: 200,
+    stopY: 425,
+    limit: 700,
+    delay: 250,
+})
+
 
 
 let spawnedEnemies = false;
@@ -33,6 +78,34 @@ let deltaTime_Mult = 1;
 let deltaTime = 0;
 let lastTime = performance.now();
 
+let SlotMachine = new AnimatedSprite({
+    position:{x:-51, y:-25},
+    size: {width: 200, height: 200},
+    frames: 1,
+    frameRate: 1,
+    source:'./assets/slot-machine/SlotMachine-idle(1).png',
+    frameBuffer:1,
+    scale: 10,
+    animations: {
+        Idle:{
+            source:"./assets/slot-machine/SlotMachine-idle(1).png",
+            frameBuffer: 1,
+            frameRate: 1,
+            image: new Image()
+
+        },
+
+        Push:{
+            source:"./assets/slot-machine/SlotMachine.png",
+            frameBuffer: 6,
+            frameRate:12,
+            image:new Image()
+        }
+    }
+
+
+});
+
 let menu = (currentTime) => {
     deltaTime = (currentTime - lastTime);
     deltaTime_Mult = deltaTime / frameInterval;
@@ -40,14 +113,11 @@ let menu = (currentTime) => {
     ctx.imageSmoothingEnabled = false;
     ctx.textAlign = 'center';
 
-
+    
+    
     mainMenu();
-    SPnum1.update()
-    SPnum2.update()
-    SPnum3.update()
-    SPnum4.update()
-    SPnum5.update()
-
+    
+    
     lastTime = currentTime;
 
 

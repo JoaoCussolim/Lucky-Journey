@@ -89,16 +89,12 @@ addEventListener('wheel', (e) => {
 let playbtnClicked = () => {
     playbtn.mouseOn = false;
     console.log("CLICKED")
+    SlotMachine.switchSprite("Push");
     played = true;
 }
 
 let controlsbtnClicked = () => {
     controlsbtn.mouseOn = false;
-    SPnum1.stop()
-    SPnum2.stop()
-    SPnum3.stop()
-    SPnum4.stop()
-    SPnum5.stop()
 
 }
 

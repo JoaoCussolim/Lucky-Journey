@@ -39,21 +39,52 @@ let mainMenu = () => {
             ctx.fillStyle = "lightgreen";
             break;
     }
+
+ 
+
     ctx.fillRect(0, 0, canvas.width, canvas.height);
+    ctx.fillStyle = 'white';
+    ctx.fillRect(700,200,500,300)
+    ctx.fillStyle = 'black';
+    SPnum1.update();
+    SPnum2.update();
+    SPnum3.update();
+    SPnum4.update();
+    SPnum5.update();
+    SlotMachine.update();
+if(!played){
     playbtn.update();
     controlsbtn.update();
     creditsbtn.update();
-
+}
     if (played) playedClicked_UI();
 }
 
 let played = false;
 let alphaColor = 0
 
+
+let pushStoped = false;
+
 let playedClicked_UI = () => {
+    if(SlotMachine.currentFrame == 11){
+        SlotMachine.switchSprite("Idle");
+        pushStoped = true;
+    }
+    if(pushStoped){
+        SPnum1.stop()
+        SPnum2.stop()
+        SPnum3.stop()
+        SPnum4.stop()
+        SPnum5.stop()
+    }
+
+
+if(SPnum5.stoped){
     ctx.fillStyle = `rgba(255,255,255,${alphaColor})`
     ctx.fillRect(0, 0, innerWidth, innerHeight)
     alphaColor += 0.01
     if (alphaColor >= 1.5) started = true
+}
 
 }
