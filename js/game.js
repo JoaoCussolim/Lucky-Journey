@@ -9,12 +9,12 @@ canvas.height = window.innerHeight;
 let backgroundPositions = {
     x: 0,
     y: 0
-}
+};
 
 let backgroundVelocity = {
     x: 0,
     y: 0
-}
+};
 
 let started = false
 let SPnum1 = new SpinningNumber({
@@ -25,7 +25,7 @@ let SPnum1 = new SpinningNumber({
     stopY: 425,
     limit: 700,
     delay: 50,
-})
+});
 
 let SPnum2 = new SpinningNumber({
     pos: { x: 855, y: 425 }, 
@@ -35,7 +35,7 @@ let SPnum2 = new SpinningNumber({
     stopY: 425,
     limit: 700,
     delay: 100,
-})
+});
 
 let SPnum3 = new SpinningNumber({
     pos: { x: 955, y: 425 }, 
@@ -45,7 +45,7 @@ let SPnum3 = new SpinningNumber({
     stopY: 425,
     limit: 700,
     delay: 150,
-})
+});
 
 let SPnum4 = new SpinningNumber({
     pos: { x: 1055, y: 425 }, 
@@ -55,7 +55,7 @@ let SPnum4 = new SpinningNumber({
     stopY: 425,
     limit: 700,
     delay: 200
-})
+});
 
 let SPnum5 = new SpinningNumber({
     pos: { x: 1155, y: 425 }, 
@@ -65,7 +65,7 @@ let SPnum5 = new SpinningNumber({
     stopY: 425,
     limit: 700,
     delay: 250,
-})
+});
 
 
 

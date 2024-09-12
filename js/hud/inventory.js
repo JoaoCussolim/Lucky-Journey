@@ -9,7 +9,10 @@ function drawBorder(x, y, width, height, borderSize, borderColor) {
     ctx.restore()
     ctx.closePath()
 }
-
+let itemBox = new Image()
+let scrollImg = new Image()
+itemBox.src = "./assets/ui/ItemBox.png";
+scrollImg.src = "./assets/ui/Scroll.png";
 
 class inventory {
     constructor() {
@@ -52,7 +55,7 @@ class inventory {
             ctx.fillStyle = 'black';
 
 
-            ctx.fillRect(this.listX, this.listY + y, this.listWidth, this.itemHeight);
+            ctx.drawImage(itemBox,this.listX, this.listY + y, this.listWidth, this.itemHeight);
             ctx.fillStyle = 'white';
             ctx.font = '20px Arial';
             ctx.textBaseline = 'middle'; // Center text vertically
@@ -79,7 +82,7 @@ class inventory {
         ctx.fillRect(this.listX + this.listWidth, this.listY, scrollbarWidth, this.listHeight); // Background of scrollbar container
 
         ctx.fillStyle = '#333';
-        ctx.fillRect(this.listX + this.listWidth, scrollbarTop, scrollbarWidth, scrollbarHeight); // Scrollbar itself
+        ctx.drawImage(scrollImg,this.listX + this.listWidth, scrollbarTop, scrollbarWidth, scrollbarHeight); // Scrollbar itself
     }
 
     open() {

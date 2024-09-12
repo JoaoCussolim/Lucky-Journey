@@ -1,4 +1,4 @@
-class Dice {
+class Dice{
     constructor({ sides, addiction, pos = { x: (window.innerWidth / 2) - 100, y: (window.innerHeight / 2) - 100 } }) {
         this.sides = sides;
         this.numberDisplay = 0;
