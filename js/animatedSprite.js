@@ -1,5 +1,5 @@
 class AnimatedSprite {
-    constructor({ position = { x: 0, y: 0 }, source, frameRate = 1, frameBuffer = 3, scale = 1 }) {
+    constructor({ position = { x: 0, y: 0 }, source, frameRate = 1, frameBuffer = 3, scale = 1, animations = [] }) {
         this.position = position;
         this.scale = scale;
         this.loaded = false;
@@ -14,11 +14,29 @@ class AnimatedSprite {
         this.currentFrame = 0;
         this.frameBuffer = frameBuffer;
         this.elapsedFrames = 0;
+
+        this.animations = animations
+        if (animations != []) {
+            for (let anim in this.animations) {
+                let image = new Image()
+                image.src = this.animations[anim].source
+
+                this.animations[anim].image = image
+            }
+        }
     }
+
+    switchSprite(anim) {
+        if (this.image === this.animations[anim].image || !this.loaded) return
+        this.image = this.animations[anim].image
+        this.frameBuffer = this.animations[anim].frameBuffer
+        this.frameRate = this.animations[anim].frameRate
+    }
+
 
     draw() {
         if (!this.image) return;
-        
+
         let cropbox = {
             position: {
                 x: this.currentFrame * (this.image.width / this.frameRate),
