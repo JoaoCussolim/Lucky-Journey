@@ -16,54 +16,54 @@ let backgroundVelocity = {
     y: 0
 };
 
-let started = false
+let started = true
 let SPnum1 = new SpinningNumber({
-    pos: { x: 755, y: 450 }, 
-    finalValue: "P", 
-    size: 50, 
-    restartY: 200,
-    stopY: 425,
-    limit: 700,
+    pos: { x: canvas.width / 2 - 205, y: canvas.height / 2 - 350 },
+    finalValue: "P",
+    size: 50,
+    restartY: canvas.height / 2 - 350,
+    stopY: canvas.height / 2 - 70,
+    limit: canvas.height / 2 + 100,
     delay: 50,
 });
 
 let SPnum2 = new SpinningNumber({
-    pos: { x: 855, y: 425 }, 
-    finalValue: "L", 
-    size: 50, 
-    restartY: 200,
-    stopY: 425,
-    limit: 700,
+    pos: { x: canvas.width / 2 - 105, y: canvas.height / 2 - 350 },
+    finalValue: "L",
+    size: 50,
+    restartY: canvas.height / 2 - 350,
+    stopY: canvas.height / 2 - 70,
+    limit: canvas.height / 2 + 100,
     delay: 100,
 });
 
 let SPnum3 = new SpinningNumber({
-    pos: { x: 955, y: 425 }, 
-    finalValue: "A", 
-    size: 50, 
-    restartY: 200,
-    stopY: 425,
-    limit: 700,
+    pos: { x: canvas.width / 2 - 5, y: canvas.height / 2 - 350 },
+    finalValue: "A",
+    size: 50,
+    restartY: canvas.height / 2 - 350,
+    stopY: canvas.height / 2 - 70,
+    limit: canvas.height / 2 + 100,
     delay: 150,
 });
 
 let SPnum4 = new SpinningNumber({
-    pos: { x: 1055, y: 425 }, 
-    finalValue: "Y", 
-    size: 50, 
-    restartY: 200,
-    stopY: 425,
-    limit: 700,
+    pos: { x: canvas.width / 2 + 95, y: canvas.height / 2 - 350 },
+    finalValue: "Y",
+    size: 50,
+    restartY: canvas.height / 2 - 350,
+    stopY: canvas.height / 2 - 70,
+    limit: canvas.height / 2 + 100,
     delay: 200
 });
 
 let SPnum5 = new SpinningNumber({
-    pos: { x: 1155, y: 425 }, 
-    finalValue: "!", 
-    size: 50, 
-    restartY: 200,
-    stopY: 425,
-    limit: 700,
+    pos: { x: canvas.width / 2 + 195, y: canvas.height / 2 - 350 },
+    finalValue: "!",
+    size: 50,
+    restartY: canvas.height / 2 - 350,
+    stopY: canvas.height / 2 - 70,
+    limit: canvas.height / 2 + 100,
     delay: 250,
 });
 
@@ -79,27 +79,27 @@ let deltaTime = 0;
 let lastTime = performance.now();
 
 let SlotMachine = new AnimatedSprite({
-    position:{x:-51, y:-25},
-    size: {width: 200, height: 200},
+    position: { x: canvas.width / 2 - 1010, y: canvas.height / 2 - 530 },
+    size: { width: 200, height: 200 },
     frames: 1,
     frameRate: 1,
-    source:'./assets/slot-machine/SlotMachine-idle(1).png',
-    frameBuffer:1,
+    source: './assets/slot-machine/SlotMachine-idle(1).png',
+    frameBuffer: 1,
     scale: 10,
     animations: {
-        Idle:{
-            source:"./assets/slot-machine/SlotMachine-idle(1).png",
+        Idle: {
+            source: "./assets/slot-machine/SlotMachine-idle(1).png",
             frameBuffer: 1,
             frameRate: 1,
             image: new Image()
 
         },
 
-        Push:{
-            source:"./assets/slot-machine/SlotMachine.png",
+        Push: {
+            source: "./assets/slot-machine/SlotMachine.png",
             frameBuffer: 6,
-            frameRate:12,
-            image:new Image()
+            frameRate: 12,
+            image: new Image()
         }
     }
 
@@ -113,11 +113,11 @@ let menu = (currentTime) => {
     ctx.imageSmoothingEnabled = false;
     ctx.textAlign = 'center';
 
-    
-    
+
+
     mainMenu();
-    
-    
+
+
     lastTime = currentTime;
 
 
@@ -135,7 +135,7 @@ let game = (currentTime) => {
     ctx.imageSmoothingEnabled = false;
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-    drawInfiniteGrid();
+    biome.draw();
 
     getMouseAngle();
 
@@ -160,6 +160,9 @@ let game = (currentTime) => {
 
     player.update();
     actualNpc.update();
+    collisionBlocksClass.update(player)
+    console.log(player.colliding)
+
     if (dialogActive) actualDialogBox.draw()
     if (canvasPromptActive) loadCanvasPrompt()
     if (player.inventory.visible) player.inventory.draw()
@@ -167,6 +170,7 @@ let game = (currentTime) => {
 
     for (let i = enemies.length - 1; i >= 0; i--) {
         enemy = enemies[i];
+        collisionBlocksClass.update(enemy)
         enemy.update();
     };
     dice.update();

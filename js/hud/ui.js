@@ -44,7 +44,7 @@ let mainMenu = () => {
 
     ctx.fillRect(0, 0, canvas.width, canvas.height);
     ctx.fillStyle = 'white';
-    ctx.fillRect(700,200,500,300)
+    ctx.fillRect(canvas.width/2 - 250, canvas.height/2 - 300,500,300)
     ctx.fillStyle = 'black';
     SPnum1.update();
     SPnum2.update();

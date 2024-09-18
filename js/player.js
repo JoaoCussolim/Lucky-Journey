@@ -32,13 +32,13 @@ class Player extends Sprite {
     };
 
     shouldPanCameraVertical() {
-        backgroundPositions.x -= this.velocity.x;
+        backgroundPositions.x += this.velocity.x;
         this.position.x -= this.velocity.x;
         backgroundVelocity.x = this.velocity.x;
     };
 
     shouldPanCameraHorizontal() {
-        backgroundPositions.y -= this.velocity.y;
+        backgroundPositions.y += this.velocity.y;
         this.position.y -= this.velocity.y;
         backgroundVelocity.y = this.velocity.y;
     };
@@ -84,15 +84,18 @@ class Player extends Sprite {
 
     update() {
         this.draw();
+        this.detectColliding();
         this.updateBoxes();
-        this.shouldPanCameraHorizontal();
-        this.shouldPanCameraVertical();
+        if (!this.colliding) {
+            this.shouldPanCameraHorizontal();
+            this.shouldPanCameraVertical();
+        }
         this.inventory.update()
         // this.applyVelocity()
     };
 };
 
-let player = new Player({ position: { x: 950, y: 600 }, dimensions: { width: 100, height: 100 } });
+let player = new Player({ position: { x: 950, y: 600 }, dimensions: { width: 50, height: 50 } });
 
 let acceptedKeys = {
     ArrowUp(player) {

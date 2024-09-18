@@ -6,12 +6,20 @@ class Sprite {
             x: 0,
             y: 0
         };
+        this.colliding = false;
     };
 
     draw() {
         ctx.fillStyle = 'black';
         ctx.fillRect(this.position.x, this.position.y, this.dimensions.width, this.dimensions.height);
     };
+
+    detectColliding(){
+        if(this.colliding){
+            this.velocity.x = 0;
+            this.velocity.y = 0;
+        }
+    }
 
     applyVelocity() {
         this.position.x += this.velocity.x;
