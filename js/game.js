@@ -175,18 +175,12 @@ let game = (currentTime) => {
     };
     dice.update();
 
-
-    if (dice.rolling) canSpawnEnemies = true;
-
-    if (!dice.rolling && canSpawnEnemies) {
-        spawnedEnemies = false;
-        canSpawnEnemies = false;
+    
+    if(dice.doAction == true){
+        dice.doAction = false;
+        makeEnemies(dice.numberDisplay)
     }
-
-    if (!spawnedEnemies && dice.rolledNumber != 0) {
-        makeEnemies(dice.rolledNumber);
-        spawnedEnemies = true;
-    };
+    
 
 
 

@@ -19,7 +19,7 @@ class inventory {
         this.pos = { x: 450, y: 100 };
         this.size = { width: 1000, height: 750 };
         this.visible = false;
-        this.totalItems = 5
+        this.totalItems = 50
         this.items = [];
         for (let i = 0; i < this.totalItems; i++) {
             this.items.push(`Item ${i + 1}`);

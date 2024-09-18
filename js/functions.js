@@ -35,6 +35,10 @@ let mouse = {
     y: undefined
 };
 
+let textSize = (size) =>{
+    ctx.font = size + "px Pixeloid"
+}
+
 
 canvas.onmousemove = function (e) {
     mouse.x = e.clientX;
