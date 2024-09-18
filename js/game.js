@@ -16,7 +16,7 @@ let backgroundVelocity = {
     y: 0
 };
 
-let started = false
+let started = true
 let SPnum1 = new SpinningNumber({
     pos: { x: 755, y: 450 }, 
     finalValue: "P", 
@@ -171,18 +171,12 @@ let game = (currentTime) => {
     };
     dice.update();
 
-
-    if (dice.rolling) canSpawnEnemies = true;
-
-    if (!dice.rolling && canSpawnEnemies) {
-        spawnedEnemies = false;
-        canSpawnEnemies = false;
+    
+    if(dice.doAction == true){
+        dice.doAction = false;
+        makeEnemies(dice.numberDisplay)
     }
-
-    if (!spawnedEnemies && dice.rolledNumber != 0) {
-        makeEnemies(dice.rolledNumber);
-        spawnedEnemies = true;
-    };
+    
 
 
 
