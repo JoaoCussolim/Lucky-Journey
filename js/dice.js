@@ -18,17 +18,20 @@ class Dice extends AnimatedSprite {
             this.switchSprite('roll');
             if (this.rollTimer > 0) this.rollTimer--;
             else {
+                if(this.rollTimer > -1){
                 this.switchSprite('idle');
                 this.rolledNumber = RandomInt(1, this.sides)
-
+    
                 if (this.addiction != undefined) {
                     if (RandomInt(1, this.addiction.rate) != 1) {
                         this.rolledNumber = this.addiction.number
                     }
                 }
-
+    
                 this.numberDisplay = this.rolledNumber;
-                this.switchSprite('idle');
+                this.rollTimer --;
+            }
+            this.switchSprite('idle');
                 if (this.rollInterval > 0) this.rollInterval--;
                 else {
                     this.rolling = false;
@@ -91,7 +94,7 @@ let dice = new Dice({
     frameBuffer: 1,
     scale: 1,
     source: "./assets/ui/dice/DiceSprite-stoped.png",
-    addiction: { rate: 100, number: 10 },
+    addiction: { rate: 0, number: 10 },
     animations: {
         idle: {
             source: "./assets/ui/dice/DiceSprite-stoped.png",
