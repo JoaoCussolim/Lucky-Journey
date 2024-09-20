@@ -160,8 +160,6 @@ let game = (currentTime) => {
 
     player.update();
     actualNpc.update();
-    collisionBlocksClass.update(player)
-    console.log(player.colliding)
 
     if (dialogActive) actualDialogBox.draw()
     if (canvasPromptActive) loadCanvasPrompt()
@@ -170,7 +168,6 @@ let game = (currentTime) => {
 
     for (let i = enemies.length - 1; i >= 0; i--) {
         enemy = enemies[i];
-        collisionBlocksClass.update(enemy)
         enemy.update();
     };
     dice.update();

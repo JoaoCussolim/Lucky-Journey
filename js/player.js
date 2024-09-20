@@ -84,13 +84,13 @@ class Player extends Sprite {
 
     update() {
         this.draw();
-        this.detectColliding();
         this.updateBoxes();
-        if (!this.colliding) {
-            this.shouldPanCameraHorizontal();
-            this.shouldPanCameraVertical();
-        }
+
+        this.shouldPanCameraHorizontal();
+        this.shouldPanCameraVertical();
+
         this.inventory.update()
+        this.detectColliding()
         // this.applyVelocity()
     };
 };

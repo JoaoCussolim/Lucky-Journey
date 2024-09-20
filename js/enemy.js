@@ -139,7 +139,6 @@ class Enemy extends Sprite {
         this.velocity.y = 0;
         this.updateBoxes()
         this.draw();
-        this.detectColliding();
         this.detectPlayer()
         this.followPlayer()
         this.applyVelocity();

@@ -13,7 +13,6 @@ class Dice extends AnimatedSprite {
     };
 
     roll() {
-        console.log(this.rollInterval)
         if (this.rolling) {
             this.switchSprite('roll');
             if (this.rollTimer > 0) this.rollTimer--;
