@@ -15,45 +15,80 @@ class Sprite {
     };
 
     detectColliding() {
-        this.colliding = false; // Reset collision status
+        let isColliding = false;
+
         for (const block of collisionBlocksList) {
             if (this.collidesWith(block)) {
+                isColliding = true;
                 this.colliding = true;
                 this.handleCollision(block);
                 break;
             }
         }
+
+        if (!isColliding) {
+            this.colliding = false;
+            backgroundLocked = true;
+        }
     }
 
-    collidesWith(block) {
-        const collide =
-            screenToWorldX(this.position.x) + this.dimensions.width > block.size &&
-            block.size + worldToScreenX(block.position.x) > screenToWorldX(this.position.x) &&
-            screenToWorldY(this.position.y) + this.dimensions.height > block.size &&
-            block.size + worldToScreenY(block.position.y) > screenToWorldY(this.position.y)
-        console.log(collide)
 
+    collidesWith(block) {
+        const stwX = screenToWorldX(this.position.x);
+        const stwY = screenToWorldY(this.position.y);
+        const stwX2 = screenToWorldX(this.position.x + this.dimensions.width);
+        const stwY2 = screenToWorldY(this.position.y + this.dimensions.height);
+        const bX = worldToScreenX(block.position.x);
+        const bY = worldToScreenY(block.position.y);
+        const bX2 = worldToScreenX(block.position.x + block.size);
+        const bY2 = worldToScreenY(block.position.y + block.size);
+
+        return stwX2 >= bX
+            && stwX <= bX2
+            && stwY2 >= bY
+            && stwY <= bY2
     }
 
 
     handleCollision(block) {
-        // Horizontal collision
-        if (Math.sign(this.velocity.x) != Math.sign(backgroundPositions.x)) {
-            this.position.x -= this.velocity.x;
-            this.velocity.x = 0;
+        const playerBottom = screenToWorldY(this.position.y + this.dimensions.height);
+        const playerTop = screenToWorldY(this.position.y);
+        const playerRight = screenToWorldX(this.position.x + this.dimensions.width);
+        const playerLeft = screenToWorldX(this.position.x);
+
+        const blockBottom = worldToScreenY(block.position.y + block.size);
+        const blockTop = worldToScreenY(block.position.y);
+        const blockRight = worldToScreenX(block.position.x + block.size);
+        const blockLeft = worldToScreenX(block.position.x);
+
+        // Check vertical collisions
+        if (this.velocity.y > 0 && playerBottom > blockTop && playerTop < blockTop) {
+            // Player moving down and hitting the top of the block
+            this.position.y -= this.velocity.y; // Set player just above the block
+            this.velocity.y = 0; // Stop downward movement
+            backgroundLocked = true
+        } else if (this.velocity.y < 0 && playerTop < blockBottom && playerBottom > blockBottom) {
+            // Player moving up and hitting the bottom of the block
+            this.position.y -= this.velocity.y; // Set player just below the block
+            this.velocity.y = 0; // Stop upward movement
+            backgroundLocked = true
         }
 
-        // Vertical collision (falling down)
-        if (this.velocity.y > 0) {
-            this.position.y -= this.velocity.y;
-            this.velocity.y = 0; // Stop downward motion
-        }
-        // Vertical collision (going up)
-        else if (this.velocity.y < 0) {
-            this.position.y -= this.velocity.y;
-            this.velocity.y = 0; // Stop upward motion
+        // Check horizontal collisions
+        if (this.velocity.x > 0 && playerRight > blockLeft && playerLeft < blockLeft) {
+            // Player moving right and hitting the left side of the block
+            this.position.x -= this.velocity.x; // Set player just to the left of the block
+            this.velocity.x = 0; // Stop rightward movement
+            backgroundLocked = true;
+        } else if (this.velocity.x < 0 && playerLeft < blockRight && playerRight > blockRight) {
+            // Player moving left and hitting the right side of the block
+            this.position.x -= this.velocity.x; // Set player just to the right of the block
+            this.velocity.x = 0; // Stop leftward movement
+            backgroundLocked = true
         }
     }
+
+
 
 
     applyVelocity() {

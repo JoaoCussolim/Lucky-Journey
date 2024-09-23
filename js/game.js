@@ -13,8 +13,10 @@ let backgroundPositions = {
 
 let backgroundVelocity = {
     x: 0,
-    y: 0
-};
+    y: 0,
+}
+
+let backgroundLocked = false 
 
 let started = true
 let SPnum1 = new SpinningNumber({

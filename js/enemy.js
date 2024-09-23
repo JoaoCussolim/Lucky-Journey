@@ -38,11 +38,11 @@ class Enemy extends Sprite {
 
     applyVelocity() {
         if (this.velocity.x === 0 && this.velocity.y === 0) {
-            this.position.x += this.velocity.x - backgroundVelocity.x * 5 * deltaTime_Mult;
-            this.position.y += this.velocity.y - backgroundVelocity.y * 5 * deltaTime_Mult;
+            this.position.x += this.velocity.x - player.velocity.x * 5 * deltaTime_Mult;
+            this.position.y += this.velocity.y - player.velocity.y * 5 * deltaTime_Mult;
         } else {
-            this.position.x += this.velocity.x - backgroundVelocity.x * 1 * deltaTime_Mult;
-            this.position.y += this.velocity.y - backgroundVelocity.y * 1 * deltaTime_Mult;
+            this.position.x += this.velocity.x - player.velocity.x * 1 * deltaTime_Mult;
+            this.position.y += this.velocity.y - player.velocity.y * 1 * deltaTime_Mult;
         };
     };
 

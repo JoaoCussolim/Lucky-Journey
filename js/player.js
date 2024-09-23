@@ -31,17 +31,25 @@ class Player extends Sprite {
         this.inventory = new inventory()
     };
 
-    shouldPanCameraVertical() {
-        backgroundPositions.x += this.velocity.x;
-        this.position.x -= this.velocity.x;
-        backgroundVelocity.x = this.velocity.x;
-    };
-
     shouldPanCameraHorizontal() {
-        backgroundPositions.y += this.velocity.y;
-        this.position.y -= this.velocity.y;
-        backgroundVelocity.y = this.velocity.y;
-    };
+        // Move background and player if no collision horizontally
+        if (!this.colliding || this.velocity.x === 0) {
+            backgroundVelocity.x = this.velocity.x;
+            if(!backgroundLocked) backgroundPositions.x += backgroundVelocity.x;
+            this.position.x -= this.velocity.x; // Move player
+        }
+    }
+    
+    shouldPanCameraVertical() {
+        // Move background and player if no collision vertically
+        if (!this.colliding || this.velocity.y === 0) {
+            backgroundVelocity.y = this.velocity.y;
+            if(!backgroundLocked) backgroundPositions.y += backgroundVelocity.y;
+            this.position.y -= this.velocity.y; // Move player
+        }
+    }
+    
+
 
     updateBoxes() {
         this.hitbox = {

@@ -34,5 +34,5 @@ addEventListener('keydown', (e) => {
 });
 
 addEventListener('keyup', (e) => {
-    if (acceptedKeys[e.key]) keyUpKeys[e.key](player);
+    if (keyUpKeys[e.key]) keyUpKeys[e.key](player);
 });
