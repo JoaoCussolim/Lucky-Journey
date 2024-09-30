@@ -50,19 +50,19 @@ class Sprite {
                     stwSpriteY < wtsCollisionBlockHeight &&
                     stwSpriteHeight > wtsCollisionBlockY) {
 
-                    if (this.velocity.x > 0 || this.colliding.right) {
+                    if ((this.velocity.x > 0 || this.colliding.right) && !this.colliding.down && !this.colliding.up) {
                         isCollidingRight = true;
                     }
 
-                    if (this.velocity.x < 0 || this.colliding.left) {
+                    if ((this.velocity.x < 0 || this.colliding.left) && !this.colliding.down && !this.colliding.up) {
                         isCollidingLeft = true;
                     }
 
-                    if (this.velocity.y > 0 || this.colliding.down) {
+                    if ((this.velocity.y > 0 || this.colliding.down) && !this.colliding.right && !this.colliding.left) {
                         isCollidingDown = true;
                     }
 
-                    if (this.velocity.y < 0 || this.colliding.up) {
+                    if ((this.velocity.y < 0 || this.colliding.up) && !this.colliding.right && !this.colliding.left) {
                         isCollidingUp = true;
                     }
                 }
