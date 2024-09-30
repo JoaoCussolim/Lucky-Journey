@@ -16,9 +16,9 @@ let backgroundVelocity = {
     y: 0,
 }
 
-let backgroundLocked = false 
+let backgroundLocked = false
 
-let started = true
+let started = false
 let SPnum1 = new SpinningNumber({
     pos: { x: canvas.width / 2 - 205, y: canvas.height / 2 - 350 },
     finalValue: "P",
@@ -104,8 +104,6 @@ let SlotMachine = new AnimatedSprite({
             image: new Image()
         }
     }
-
-
 });
 
 let menu = (currentTime) => {
@@ -175,12 +173,12 @@ let game = (currentTime) => {
 
     dice.update();
 
-    
-    if(dice.doAction == true){
+
+    if (dice.doAction == true) {
         dice.doAction = false;
         makeEnemies(dice.numberDisplay)
     }
-    
+
 
 
 
@@ -195,4 +193,3 @@ let game = (currentTime) => {
 setTimeout(() => {
     menu();
 }, 500);
-

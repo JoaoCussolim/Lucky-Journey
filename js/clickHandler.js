@@ -86,6 +86,7 @@ addEventListener('wheel', (e) => {
 
 
 
+
 let playbtnClicked = () => {
     playbtn.mouseOn = false;
     console.log("CLICKED")
@@ -98,9 +99,7 @@ let controlsbtnClicked = () => {
 
 }
 
-
 let buttonClicked = () => {
     console.log("button clicked");
     button.mouseOn = false;
 }
-
