@@ -37,10 +37,10 @@ class Enemy extends Sprite {
     };
 
     applyVelocity() {
-        if (this.velocity.x === 0 && this.velocity.y === 0) {
+        if (this.velocity.x === 0 && this.velocity.y === 0 && player.velocity.x + player.velocity.y != 0) {
             this.position.x += this.velocity.x - player.velocity.x * 5 * deltaTime_Mult;
             this.position.y += this.velocity.y - player.velocity.y * 5 * deltaTime_Mult;
-        } else {
+        } else if (!this.colliding.left && !this.colliding.right && !this.colliding.up && !this.colliding.down) {
             this.position.x += this.velocity.x - player.velocity.x * 1 * deltaTime_Mult;
             this.position.y += this.velocity.y - player.velocity.y * 1 * deltaTime_Mult;
         };
@@ -64,25 +64,36 @@ class Enemy extends Sprite {
     }
 
     followPlayer() {
-        if (!this.dead & this.playerOnRange) {
-            if (screenToWorldX(player.position.x) > screenToWorldX(this.position.x + this.dimensions.width)) {
-                this.velocity.y = 0;
-                this.velocity.x = 5 * deltaTime_Mult;
-            };
-            if (screenToWorldX(player.position.x) < screenToWorldX(this.position.x - this.dimensions.width)) {
-                this.velocity.y = 0;
-                this.velocity.x = -5 * deltaTime_Mult;
-            };
-            if (screenToWorldY(player.position.y) > screenToWorldY(this.position.y + this.dimensions.height)) {
-                this.velocity.x = 0;
-                this.velocity.y = 5 * deltaTime_Mult;
-            };
-            if (screenToWorldY(player.position.y) < screenToWorldY(this.position.y - this.dimensions.height)) {
-                this.velocity.x = 0;
-                this.velocity.y = -5 * deltaTime_Mult;
-            };
-        };
-    };
+        if (!this.dead && this.playerOnRange) {
+            const playerWorldX = screenToWorldX(player.position.x);
+            const playerWorldY = screenToWorldY(player.position.y);
+            const enemyWorldX = screenToWorldX(this.position.x);
+            const enemyWorldY = screenToWorldY(this.position.y);
+
+            // Move Right if player is to the right, but stop if colliding on the right
+            if (playerWorldX > enemyWorldX + this.dimensions.width && !this.colliding.right) {
+                this.velocity.y = 0; // Stop vertical movement
+                this.velocity.x = 5 * deltaTime_Mult; // Move right
+            }
+            // Move Left if player is to the left, but stop if colliding on the left
+            else if (playerWorldX < enemyWorldX - this.dimensions.width && !this.colliding.left) {
+                this.velocity.y = 0; // Stop vertical movement
+                this.velocity.x = -5 * deltaTime_Mult; // Move left
+            }
+
+            // Move Down if player is below, but stop if colliding on the bottom
+            if (playerWorldY > enemyWorldY + this.dimensions.height && !this.colliding.down) {
+                this.velocity.x = 0; // Stop horizontal movement
+                this.velocity.y = 5 * deltaTime_Mult; // Move down
+            }
+            // Move Up if player is above, but stop if colliding on the top
+            else if (playerWorldY < enemyWorldY - this.dimensions.height && !this.colliding.up) {
+                this.velocity.x = 0; // Stop horizontal movement
+                this.velocity.y = -5 * deltaTime_Mult; // Move up
+            }
+        }
+    }
+
 
 
     DestroyEnemies() {
@@ -143,6 +154,7 @@ class Enemy extends Sprite {
         this.followPlayer()
         this.applyVelocity();
         this.DestroyEnemies()
+        this.handleCollision()
         this.healthbar.updateValues({ pos: { x: screenToWorldX(this.position.x - 50), y: screenToWorldY(this.position.y - 100) }, health: this.health });
     };
 };

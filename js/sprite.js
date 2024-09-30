@@ -6,7 +6,12 @@ class Sprite {
             x: 0,
             y: 0
         };
-        this.colliding = false;
+        this.colliding = {
+            left: false,
+            right: false,
+            up: false,
+            down: false
+        };
     };
 
     draw() {
@@ -14,80 +19,62 @@ class Sprite {
         ctx.fillRect(this.position.x, this.position.y, this.dimensions.width, this.dimensions.height);
     };
 
-    detectColliding() {
-        let isColliding = false;
+    handleCollision() {
+        let isCollidingLeft = false;
+        let isCollidingRight = false;
+        let isCollidingUp = false;
+        let isCollidingDown = false;
 
-        for (const block of collisionBlocksList) {
-            if (this.collidesWith(block)) {
-                isColliding = true;
-                this.colliding = true;
-                this.handleCollision(block);
-                break;
+        let bonusSize = 0
+
+        const stwSpriteX = screenToWorldX(this.position.x);
+        const stwSpriteY = screenToWorldY(this.position.y);
+        const stwSpriteWidth = screenToWorldX(this.position.x + this.dimensions.width);
+        const stwSpriteHeight = screenToWorldY(this.position.y + this.dimensions.height);
+
+        for (let i = 0; i < collisionBlocks.length; i++) {
+            const collisionBlock = collisionBlocks[i];
+            if (collisionBlock) {
+
+                if (collisionBlock.name === 'tree') {
+                    bonusSize = 30
+                }
+
+                const wtsCollisionBlockX = worldToScreenX(collisionBlock.position.x + bonusSize);
+                const wtsCollisionBlockY = worldToScreenY(collisionBlock.position.y + bonusSize);
+                const wtsCollisionBlockWidth = worldToScreenX(collisionBlock.position.x + collisionBlock.size + bonusSize);
+                const wtsCollisionBlockHeight = worldToScreenY(collisionBlock.position.y + collisionBlock.size + bonusSize);
+
+                if (stwSpriteX < wtsCollisionBlockWidth &&
+                    stwSpriteWidth > wtsCollisionBlockX &&
+                    stwSpriteY < wtsCollisionBlockHeight &&
+                    stwSpriteHeight > wtsCollisionBlockY) {
+
+                    if (this.velocity.x > 0 || this.colliding.right) {
+                        isCollidingRight = true;
+                    }
+
+                    if (this.velocity.x < 0 || this.colliding.left) {
+                        isCollidingLeft = true;
+                    }
+
+                    if (this.velocity.y > 0 || this.colliding.down) {
+                        isCollidingDown = true;
+                    }
+
+                    if (this.velocity.y < 0 || this.colliding.up) {
+                        isCollidingUp = true;
+                    }
+                }
             }
         }
 
-        if (!isColliding) {
-            this.colliding = false;
-            backgroundLocked = true;
-        }
+        // Update collision flags
+        this.colliding.left = isCollidingLeft;
+        this.colliding.right = isCollidingRight;
+        this.colliding.up = isCollidingUp;
+        this.colliding.down = isCollidingDown;
     }
-
-
-    collidesWith(block) {
-        const stwX = screenToWorldX(this.position.x);
-        const stwY = screenToWorldY(this.position.y);
-        const stwX2 = screenToWorldX(this.position.x + this.dimensions.width);
-        const stwY2 = screenToWorldY(this.position.y + this.dimensions.height);
-        const bX = worldToScreenX(block.position.x);
-        const bY = worldToScreenY(block.position.y);
-        const bX2 = worldToScreenX(block.position.x + block.size);
-        const bY2 = worldToScreenY(block.position.y + block.size);
-
-        return stwX2 >= bX
-            && stwX <= bX2
-            && stwY2 >= bY
-            && stwY <= bY2
-    }
-
-
-    handleCollision(block) {
-        const playerBottom = screenToWorldY(this.position.y + this.dimensions.height);
-        const playerTop = screenToWorldY(this.position.y);
-        const playerRight = screenToWorldX(this.position.x + this.dimensions.width);
-        const playerLeft = screenToWorldX(this.position.x);
-
-        const blockBottom = worldToScreenY(block.position.y + block.size);
-        const blockTop = worldToScreenY(block.position.y);
-        const blockRight = worldToScreenX(block.position.x + block.size);
-        const blockLeft = worldToScreenX(block.position.x);
-
-        // Check vertical collisions
-        if (this.velocity.y > 0 && playerBottom > blockTop && playerTop < blockTop) {
-            // Player moving down and hitting the top of the block
-            this.position.y -= this.velocity.y; // Set player just above the block
-            this.velocity.y = 0; // Stop downward movement
-            backgroundLocked = true
-        } else if (this.velocity.y < 0 && playerTop < blockBottom && playerBottom > blockBottom) {
-            // Player moving up and hitting the bottom of the block
-            this.position.y -= this.velocity.y; // Set player just below the block
-            this.velocity.y = 0; // Stop upward movement
-            backgroundLocked = true
-        }
-
-        // Check horizontal collisions
-        if (this.velocity.x > 0 && playerRight > blockLeft && playerLeft < blockLeft) {
-            // Player moving right and hitting the left side of the block
-            this.position.x -= this.velocity.x; // Set player just to the left of the block
-            this.velocity.x = 0; // Stop rightward movement
-            backgroundLocked = true;
-        } else if (this.velocity.x < 0 && playerLeft < blockRight && playerRight > blockRight) {
-            // Player moving left and hitting the right side of the block
-            this.position.x -= this.velocity.x; // Set player just to the right of the block
-            this.velocity.x = 0; // Stop leftward movement
-            backgroundLocked = true
-        }
-    }
-
 
 
 

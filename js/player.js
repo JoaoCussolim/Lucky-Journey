@@ -32,23 +32,32 @@ class Player extends Sprite {
     };
 
     shouldPanCameraHorizontal() {
-        // Move background and player if no collision horizontally
-        if (!this.colliding || this.velocity.x === 0) {
+        if (this.velocity.x < 0 && !this.colliding.left) {
             backgroundVelocity.x = this.velocity.x;
-            if(!backgroundLocked) backgroundPositions.x += backgroundVelocity.x;
-            this.position.x -= this.velocity.x; // Move player
+            backgroundPositions.x += backgroundVelocity.x;
+            this.position.x -= this.velocity.x;
+        }
+
+        if (this.velocity.x > 0 && !this.colliding.right) {
+            backgroundVelocity.x = this.velocity.x;
+            backgroundPositions.x += backgroundVelocity.x;
+            this.position.x -= this.velocity.x;
         }
     }
-    
+
     shouldPanCameraVertical() {
-        // Move background and player if no collision vertically
-        if (!this.colliding || this.velocity.y === 0) {
+        if (this.velocity.y < 0 && !this.colliding.up) {
             backgroundVelocity.y = this.velocity.y;
-            if(!backgroundLocked) backgroundPositions.y += backgroundVelocity.y;
-            this.position.y -= this.velocity.y; // Move player
+            backgroundPositions.y += backgroundVelocity.y;
+            this.position.y -= this.velocity.y;
+        }
+
+        if (this.velocity.y > 0 && !this.colliding.down) {
+            backgroundVelocity.y = this.velocity.y;
+            backgroundPositions.y += backgroundVelocity.y;
+            this.position.y -= this.velocity.y;
         }
     }
-    
 
 
     updateBoxes() {
@@ -96,9 +105,9 @@ class Player extends Sprite {
 
         this.shouldPanCameraHorizontal();
         this.shouldPanCameraVertical();
+        this.handleCollision()
 
         this.inventory.update()
-        this.detectColliding()
         // this.applyVelocity()
     };
 };
@@ -109,6 +118,7 @@ let acceptedKeys = {
     ArrowUp(player) {
         player.velocity.x = 0;
         player.velocity.y = -5 * deltaTime_Mult;
+
     },
     ArrowDown(player) {
         player.velocity.x = 0;

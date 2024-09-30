@@ -172,6 +172,7 @@ let game = (currentTime) => {
         enemy = enemies[i];
         enemy.update();
     };
+
     dice.update();
 
     

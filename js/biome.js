@@ -63,9 +63,9 @@ class Biome {
             name: 'tree',
             image: treeImage,
             position: { x: x, y: y - realSize },
-            treeSize: realSize,
+            size: realSize,
         }
-        collisionBlocksClass.createBlock({ position: { x: x, y: y - realSize }, size: realSize })
+        putCollisionBlock({ position: { x: x, y: y - realSize }, size: realSize, name: 'tree' })
     }
 
     lakeGenerate(seed, x, y) {
@@ -143,10 +143,11 @@ class Biome {
                     seed: seed,
                     image: structureImage,
                     position: { x: i, y: j },
-                    treeSize: this.size,
+                    size: this.size,
                 }
 
                 actualPosition.x++
+                putCollisionBlock({ position: { x: i, y: j }, size: this.size, name: 'lake' })
             }
         }
     }
@@ -212,7 +213,7 @@ class Biome {
                 ctx.drawImage(biome.image, worldToScreenX(biome.position.x), worldToScreenY(biome.position.y), this.size, this.size);
                 visibleBiome[seed] = biome;
                 if (structure) {
-                    ctx.drawImage(structure.image, worldToScreenX(structure.position.x), worldToScreenY(structure.position.y), structure.treeSize, structure.treeSize);
+                    ctx.drawImage(structure.image, worldToScreenX(structure.position.x), worldToScreenY(structure.position.y), structure.size, structure.size);
                 }
             }
         }

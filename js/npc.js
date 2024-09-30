@@ -30,7 +30,7 @@ class NonPlayableCharacter extends Sprite {
     }
     keyWarn() {
         if (this.talkable) {
-            ctx.drawImage(this.talkButton, worldToScreenX(this.center.x), worldToScreenY(this.center.y) - 100, 250, 100)
+            ctx.drawImage(this.talkButton, worldToScreenX(this.center.x) - this.dimensions.width/2, worldToScreenY(this.center.y) - this.dimensions.width, 250, 100)
         }
     }
     updateCenter() {
@@ -58,4 +58,4 @@ class NonPlayableCharacter extends Sprite {
     }
 }
 
-let actualNpc = new NonPlayableCharacter({ position: { x: player.position.x - 100, y: player.position.y - 1200 }, dimensions: { width: 200, height: 200 }, dialog: ['Eu sou um npc de teste', 'Eu sou uma criação de Deus', 'Agora calma'], name: 'Test', src: './assets/mage/idle/forward.png' })
+let actualNpc = new NonPlayableCharacter({ position: { x: player.position.x - 100, y: player.position.y - 1200 }, dimensions: { width: 100, height: 100 }, dialog: ['Eu sou um npc de teste', 'Eu sou uma criação de Deus', 'Agora calma'], name: 'Test', src: './assets/mage/idle/forward.png' })
