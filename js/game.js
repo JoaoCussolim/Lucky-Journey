@@ -183,8 +183,7 @@ let game = (currentTime) => {
 
 
 
-    // characterSelection();
-    // button.update();
+    characterSelection(); 
 
     lastTime = currentTime;
     requestAnimationFrame(game);

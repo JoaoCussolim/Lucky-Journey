@@ -8,14 +8,23 @@ function RandomInt(min, max) {
 let characterSelection = () => {
     ctx.fillStyle = "rgba(0,0,0,0.5)";
     ctx.fillRect(0, 0, canvas.width, canvas.height);
-    ctx.fillStyle = "rgb(235, 178, 80)";
+    ctx.fillStyle = "rgba(46, 70, 89, 1)";
     ctx.fillRect(30, 30, canvas.width - 60, canvas.height - 60);
-    ctx.fillStyle = "black";
+    ctx.fillStyle = "rgba(237, 172, 74, 1)";
     ctx.font = "50px Pixeloid";
     ctx.textAlign = "center";
     ctx.fillText("Escolha Seu Personagem", canvas.width / 2, 100)
     ctx.font = "25px Pixeloid";
     ctx.fillText("Mago", 200, 700)
+    ctx.fillText("Clérigo", 600, 700)
+    ctx.fillText("Arqueiro", 1000, 700)
+    ctx.fillText("Guerreiro", 1400, 700)
+
+    mageButton.update();
+    clericButton.update();
+    ArqueiroButton.update();
+    GuerreiroButton.update();
+    
 }
 
 

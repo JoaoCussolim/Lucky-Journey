@@ -1,5 +1,5 @@
 class Button {
-    constructor({ txtType, color, color2, size, position, text, source, border, borderColor, effect, originalSz }) {
+    constructor({ txtType, color, color2, size, position, text, source, border, borderColor, effect, originalSz,backgroundColor }) {
         this.txtType = txtType;
         this.colorUsed = color;
         this.color = color;
@@ -10,6 +10,7 @@ class Button {
         this.border = border;
         this.effect = effect;
         this.originalSz = originalSz;
+        this.backgroundColor = backgroundColor;
         this.mouseOn;
         if (borderColor == undefined) {
             this.borderColor = "black";
@@ -39,9 +40,12 @@ class Button {
         else {
             //border
             ctx.fillStyle = this.borderColor;
-            ctx.fillRect(this.position.x - this.border, this.position.y - this.border, this.size.w + this.border * 2, this.size.h + this.border * 2);
+            drawBorder(this.position.x,this.position.y,this.size.w,this.size.h,this.border,this.borderColor)
+
 
             //main
+            ctx.fillStyle = this.backgroundColor;
+            ctx.fillRect(this.position.x,this.position.y,this.size.w,this.size.h)
             ctx.drawImage(this.img, this.position.x, this.position.y, this.size.w, this.size.h);
         }
     }
@@ -113,19 +117,59 @@ class Button {
 }
 
 
-let button = new Button({
+let mageButton = new Button({
     txtType: false,
-    color: 'white',
-    color2: 'rgb(200,200,200',
-    position: { x: 130, y: 200 },
-    size: { w: 150, h: 150 },
-    originalSz: { w: 150, h: 150 },
+    position: { x: 130, y: 300 },
+    size: { w: 200, h: 200 },
+    originalSz: { w: 200, h: 200 },
     border: 5,
-    text: { writing: 'Click me', size: 30, color: "black" },
-    source: "./assets/teste.png",
-    effect: { w: 200, h: 200 },
+    source: "./assets/mage/idle/forward.png",
+    effect: { w: 220, h: 220 },
+    borderColor: 'rgba(237, 172, 74, 1)',
+    backgroundColor: 'rgba(67, 93, 115, 1)'
 
 });
+
+let clericButton = new Button({
+    txtType: false,
+    position: { x: 500, y: 300 },
+    size: { w: 200, h: 200 },
+    originalSz: { w: 200, h: 200 },
+    border: 5,
+    source: "./assets/mage/idle/forward.png",
+    effect: { w: 220, h: 220 },
+    borderColor: 'rgba(237, 172, 74, 1)',
+    backgroundColor: 'rgba(67, 93, 115, 1)'
+
+});
+
+let ArqueiroButton = new Button({
+    txtType: false,
+    position: { x: 900, y: 300 },
+    size: { w: 200, h: 200 },
+    originalSz: { w: 200, h: 200 },
+    border: 5,
+    source: "./assets/archer/idle/forward.png",
+    effect: { w: 220, h: 220 },
+    borderColor: 'rgba(237, 172, 74, 1)',
+    backgroundColor: 'rgba(67, 93, 115, 1)'
+
+});
+
+let GuerreiroButton = new Button({
+    txtType: false,
+    position: { x: 1300, y: 300 },
+    size: { w: 200, h: 200 },
+    originalSz: { w: 200, h: 200 },
+    border: 5,
+    source: "./assets/warrior/idle/forward.png",
+    effect: { w: 220, h: 220 },
+    borderColor: 'rgba(237, 172, 74, 1)',
+    backgroundColor: 'rgba(67, 93, 115, 1)'
+
+});
+
+
 
 let playbtn = new Button({
     txtType: true,

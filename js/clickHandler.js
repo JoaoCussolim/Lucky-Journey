@@ -1,6 +1,6 @@
 addEventListener("click", (e) => {
-    if (button.mouseOn) {
-        buttonClicked()
+    if (mageButton.mouseOn) {
+        
     }
 
     if (playbtn.mouseOn) {
