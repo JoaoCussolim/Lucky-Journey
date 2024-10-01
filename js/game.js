@@ -18,7 +18,7 @@ let backgroundVelocity = {
 
 let backgroundLocked = false
 
-let started = false
+let started = true
 let SPnum1 = new SpinningNumber({
     pos: { x: canvas.width / 2 - 205, y: canvas.height / 2 - 350 },
     finalValue: "P",
@@ -183,7 +183,7 @@ let game = (currentTime) => {
 
 
 
-    characterSelection(); 
+    // characterSelection(); 
 
     lastTime = currentTime;
     requestAnimationFrame(game);

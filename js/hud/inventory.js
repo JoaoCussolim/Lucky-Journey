@@ -9,6 +9,11 @@ function drawBorder(x, y, width, height, borderSize, borderColor) {
     ctx.restore()
     ctx.closePath()
 }
+
+let items = {
+    botaDeSlime :{name: "Bota de Slime", sorce:'', description: 'uma bota feita de slimes', type: "botas", effect: () => {}},
+}
+
 let itemBox = new Image()
 let scrollImg = new Image()
 itemBox.src = "./assets/ui/ItemBox.png";
@@ -19,11 +24,22 @@ class inventory {
         this.pos = { x: 450, y: 100 };
         this.size = { width: 1000, height: 750 };
         this.visible = false;
-        this.totalItems = 50
-        this.items = [];
-        for (let i = 0; i < this.totalItems; i++) {
-            this.items.push(`Item ${i + 1}`);
-        }
+        this.items = [
+            {name: "Bota de Slime", sorce:'./assets/items/boots/slimeboot.png', description: 'uma bota feita de slimes', type: "botas", effect: () => {}},
+            {name: "Bota de hércules", sorce:'./assets/items/boots/herculesboots.png', description: 'uma bota usada por hercules', type: "botas", effect: () => {}},
+            {name: "Bota Abençoada", sorce:'./assets/items/boots/blessedboots.png', description: 'uma bota feita de slimes', type: "botas", effect: () => {}},
+            {name: "Bota de Slime", sorce:'./assets/items/boots/slimeboot.png', description: 'uma bota feita de slimes', type: "botas", effect: () => {}},
+            {name: "Bota de Slime", sorce:'./assets/items/boots/slimeboot.png', description: 'uma bota feita de slimes', type: "botas", effect: () => {}},
+            {name: "Bota de Slime", sorce:'./assets/items/boots/slimeboot.png', description: 'uma bota feita de slimes', type: "botas", effect: () => {}},
+            {name: "Bota de Slime", sorce:'./assets/items/boots/slimeboot.png', description: 'uma bota feita de slimes', type: "botas", effect: () => {}},
+            {name: "Bota de Slime", sorce:'./assets/items/boots/slimeboot.png', description: 'uma bota feita de slimes', type: "botas", effect: () => {}},
+            {name: "Bota de Slime", sorce:'./assets/items/boots/slimeboot.png', description: 'uma bota feita de slimes', type: "botas", effect: () => {}},
+            {name: "Bota de Slime", sorce:'./assets/items/boots/slimeboot.png', description: 'uma bota feita de slimes', type: "botas", effect: () => {}},
+            {name: "Bota de Slime", sorce:'./assets/items/boots/slimeboot.png', description: 'uma bota feita de slimes', type: "botas", effect: () => {}},
+            {name: "Bota de Slime", sorce:'./assets/items/boots/slimeboot.png', description: 'uma bota feita de slimes', type: "botas", effect: () => {}},
+            {name: "Bota de Slime", sorce:'./assets/items/boots/slimeboot.png', description: 'uma bota feita de slimes', type: "botas", effect: () => {}},
+        ]
+        this.totalItems = this.items.length;
         this.listWidth = 500;  // Width of the scrollable list area
         this.listHeight = 400; // Height of the scrollable list area
         this.listX = 930; // Center horizontally
@@ -54,12 +70,18 @@ class inventory {
 
             ctx.fillStyle = 'black';
 
-
+            
             ctx.drawImage(itemBox,this.listX, this.listY + y, this.listWidth, this.itemHeight);
             ctx.fillStyle = 'white';
-            ctx.font = '20px Arial';
-            ctx.textBaseline = 'middle'; // Center text vertically
-            ctx.fillText(this.items[itemIndex], this.listX + 40, this.listY + y + this.itemHeight / 2);
+            ctx.font = '20px Pixeloid';
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'alphabetic';
+            let image = new Image();
+            image.src = this.items[itemIndex].sorce;
+            ctx.drawImage(image,this.listX + 22, this.listY + y + this.itemHeight/5 ,80,80)
+            ctx.fillText(this.items[itemIndex].name, this.listX + 250, this.listY + y + this.itemHeight / 3);
+            ctx.fillText(this.items[itemIndex].description, this.listX + 310, this.listY + y + this.itemHeight / 2);
+            
 
             ctx.fillStyle = 'white';
 

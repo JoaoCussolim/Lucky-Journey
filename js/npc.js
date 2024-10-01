@@ -5,27 +5,27 @@ class NonPlayableCharacter extends Sprite {
             x: this.position.x - this.dimensions.width / 2,
             y: this.position.y - this.dimensions.height / 2
         }
-        this.dialog = dialog
-        this.name = name
-        this.image = new Image()
-        this.image.src = src
-        this.talking = false
-        this.talked = false
-        this.talkable = false
-        this.talkButton = new Image()
-        this.talkButton.src = './assets/talkButton.png'
+        this.dialog = dialog;
+        this.name = name;
+        this.image = new Image();
+        this.image.src = src;
+        this.talking = false;
+        this.talked = false;
+        this.talkable = false;
+        this.talkButton = new Image();
+        this.talkButton.src = './assets/talkButton.png';
     }
     talk() {
         if (!this.talked) {
-            dialogActive = true
-            this.talking = true
-            this.talked = true
+            dialogActive = true;
+            this.talking = true;
+            this.talked = true;
             actualDialogBox = new DialogBox({ dialog: this.dialog, speaker: this.name, src: this.image.src });
         } else {
-            this.talking = true
-            dialogActive = true
+            this.talking = true;
+            dialogActive = true;
             actualDialogBox = new DialogBox({ dialog: this.dialog, speaker: this.name, src: this.image.src });
-            actualDialogBox.generic = true
+            actualDialogBox.generic = true;
         }
     }
     keyWarn() {
@@ -58,4 +58,4 @@ class NonPlayableCharacter extends Sprite {
     }
 }
 
-let actualNpc = new NonPlayableCharacter({ position: { x: player.position.x - 100, y: player.position.y - 1200 }, dimensions: { width: 100, height: 100 }, dialog: ['Eu sou um npc de teste', 'Eu sou uma criação de Deus', 'Agora calma'], name: 'Test', src: './assets/mage/idle/forward.png' })
+let actualNpc = new NonPlayableCharacter({ position: { x: player.position.x - 100, y: player.position.y - 1200 }, dimensions: { width: 100, height: 100 }, dialog: ['Agora calma', 'Eu sou uma criação de Deus', 'Eu sou um npc de teste'], name: 'Test', src: './assets/mage/idle/forward.png' })

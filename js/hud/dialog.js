@@ -19,17 +19,17 @@ class DialogBox {
     }
 
     drawText() {
-        ctx.textBaseline = 'alphabetic'
-        const borderSize = 10
-        const borderColor = 'rgba(237, 172, 74, 1)'
+        ctx.textBaseline = 'alphabetic';
+        const borderSize = 10;
+        const borderColor = 'rgba(237, 172, 74, 1)';
         drawBorder(this.position.x + 300, this.position.y + 5, this.dimensions.width - 500, this.dimensions.height, borderSize, borderColor);
         ctx.fillStyle = 'rgba(67, 93, 115, 1)';
         ctx.fillRect(this.position.x + 300, this.position.y + 5, this.dimensions.width - 500, this.dimensions.height);
 
-        ctx.fillStyle = 'rgba(245, 203, 83, 1)'
-        ctx.textAlign = 'start'
-        const fontSize = 40
-        ctx.font = `${fontSize}px Pixeloid`
+        ctx.fillStyle = 'rgba(245, 203, 83, 1)';
+        ctx.textAlign = 'start';
+        const fontSize = 40;
+        ctx.font = `${fontSize}px Pixeloid`;
 
 
         function wrapText(text, maxWidth) {
