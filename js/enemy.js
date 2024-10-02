@@ -5,7 +5,7 @@ class Enemy extends AnimatedSprite {
         this.playerOnRange = false;
         this.health = 100;
         this.healthbar = new Healthbar({
-            maxHealth: 100,
+            maxHealth: this.health,
             pos: { x: this.position.x, y: this.position.y - 50 },
             size: { w: this.dimensions.width, h: 20 }
 
