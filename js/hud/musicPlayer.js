@@ -2,18 +2,23 @@ class musicPlayer {
     constructor() {
         this.backgroundMusic = new Audio('./assets/soundtrack/musicas/menuTheme.mp3');
         this.backgroundMusic.preload = 'auto';
+        this.backgroundMusic.loop = true;
+        this.lastMusic = ''
     }
 
     changeMusic({ local, name }) {
         let directory = './assets/soundtrack/musicas/'
 
-        if (local != '') {
-            directory += local + '/'
-        }
+        if (this.lastMusic != name) {
+            if (local != '') {
+                directory += local + '/'
+            }
+            this.lastMusic = name
 
-        this.backgroundMusic.src = directory + name + '.mp3';
-        this.backgroundMusic.load();
-        this.playMusic();
+            this.backgroundMusic.src = directory + name + '.mp3';
+            this.backgroundMusic.load();
+            this.playMusic();
+        }
     }
 
     playMusic() {
@@ -35,6 +40,5 @@ class musicPlayer {
 
 let musicControl = new musicPlayer()
 
-musicControl.playMusic()
-
-musicControl.changeMusic({ local: 'swamp', name: 'Swampy Darkness' })
+let CurrentMusicLocal = ''
+let CurrentMusicName = 'menuTheme'

@@ -38,6 +38,8 @@ class Sprite {
 
                 if (collisionBlock.name === 'tree') {
                     bonusSize = 30
+                }else{
+                    bonusSize = 0
                 }
 
                 const wtsCollisionBlockX = worldToScreenX(collisionBlock.position.x + bonusSize);

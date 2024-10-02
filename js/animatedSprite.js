@@ -1,6 +1,6 @@
-class AnimatedSprite {
-    constructor({ position = { x: 0, y: 0 }, source, frameRate = 1, frameBuffer = 3, scale = 1, animations = [] }) {
-        this.position = position;
+class AnimatedSprite extends Sprite{
+    constructor({ position = { x: 0, y: 0 }, dimensions = {width: 0, height: 0}, source, frameRate = 1, frameBuffer = 3, scale = 1, animations = {} }) {
+        super({position, dimensions})
         this.scale = scale;
         this.loaded = false;
         this.image = new Image();

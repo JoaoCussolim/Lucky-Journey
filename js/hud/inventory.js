@@ -47,9 +47,6 @@ class inventory {
 
         this.itemHeight = 150; // Height of each item
         this.scrollY = 0; // Vertical scroll offset
-
-
-
     }
 
     drawItems() {

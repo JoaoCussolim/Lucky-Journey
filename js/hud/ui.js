@@ -24,7 +24,6 @@ let characterSelection = () => {
     clericButton.update();
     ArqueiroButton.update();
     GuerreiroButton.update();
-    
 }
 
 
@@ -49,7 +48,6 @@ let mainMenu = () => {
             break;
     }
 
- 
 
     ctx.fillRect(0, 0, canvas.width, canvas.height);
     ctx.fillStyle = 'white';

@@ -1,9 +1,11 @@
 class DialogBox {
-    constructor({ dialog = [], speaker = '', src = '' }) {
+    constructor({ dialog = [], speaker = '', src = '', imageDimensions = { width: 0, height: 0 }, mission = Object }) {
         this.dialog = dialog
         this.speaker = speaker;
+        this.imageDimensions = imageDimensions
         this.image = new Image();
         this.image.src = src;
+        this.mission = mission
         this.dimensions = {
             width: window.innerWidth - 200,
             height: 200,
@@ -87,10 +89,11 @@ class DialogBox {
     drawImage() {
         const borderSize = 10
         const borderColor = 'rgba(237, 172, 74, 1)'
-        drawBorder(this.position.x, this.position.y - 100, 305, 305, borderSize, borderColor);
+        const squareSize = 305
+        drawBorder(this.position.x, this.position.y - 100, squareSize, squareSize, borderSize, borderColor);
         ctx.fillStyle = 'rgba(46, 70, 89, 1)'
-        ctx.fillRect(this.position.x, this.position.y - 100, 305, 305)
-        ctx.drawImage(this.image, this.position.x - 10, this.position.y - 100, 300, 300)
+        ctx.fillRect(this.position.x, this.position.y - 100, squareSize, squareSize)
+        ctx.drawImage(this.image, this.position.x + squareSize / 2 - this.imageDimensions.width / 2, this.position.y, this.imageDimensions.width, this.imageDimensions.height)
     }
 
     drawPass() {
@@ -113,7 +116,12 @@ class DialogBox {
     }
 
     updateDialog() {
-        if (this.dialogIndex < this.dialog.length - 1 && !this.generic) this.dialogIndex += 1
+        if (this.dialogIndex < this.dialog.length - 1 && !this.generic) {
+            this.dialogIndex += 1
+            if (this.dialogIndex >= this.dialog.length - 1) {
+                actualMission = this.mission
+            }
+        }
         else this.closeDialog()
         this.actualDialog = this.dialog[this.dialogIndex]
     }
@@ -149,13 +157,12 @@ function loadCanvasPrompt() {
     ctx.fillText(canvasPrompText, canvas.width / 2 - 250, canvas.height / 2)
 }
 
-const API_TOKEN = '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';
 async function query(data) {
     const response = await fetch(
         "https://api-inference.huggingface.co/models/google/flan-t5-large",
         {
             headers: {
-                Authorization: "Bearer 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",
+                Authorization: `Bearer ${API_TOKEN}`,
                 "Content-Type": "application/json",
             },
             method: "POST",

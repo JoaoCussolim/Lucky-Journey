@@ -21,8 +21,16 @@ class Projectile extends Sprite {
     };
 
     aim() {
-        this.position.x += this.velocity.x - player.velocity.x * deltaTime_Mult;
-        this.position.y += this.velocity.y - player.velocity.y * deltaTime_Mult;
+        const aux = {
+            x: player.velocity.x,
+            y: player.velocity.y
+        }
+
+        if (player.colliding.left || player.colliding.right) aux.x = 0
+        if (player.colliding.up || player.colliding.down) aux.y = 0
+
+        this.position.x += this.velocity.x - aux.x * deltaTime_Mult;
+        this.position.y += this.velocity.y - aux.y * deltaTime_Mult;
     };
 
     updateHitbox() {

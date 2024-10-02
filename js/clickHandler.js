@@ -11,11 +11,24 @@ addEventListener("click", (e) => {
         controlsbtnClicked()
     }
 
-    projectiles.push(new Projectile({
-        position: { x: screenToWorldX(player.position.x), y: screenToWorldY(player.position.y) },
-        dimensions: { width: 100, height: 100 },
-        velocity: { x: Math.cos(shootAngle) * 5, y: Math.sin(shootAngle) * 5 }
-    }))
+    if (!player.attackInCooldown) {
+        projectiles.push(new Projectile({
+            position: { x: screenToWorldX(player.position.x), y: screenToWorldY(player.position.y) },
+            dimensions: { width: 100, height: 100 },
+            velocity: { x: Math.cos(shootAngle) * 5, y: Math.sin(shootAngle) * 5 }
+        }))
+
+        switch (player.direction) {
+            case 'behind': player.switchSprite('AttackingBehind'); break;
+            case 'forward': player.switchSprite('AttackingForward'); break;
+            case 'side': player.switchSprite('AttackingSide'); break;
+            case 'sideLeft': player.switchSprite('AttackingSideLeft'); break;
+        }
+
+        player.attacking = true;
+        player.attackInCooldown = true;
+        player.attackCooldown()
+    }
 
     if (dialogActive) {
         if (canvasPrompResponse != '') {

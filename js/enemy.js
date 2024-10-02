@@ -1,6 +1,6 @@
-class Enemy extends Sprite {
-    constructor({ position = { x: 0, y: 0 }, dimensions = { width: 0, height: 0 } }) {
-        super({ position, dimensions });
+class Enemy extends AnimatedSprite {
+    constructor({ position = { x: 0, y: 0 }, dimensions = { width: 0, height: 0 }, source, frameRate = 1, frameBuffer = 3, scale = 1, animations = {} }) {
+        super({ position, dimensions, source, frameRate, frameBuffer, scale, animations });
         this.dead = false;
         this.playerOnRange = false;
         this.health = 100;
@@ -157,6 +157,81 @@ class Enemy extends Sprite {
         this.handleCollision()
         this.healthbar.updateValues({ pos: { x: screenToWorldX(this.position.x - 50), y: screenToWorldY(this.position.y - 100) }, health: this.health });
     };
-};
+}
+
+class Slime extends Enemy {
+    constructor({ position = { x: 0, y: 0 }, dimensions = { width: 0, height: 0 }, source = './assets/enemies/slime/action.png', frameRate = 11, frameBuffer = 11, scale = 0.4, animations = {
+        Idle: {
+            source: './assets/enemies/slime/idle.png',
+            frameBuffer: 1,
+            frameRate: 1,
+            image: new Image()
+        },
+
+        Action: {
+            source: './assets/enemies/slime/action.png',
+            frameBuffer: 11,
+            frameRate: 11,
+            image: new Image()
+        },
+
+    } }) {
+        super({ position, dimensions, source, frameRate, frameBuffer, scale, animations });
+    }
+
+    draw() {
+        this.center = {
+            x: this.position.x - this.dimensions.width / 2,
+            y: this.position.y - this.dimensions.height / 2,
+        };
+
+        if (!this.image) return;
+
+        let cropbox = {
+            position: {
+                x: this.currentFrame * (this.image.width / this.frameRate),
+                y: 0
+            },
+            width: this.image.width / this.frameRate,
+            height: this.image.height
+        };
+
+        //ctx.fillStyle = 'blue';
+        //ctx.fillRect(this.hitbox.position.x, this.hitbox.position.y, this.hitbox.dimensions.width, this.hitbox.dimensions.height);
+        //ctx.fillStyle = 'brown';
+        //ctx.fillRect(this.attackbox.position.x, this.attackbox.position.y, this.attackbox.dimensions.width, this.attackbox.dimensions.height);
+
+
+        ctx.drawImage(this.image, cropbox.position.x, cropbox.position.y, cropbox.width, cropbox.height, screenToWorldX(this.position.x - this.width / 2 + this.width / 10), screenToWorldY(this.position.y - this.height / 2 + this.height / 10), this.width, this.height)
+        this.healthbar.update();
+    }
+
+    receivingDamage(damage) {
+        this.health -= damage;
+        if (this.health <= 0) {
+            this.health = 0;
+            if (actualMission != '' && !this.dead) {
+                actualMission.defeatedTargets++;
+            }
+            this.dead = true;
+            this.switchSprite('Idle')
+        }
+    }
+
+
+    update() {
+        this.velocity.x = 0;
+        this.velocity.y = 0;
+        this.updateBoxes()
+        this.draw();
+        this.detectPlayer()
+        this.followPlayer()
+        this.applyVelocity();
+        this.DestroyEnemies()
+        this.handleCollision()
+        this.updateFrames();
+        this.healthbar.updateValues({ pos: { x: screenToWorldX(this.position.x - 5), y: screenToWorldY(this.position.y - 80) }, health: this.health });
+    };
+}
 
 let enemies = [];

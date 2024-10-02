@@ -80,7 +80,7 @@ let makeEnemies = (quantity) => {
     for (let i = 0; i < quantity; i++) {
         let cordinatesValuex = RandomInt(0, canvas.width);
         let cordinatesValuey = RandomInt(0, canvas.height);
-        enemies.push(new Enemy({ position: { x: cordinatesValuex, y: cordinatesValuey }, dimensions: { width: 100, height: 100 } }))
+        enemies.push(new Slime({ position: { x: cordinatesValuex, y: cordinatesValuey }, dimensions: { width: 50, height: 50 } }))
     };
 };
 

@@ -137,6 +137,12 @@ let game = (currentTime) => {
 
     biome.draw();
 
+    if (player.inCombat) {
+        musicControl.changeMusic({ local: '', name: 'combat' })
+    } else {
+        musicControl.changeMusic({ local: CurrentMusicLocal, name: CurrentMusicName })
+    }
+
     getMouseAngle();
 
     for (let i = projectiles.length - 1; i >= 0; i--) {
@@ -153,13 +159,41 @@ let game = (currentTime) => {
                 for (let i = hittedEnemies.length - 1; i >= 0; i--) {
                     hittedEnemies[i].receivingDamage(projectile.damage);
                 };
+                player.combatMode();
             };
         };
         if (projectile.shouldRemove) projectiles.splice(i, 1);
     };
 
     player.update();
-    actualNpc.update();
+
+    for (let i = 0; i <= npcs.length - 1; i++) {
+        const npc = npcs[i]
+        npc.update()
+
+        const stwPlayerX = screenToWorldX(player.position.x);
+        const stwPlayerY = screenToWorldY(player.position.y);
+        const stwPlayerWidth = screenToWorldX(player.position.x + player.dimensions.width);
+        const stwPlayerHeight = screenToWorldY(player.position.y + player.dimensions.height);
+
+        const bonusSize = 30
+
+        const wtsNpcX = worldToScreenX(npc.position.x + bonusSize);
+        const wtsNpcY = worldToScreenY(npc.position.y + bonusSize);
+        const wtsNpcWidth = worldToScreenX(npc.position.x + npc.dimensions.width + bonusSize);
+        const wtsNpcHeight = worldToScreenY(npc.position.y + npc.dimensions.height + bonusSize);
+
+        if (stwPlayerX < wtsNpcWidth &&
+            stwPlayerWidth > wtsNpcX &&
+            stwPlayerY < wtsNpcHeight &&
+            stwPlayerHeight > wtsNpcY) {
+            actualNpc = npc
+        }
+    }
+
+    if (actualMission != '') {
+        actualMission.update()
+    }
 
     if (dialogActive) actualDialogBox.draw()
     if (canvasPromptActive) loadCanvasPrompt()
@@ -172,7 +206,7 @@ let game = (currentTime) => {
     };
 
     dice.update();
-
+    generateNPC()
 
     if (dice.doAction == true) {
         dice.doAction = false;
@@ -180,10 +214,7 @@ let game = (currentTime) => {
     }
 
 
-
-
-
-    // characterSelection(); 
+    //characterSelection();
 
     lastTime = currentTime;
     requestAnimationFrame(game);

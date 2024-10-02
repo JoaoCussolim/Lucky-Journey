@@ -17,20 +17,20 @@ class Dice extends AnimatedSprite {
             this.switchSprite('roll');
             if (this.rollTimer > 0) this.rollTimer--;
             else {
-                if(this.rollTimer > -1){
-                this.switchSprite('idle');
-                this.rolledNumber = RandomInt(1, this.sides)
-    
-                if (this.addiction != undefined) {
-                    if (RandomInt(1, this.addiction.rate) != 1) {
-                        this.rolledNumber = this.addiction.number
+                if (this.rollTimer > -1) {
+                    this.switchSprite('idle');
+                    this.rolledNumber = RandomInt(1, this.sides)
+
+                    if (this.addiction != undefined) {
+                        if (RandomInt(1, this.addiction.rate) != 1) {
+                            this.rolledNumber = this.addiction.number
+                        }
                     }
+
+                    this.numberDisplay = this.rolledNumber;
+                    this.rollTimer--;
                 }
-    
-                this.numberDisplay = this.rolledNumber;
-                this.rollTimer --;
-            }
-            this.switchSprite('idle');
+                this.switchSprite('idle');
                 if (this.rollInterval > 0) this.rollInterval--;
                 else {
                     this.rolling = false;
@@ -61,13 +61,15 @@ class Dice extends AnimatedSprite {
         };
         if (this.rolling) {
             ctx.drawImage(this.image, cropbox.position.x, cropbox.position.y, cropbox.width, cropbox.height, this.position.x, this.position.y, this.width, this.height)
-        
-        if (this.rolledNumber == this.numberDisplay) {
-            ctx.fillStyle = 'white';
-            textSize(30);
-            ctx.fillText(this.numberDisplay, this.position.x + 285, this.position.y + 140)
+
+            if (this.rolledNumber == this.numberDisplay) {
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'alphabetic'
+                ctx.fillStyle = 'white';
+                textSize(30);
+                ctx.fillText(this.numberDisplay, this.position.x + 285, this.position.y + 140)
+            }
         }
-    }
 
     }
 
