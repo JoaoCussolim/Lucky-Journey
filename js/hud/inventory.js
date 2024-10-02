@@ -16,12 +16,18 @@ let items = {
 
 let itemBox = new Image()
 let scrollImg = new Image()
+let menuInv = new Image()
+let menuInvTop = new Image()
+let menuInvBottom = new Image()
 itemBox.src = "./assets/ui/ItemBox.png";
 scrollImg.src = "./assets/ui/Scroll.png";
+menuInv.src = "./assets/ui/inv-menu.png"
+menuInvTop.src = "./assets/ui/invtop.png"
+menuInvBottom.src = "./assets/ui/invbottom.png"
 
 class inventory {
     constructor() {
-        this.pos = { x: 450, y: 100 };
+        this.pos = { x: 465, y: 100 };
         this.size = { width: 1000, height: 750 };
         this.visible = false;
         this.items = [
@@ -50,10 +56,6 @@ class inventory {
     }
 
     drawItems() {
-        // Draw the list background
-        ctx.fillStyle = '#eee';
-        ctx.fillRect(this.listX, this.listY, this.listWidth, this.listHeight);
-
         const startIndex = Math.floor(this.scrollY / this.itemHeight);
         const endIndex = startIndex + Math.ceil(this.listHeight / this.itemHeight) + 1;
 
@@ -80,11 +82,8 @@ class inventory {
             ctx.fillText(this.items[itemIndex].description, this.listX + 310, this.listY + y + this.itemHeight / 2);
             
 
-            ctx.fillStyle = 'white';
-
-
-            ctx.fillRect(930, 650, 500, 150)
-            ctx.fillRect(930, 100, 500, 150)
+            ctx.drawImage(menuInvTop, 930, 96.6, 500, 150)
+            ctx.drawImage(menuInvBottom, 463.8, 707.9, 995, 168.5)
         }
 
         // Draw the scrollbar
@@ -118,7 +117,7 @@ class inventory {
         // Draw the inventory box
         if (this.visible) {
             ctx.fillStyle = "rgb(255, 255, 255)";
-            ctx.fillRect(this.pos.x, this.pos.y, this.size.width, this.size.height); //antes
+            ctx.drawImage(menuInv, this.pos.x - 290, this.pos.y - 125, this.size.width + 580, this.size.height + 250); //antes
             this.drawItems(); //depois
 
         }

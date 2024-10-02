@@ -51,7 +51,7 @@ let mainMenu = () => {
 
     ctx.fillRect(0, 0, canvas.width, canvas.height);
     ctx.fillStyle = 'white';
-    ctx.fillRect(canvas.width/2 - 250, canvas.height/2 - 300,500,300)
+    ctx.fillRect(canvas.width / 2 - 250, canvas.height / 2 - 300, 500, 300)
     ctx.fillStyle = 'black';
     SPnum1.update();
     SPnum2.update();
@@ -59,11 +59,11 @@ let mainMenu = () => {
     SPnum4.update();
     SPnum5.update();
     SlotMachine.update();
-if(!played){
-    playbtn.update();
-    controlsbtn.update();
-    creditsbtn.update();
-}
+    if (!played) {
+        playbtn.update();
+        controlsbtn.update();
+        creditsbtn.update();
+    }
     if (played) playedClicked_UI();
 }
 
@@ -74,11 +74,11 @@ let alphaColor = 0
 let pushStoped = false;
 
 let playedClicked_UI = () => {
-    if(SlotMachine.currentFrame == 11){
+    if (SlotMachine.currentFrame == 11) {
         SlotMachine.switchSprite("Idle");
         pushStoped = true;
     }
-    if(pushStoped){
+    if (pushStoped) {
         SPnum1.stop()
         SPnum2.stop()
         SPnum3.stop()
@@ -87,11 +87,11 @@ let playedClicked_UI = () => {
     }
 
 
-if(SPnum5.stoped){
-    ctx.fillStyle = `rgba(255,255,255,${alphaColor})`
-    ctx.fillRect(0, 0, innerWidth, innerHeight)
-    alphaColor += 0.01
-    if (alphaColor >= 1.5) started = true
-}
+    if (SPnum5.stoped) {
+        ctx.fillStyle = `rgba(255,255,255,${alphaColor})`
+        ctx.fillRect(0, 0, innerWidth, innerHeight)
+        alphaColor += 0.01
+        if (alphaColor >= 1.5) started = true
+    }
 
 }

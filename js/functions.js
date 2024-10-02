@@ -35,7 +35,7 @@ let mouse = {
     y: undefined
 };
 
-let textSize = (size) =>{
+let textSize = (size) => {
     ctx.font = size + "px Pixeloid"
 }
 

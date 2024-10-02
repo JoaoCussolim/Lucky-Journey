@@ -25,7 +25,7 @@ class Sprite {
         let isCollidingUp = false;
         let isCollidingDown = false;
 
-        let bonusSize = 0
+        let bonusSize = 0;
 
         const stwSpriteX = screenToWorldX(this.position.x);
         const stwSpriteY = screenToWorldY(this.position.y);
@@ -71,7 +71,6 @@ class Sprite {
             }
         }
 
-        // Update collision flags
         this.colliding.left = isCollidingLeft;
         this.colliding.right = isCollidingRight;
         this.colliding.up = isCollidingUp;

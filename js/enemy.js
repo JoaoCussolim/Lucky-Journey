@@ -34,6 +34,16 @@ class Enemy extends AnimatedSprite {
                 height: 0,
             }
         }
+        this.velocity = {
+            x: 0,
+            y: 0
+        }
+        this.colliding = {
+            left: false,
+            right: false,
+            up: false,
+            down: false
+        };
     };
 
     applyVelocity() {
@@ -52,6 +62,64 @@ class Enemy extends AnimatedSprite {
             this.health = 0;
             this.dead = true;
         }
+    }
+
+    handleCollision() {
+        let isCollidingLeft = false;
+        let isCollidingRight = false;
+        let isCollidingUp = false;
+        let isCollidingDown = false;
+
+        let bonusSize = 0;
+
+        const stwSpriteX = screenToWorldX(this.position.x);
+        const stwSpriteY = screenToWorldY(this.position.y);
+        const stwSpriteWidth = screenToWorldX(this.position.x + this.dimensions.width);
+        const stwSpriteHeight = screenToWorldY(this.position.y + this.dimensions.height);
+
+        for (let i = 0; i < collisionBlocks.length; i++) {
+            const collisionBlock = collisionBlocks[i];
+            if (collisionBlock) {
+
+                if (collisionBlock.name === 'tree') {
+                    bonusSize = 30
+                } else {
+                    bonusSize = 0
+                }
+
+                const wtsCollisionBlockX = worldToScreenX(collisionBlock.position.x + bonusSize);
+                const wtsCollisionBlockY = worldToScreenY(collisionBlock.position.y + bonusSize);
+                const wtsCollisionBlockWidth = worldToScreenX(collisionBlock.position.x + collisionBlock.size + bonusSize);
+                const wtsCollisionBlockHeight = worldToScreenY(collisionBlock.position.y + collisionBlock.size + bonusSize);
+
+                if (stwSpriteX < wtsCollisionBlockWidth &&
+                    stwSpriteWidth > wtsCollisionBlockX &&
+                    stwSpriteY < wtsCollisionBlockHeight &&
+                    stwSpriteHeight > wtsCollisionBlockY) {
+
+                    if ((this.velocity.x > 0 || this.colliding.right) && !this.colliding.down && !this.colliding.up) {
+                        isCollidingRight = true;
+                    }
+
+                    if ((this.velocity.x < 0 || this.colliding.left) && !this.colliding.down && !this.colliding.up) {
+                        isCollidingLeft = true;
+                    }
+
+                    if ((this.velocity.y > 0 || this.colliding.down) && !this.colliding.right && !this.colliding.left) {
+                        isCollidingDown = true;
+                    }
+
+                    if ((this.velocity.y < 0 || this.colliding.up) && !this.colliding.right && !this.colliding.left) {
+                        isCollidingUp = true;
+                    }
+                }
+            }
+        }
+
+        this.colliding.left = isCollidingLeft;
+        this.colliding.right = isCollidingRight;
+        this.colliding.up = isCollidingUp;
+        this.colliding.down = isCollidingDown;
     }
 
     detectPlayer() {
@@ -95,7 +163,6 @@ class Enemy extends AnimatedSprite {
     }
 
 
-
     DestroyEnemies() {
         if (this.healthbar.healthTaken <= 0) {
             let eIndex = enemies.findIndex(enemy => {
@@ -133,16 +200,27 @@ class Enemy extends AnimatedSprite {
             x: this.position.x - this.dimensions.width / 2,
             y: this.position.y - this.dimensions.height / 2,
         };
+
         //ctx.fillStyle = 'blue';
         //ctx.fillRect(this.hitbox.position.x, this.hitbox.position.y, this.hitbox.dimensions.width, this.hitbox.dimensions.height);
         //ctx.fillStyle = 'brown';
         //ctx.fillRect(this.attackbox.position.x, this.attackbox.position.y, this.attackbox.dimensions.width, this.attackbox.dimensions.height);
-        ctx.fillStyle = 'cyan';
-        ctx.fillRect(screenToWorldX(this.center.x), screenToWorldY(this.center.y), this.dimensions.width, this.dimensions.height);
+
+        if (!this.image) return;
+
+        let cropbox = {
+            position: {
+                x: this.currentFrame * (this.image.width / this.frameRate),
+                y: 0
+            },
+            width: this.image.width / this.frameRate,
+            height: this.image.height
+        };
+
+        ctx.drawImage(this.image, (cropbox.position.x), (cropbox.position.y), cropbox.width, cropbox.height, screenToWorldX(this.center.x - this.width / 2 + this.width / 10), screenToWorldY(this.center.y - this.height / 2 + this.height / 10), this.width, this.height)
 
         //healthBar
         this.healthbar.update();
-
     };
 
     update() {
@@ -153,9 +231,10 @@ class Enemy extends AnimatedSprite {
         this.detectPlayer()
         this.followPlayer()
         this.applyVelocity();
+        this.updateFrames();
         this.DestroyEnemies()
         this.handleCollision()
-        this.healthbar.updateValues({ pos: { x: screenToWorldX(this.position.x - 50), y: screenToWorldY(this.position.y - 100) }, health: this.health });
+        this.healthbar.updateValues({ pos: { x: screenToWorldX(this.position.x - 70), y: screenToWorldY(this.position.y - 100) }, health: this.health });
     };
 }
 

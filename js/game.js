@@ -74,6 +74,7 @@ let SPnum5 = new SpinningNumber({
 let spawnedEnemies = false;
 let canSpawnEnemies = false;
 
+
 let fps = 60;
 let frameInterval = 1000 / fps;
 let deltaTime_Mult = 1;
@@ -105,6 +106,7 @@ let SlotMachine = new AnimatedSprite({
         }
     }
 });
+
 
 let menu = (currentTime) => {
     deltaTime = (currentTime - lastTime);
