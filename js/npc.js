@@ -139,11 +139,11 @@ const generateNPC = () => {
             position: { x: player.position.x - 100, y: player.position.y - 20 },
             dimensions: { width: 50, height: 50 },
             imageDimensions: { width: 180, height: 180 },
-            dialog: ['Eu sou um npc de teste', 'Eu sou uma criação de Deus', 'Agora calma'],
+            dialog: ['Finalmente, um aventureiro!', 'Nosso mundo foi tomado por slimes, você precisa nos ajudar!', 'Se matar 100 slimes, te darei uma recompensa!'],
             name: 'Test',
             src: './assets/npcs/npc1.png',
             mission: new Mission({
-                name: 'Mate goblins e slimes',
+                name: 'Mate slimes',
                 mission: 'Inimigos',
                 reward: {
                     name: "Bota de Slime",
@@ -152,7 +152,7 @@ const generateNPC = () => {
                     type: "botas",
                     effect: () => { }
                 },
-                maxTargets: 10
+                maxTargets: 100
             })
         })
         npcs.push(npc)

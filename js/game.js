@@ -193,6 +193,11 @@ let game = (currentTime) => {
         }
     }
 
+    for(let i = activeAttacks.length - 1; i >= 0; i--){
+        const attack = activeAttacks[i];
+        attack.update()
+    }
+
     if (actualMission != '') {
         actualMission.update()
     }

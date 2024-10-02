@@ -210,7 +210,7 @@ class Biome {
                 }
                 const biome = this.biomeList[seed];
                 const structure = this.structureList[seed];
-                ctx.drawImage(biome.image, worldToScreenX(biome.position.x), worldToScreenY(biome.position.y), this.size, this.size);
+                ctx.drawImage(biome.image, worldToScreenX(biome.position.x), worldToScreenY(biome.position.y), this.size + 1, this.size + 1);
                 visibleBiome[seed] = biome;
                 if (structure) {
                     ctx.drawImage(structure.image, worldToScreenX(structure.position.x), worldToScreenY(structure.position.y), structure.size, structure.size);

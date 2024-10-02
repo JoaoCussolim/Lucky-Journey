@@ -16,7 +16,7 @@ class AnimatedSprite extends Sprite{
         this.elapsedFrames = 0;
 
         this.animations = animations
-        if (animations != []) {
+        if (animations != {}) {
             for (let anim in this.animations) {
                 let image = new Image()
                 image.src = this.animations[anim].source
