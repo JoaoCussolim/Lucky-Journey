@@ -32,6 +32,11 @@ class Player extends AnimatedSprite {
         this.inCombat = false;
 
         this.inventory = new inventory()
+        this.health = 100;
+        this.maxhealth = 100;
+        this.dead = false;
+        this.mana = 100;
+        this.maxmana = 100;
     };
 
     shouldPanCameraHorizontal() {
@@ -62,6 +67,15 @@ class Player extends AnimatedSprite {
         }
     }
 
+
+    receivingDamage(damage) {
+        this.health -= damage;
+        if (this.health <= 0) {
+            this.health = 0;
+            this.dead = true;
+        }
+    }
+
     attackCooldown() {
         setTimeout(() => {
             this.attackInCooldown = false;
@@ -84,6 +98,44 @@ class Player extends AnimatedSprite {
                 this.inCombat = false
             }, 20000);
         }
+    }
+
+    death() {
+        if(this.dead){
+            deathScreen();
+        }
+    }
+
+    Regen(){
+        if(this.health < this.maxhealth){
+            this.health += deltaTime_Mult * 0.03;
+        }
+        if(this.mana < this.maxmana){
+            this.mana += deltaTime_Mult * 0.03;
+        }
+    }
+
+    HealthUI(){
+        const UIimage = new Image();
+        const playerImage = new Image();
+        UIimage.src = './assets/ui/healthUI.png';
+        playerImage.src = './assets/mage/menu/icon.png';
+
+        ctx.fillStyle = 'rgb(100,100,100)'
+        ctx.fillRect(150,75,317.1,45)
+        ctx.fillStyle = 'red';
+        ctx.fillRect(150,75,(this.health/this.maxhealth)*317.1,45);
+        ctx.drawImage(UIimage,0,0,500,250)
+        ctx.drawImage(playerImage,50,50,130,130)
+
+        
+    }
+
+    ManaUI(){
+        ctx.fillStyle = 'rgb(100,100,100)';
+        ctx.fillRect(150,125,317.1,45)
+        ctx.fillStyle = 'rgb(51, 191, 226)';
+        ctx.fillRect(150,125,(this.mana/this.maxmana)*317.1,45)
     }
 
 
@@ -111,6 +163,8 @@ class Player extends AnimatedSprite {
     }
 
     draw() {
+        this.ManaUI();
+        this.HealthUI();
         this.center = {
             x: this.position.x - this.dimensions.width / 2,
             y: this.position.y - this.dimensions.height / 2,
@@ -128,11 +182,11 @@ class Player extends AnimatedSprite {
     update() {
         this.draw();
         this.updateBoxes();
-
+        this.death();
         this.shouldPanCameraHorizontal();
         this.shouldPanCameraVertical();
         this.handleCollision()
-
+        this.Regen();
         this.inventory.update()
         // this.applyVelocity()
     };
@@ -229,6 +283,8 @@ class Mage extends Player {
     }
 
     draw() {
+        this.ManaUI();
+        this.HealthUI();
         this.center = {
             x: this.position.x - this.dimensions.width / 2,
             y: this.position.y - this.dimensions.height / 2,
@@ -267,13 +323,13 @@ class Mage extends Player {
     update() {
         this.draw();
         this.updateBoxes();
-
-        this.updateFrames()
+        this.death();
+        this.updateFrames();
         this.shouldPanCameraHorizontal();
         this.shouldPanCameraVertical();
-        this.handleCollision()
-
-        this.inventory.update()
+        this.handleCollision();
+        this.Regen();
+        this.inventory.update();
         // this.applyVelocity()
     };
 }

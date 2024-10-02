@@ -95,3 +95,11 @@ let playedClicked_UI = () => {
     }
 
 }
+
+let deathScreen = () =>{
+    ctx.fillStyle = 'black';
+    ctx.fillRect(0,0,canvas.width,canvas.height)
+    ctx.fillStyle = 'white';
+    ctx.font = '100px Tales';
+    ctx.fillText('VOCÊ   MORREU!',canvas.width/2,canvas.height/2)
+}

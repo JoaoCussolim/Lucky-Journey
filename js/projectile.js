@@ -73,3 +73,23 @@ class Projectile extends Sprite {
         this.autoRemove();
     };
 };
+
+class magePower extends Projectile{
+    constructor({ position = { x: 0, y: 0 }, dimensions = { width: 0, height: 0 }, velocity = { x: 0, y: 0 } }){
+    super({ position, dimensions,velocity });
+    }
+
+    draw(){
+        let image = new Image();
+        image.src = './assets/projectiles/MagoAtaque.png';
+        ctx.drawImage(image,this.center.x,this.center.y, this.dimensions.width, this.dimensions.height)
+    }
+
+    update() {
+        this.updateHitbox();
+        this.applyVelocity();
+        this.draw();
+        this.aim();
+        this.autoRemove();
+    };
+}

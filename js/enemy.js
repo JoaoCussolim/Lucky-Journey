@@ -4,6 +4,7 @@ class Enemy extends AnimatedSprite {
         this.dead = false;
         this.playerOnRange = false;
         this.health = 100;
+        this.attackCooldown = 100;
         this.healthbar = new Healthbar({
             maxHealth: 100,
             pos: { x: this.position.x, y: this.position.y - 50 },
@@ -44,6 +45,7 @@ class Enemy extends AnimatedSprite {
             up: false,
             down: false
         };
+        this.canAttack = false;
     };
 
     applyVelocity() {
@@ -120,6 +122,7 @@ class Enemy extends AnimatedSprite {
         this.colliding.right = isCollidingRight;
         this.colliding.up = isCollidingUp;
         this.colliding.down = isCollidingDown;
+
     }
 
     detectPlayer() {
@@ -162,6 +165,29 @@ class Enemy extends AnimatedSprite {
         }
     }
 
+    calculateDistance(){
+        const dx = screenToWorldX(this.position.x) - screenToWorldX(player.position.x);
+        const dy = screenToWorldY(this.position.y) - screenToWorldY(player.position.y);
+        return Math.sqrt(dx * dx + dy * dy);
+    }
+
+    CanAttack() {
+        if (this.calculateDistance() < 100 ){
+            if(this.attackCooldown > 0)this.attackCooldown -= deltaTime_Mult;
+            else {this.canAttack = true;
+                this.attackCooldown = 100;
+            }
+        }
+        
+    }
+
+    Attack() {
+        if (this.canAttack) {
+            player.receivingDamage(10);
+            this.canAttack = false;
+        }
+
+    }
 
     DestroyEnemies() {
         if (this.healthbar.healthTaken <= 0) {
@@ -226,14 +252,16 @@ class Enemy extends AnimatedSprite {
     update() {
         this.velocity.x = 0;
         this.velocity.y = 0;
-        this.updateBoxes()
+        this.updateBoxes();
         this.draw();
-        this.detectPlayer()
-        this.followPlayer()
+        this.detectPlayer();
+        this.followPlayer();
         this.applyVelocity();
         this.updateFrames();
-        this.DestroyEnemies()
-        this.handleCollision()
+        this.DestroyEnemies();
+        this.handleCollision();
+        this.CanAttack();
+        this.Attack();
         this.healthbar.updateValues({ pos: { x: screenToWorldX(this.position.x - 70), y: screenToWorldY(this.position.y - 100) }, health: this.health });
     };
 }
@@ -309,6 +337,8 @@ class Slime extends Enemy {
         this.DestroyEnemies()
         this.handleCollision()
         this.updateFrames();
+        this.CanAttack();
+        this.Attack();
         this.healthbar.updateValues({ pos: { x: screenToWorldX(this.position.x - 5), y: screenToWorldY(this.position.y - 80) }, health: this.health });
     };
 }

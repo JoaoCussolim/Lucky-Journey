@@ -216,7 +216,7 @@ let game = (currentTime) => {
     }
 
 
-    //characterSelection();
+    // characterSelection();
 
     lastTime = currentTime;
     requestAnimationFrame(game);

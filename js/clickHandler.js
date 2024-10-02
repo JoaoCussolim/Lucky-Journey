@@ -3,6 +3,10 @@ addEventListener("click", (e) => {
         
     }
 
+    if(player.dead){
+        location.reload();
+    }
+
     if (playbtn.mouseOn) {
         playbtnClicked()
     }
@@ -11,8 +15,8 @@ addEventListener("click", (e) => {
         controlsbtnClicked()
     }
 
-    if (!player.attackInCooldown) {
-        projectiles.push(new Projectile({
+    if (!player.attackInCooldown && player.mana >= 10) {
+        projectiles.push(new magePower({
             position: { x: screenToWorldX(player.position.x), y: screenToWorldY(player.position.y) },
             dimensions: { width: 100, height: 100 },
             velocity: { x: Math.cos(shootAngle) * 5, y: Math.sin(shootAngle) * 5 }
@@ -28,6 +32,7 @@ addEventListener("click", (e) => {
         player.attacking = true;
         player.attackInCooldown = true;
         player.attackCooldown()
+        player.mana -= 10;
     }
 
     if (dialogActive) {

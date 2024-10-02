@@ -91,6 +91,7 @@ let dice = new Dice({
     sides: 20,
     position: { x: 700, y: 200 },
     frames: 1,
+    addiction: {rate:1000, number:1},
     frameRate: 1,
     frameBuffer: 1,
     scale: 1,
