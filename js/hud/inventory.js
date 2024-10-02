@@ -28,7 +28,6 @@ let itemsTodos = {
     EspadaFerro: {name: "Espada de Ferro", source:'', description: '', type:"espada", effect:()=>{}},
     EspadaFogo: {name: "Espada de Fogo", source:'', description: '', type:"espada", effect:()=>{}},
     LaminaBarbear: {name: "Lâmina de Barbear", source:'', description: 'Corta não só sua barba😨', type:"espada", effect:()=>{}},
-    LaminaBarbear: {name: "Lâmina de Barbear", source:'', description: 'Corta não só sua barba😨', type:"espada", effect:()=>{}},
     Guardachuva: {name: "Guarda chuva", source:'', description: 'Nem chove nesse jogo...', type:"espada", effect:()=>{}},
     Escalibur: {name: "Iskalibur", source:'', description: 'Acho que não era assim que usava não', type:"escudo", effect:()=>{}},
     TampaGigante: {name: "Tampa de Panela Gigante", source:'', description: 'Voce pega e PAAA nela', type:"escudo", effect:()=>{}},

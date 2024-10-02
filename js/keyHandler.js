@@ -28,6 +28,10 @@ addEventListener('keydown', (e) => {
         }
     }
 
+    if(pressedKey === 'ç'){
+        biome.changeBiome(winterBiome)
+    }
+
     if(pressedKey === 'p'){
         question = canvasPrompt('Ask a question: ');
     }
