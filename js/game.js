@@ -167,8 +167,6 @@ let game = (currentTime) => {
         if (projectile.shouldRemove) projectiles.splice(i, 1);
     };
 
-    player.update();
-
     for (let i = 0; i <= npcs.length - 1; i++) {
         const npc = npcs[i]
         npc.update()
@@ -193,7 +191,15 @@ let game = (currentTime) => {
         }
     }
 
-    for(let i = activeAttacks.length - 1; i >= 0; i--){
+
+    for (let i = enemies.length - 1; i >= 0; i--) {
+        enemy = enemies[i];
+        enemy.update();
+    };
+
+    player.update();
+
+    for (let i = activeAttacks.length - 1; i >= 0; i--) {
         const attack = activeAttacks[i];
         attack.update()
     }
@@ -206,11 +212,6 @@ let game = (currentTime) => {
     if (canvasPromptActive) loadCanvasPrompt()
     if (player.inventory.visible) player.inventory.draw()
 
-
-    for (let i = enemies.length - 1; i >= 0; i--) {
-        enemy = enemies[i];
-        enemy.update();
-    };
 
     dice.update();
     generateNPC()

@@ -22,8 +22,8 @@ class Mission {
         const borderSize = 10;
         const borderColor = 'rgba(237, 172, 74, 1)';
         const widthFix = 1200
-        const xFix = -190
-        const yFix = -620
+        const xFix = 1180
+        const yFix = -700
         drawBorder(this.position.x + xFix, this.position.y + 5 + yFix, this.dimensions.width - widthFix, this.dimensions.height, borderSize, borderColor);
         ctx.fillStyle = 'rgba(67, 93, 115, 1)';
         ctx.fillRect(this.position.x + xFix, this.position.y + 5 + yFix, this.dimensions.width - widthFix, this.dimensions.height);
@@ -32,7 +32,6 @@ class Mission {
         ctx.textAlign = 'start';
         const fontSize = 40;
         ctx.font = `${fontSize}px Pixeloid`;
-
 
         function wrapText(text, maxWidth) {
             let lines = [];

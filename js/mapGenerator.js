@@ -93,12 +93,22 @@ let drawPixels = () => {
 
 const rng = new RandomNumberGenerator()
 
-const directory = './assets/images/'
+const greenDirectory = './assets/maptiles/greenBiome/'
 
 const greenBiome = {
-    terrainImages: [directory + 'grass.png', directory + 'tallgrass.png', directory + 'flower.png', directory + 'flower2.png', directory + 'mushroom.png', directory + 'mushroom2.png', directory + 'stones.png', directory + 'stones2.png'],
-    treeImages: [directory + 'tree1.png'],
-    lakeImages: [directory + 'waterborderleft.png', directory + 'grassborderleftup.png', directory + 'grassborderleftdown.png', directory + 'waterborderright.png', directory + 'grassborderrightup.png', directory + 'grassborderrightdown.png', directory + 'waterborderup.png', directory + 'waterborderdown.png', directory + 'water.png'],
+    terrainImages: [greenDirectory + 'grass.png', greenDirectory + 'tallgrass.png', greenDirectory + 'flower.png', greenDirectory + 'flower2.png', greenDirectory + 'mushroom.png', greenDirectory + 'mushroom2.png', greenDirectory + 'stones.png', greenDirectory + 'stones2.png'],
+    treeImages: [greenDirectory + 'tree1.png'],
+    lakeImages: [greenDirectory + 'waterborderleft.png', greenDirectory + 'grassborderleftup.png', greenDirectory + 'grassborderleftdown.png', greenDirectory + 'waterborderright.png', greenDirectory + 'grassborderrightup.png', greenDirectory + 'grassborderrightdown.png', greenDirectory + 'waterborderup.png', greenDirectory + 'waterborderdown.png', greenDirectory + 'water.png'],
+    blockRarities: [0, 0.2, 0.98, 0.98, 0.99, 0.98, 0.98, 0.98],
+    isInfinite: true,
+}
+
+const winterDirectory = './assets/maptiles/winterBiome/'
+
+const winterBiome = {
+    terrainImages: [winterDirectory + 'grass.png', winterDirectory + 'tallgrass.png', winterDirectory + 'flower.png', winterDirectory + 'flower2.png', winterDirectory + 'stones.png'],
+    treeImages: [winterDirectory + 'tree1.png'],
+    lakeImages: [greenDirectory + 'waterborderleft.png', greenDirectory + 'grassborderleftup.png', greenDirectory + 'grassborderleftdown.png', greenDirectory + 'waterborderright.png', greenDirectory + 'grassborderrightup.png', greenDirectory + 'grassborderrightdown.png', greenDirectory + 'waterborderup.png', greenDirectory + 'waterborderdown.png', greenDirectory + 'water.png'],
     blockRarities: [0, 0.2, 0.98, 0.98, 0.99, 0.98, 0.98, 0.98],
     isInfinite: true,
 }
