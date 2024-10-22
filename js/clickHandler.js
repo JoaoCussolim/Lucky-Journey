@@ -153,13 +153,22 @@ addEventListener('mousedown', (e) => {
             startScrollY = player.inventory.scrollY;
             e.preventDefault();
         }
+
+        const playerEquipItemIndex = player.inventory.getHoveredItemIndex();
+        if(playerEquipItemIndex){
+            console.log(player.inventory.items[playerEquipItemIndex].name)
+        }
     }
 });
 
+let mousePos = {x: 0, y: 0}
 
 addEventListener('mousemove', (e) => {
+    mousePos.x = e.clientX;
+    mousePos.y = e.clientY;
+
     if (isDragging) {
-        const deltaY = e.clientY - startY;
+        const deltaY = mousePos.y - startY;
         const maxScrollY = player.inventory.itemHeight * player.inventory.totalItems - player.inventory.listHeight;
         player.inventory.scrollY = startScrollY + deltaY * (player.inventory.itemHeight * player.inventory.totalItems / player.inventory.listHeight);
         if (player.inventory.scrollY > maxScrollY) player.inventory.scrollY = maxScrollY;

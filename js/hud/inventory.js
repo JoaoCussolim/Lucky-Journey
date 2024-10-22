@@ -96,6 +96,8 @@ class inventory {
             { name: "Escudo de Ferro", source: './assets/items/shields/ironshield.png', description: 'É tipo madeira, só que mais dura', type: "escudo", effect: () => { } },
         ]
 
+        this.equippedItems = []
+
         this.totalItems = this.items.length;
         this.listWidth = 500;  // Width of the scrollable list area
         this.listHeight = 400; // Height of the scrollable list area
@@ -105,6 +107,31 @@ class inventory {
         this.itemHeight = 150; // Height of each item
         this.scrollY = 0; // Vertical scroll offset
     }
+
+    getHoveredItemIndex() {
+        const startIndex = Math.floor(this.scrollY / this.itemHeight);
+        const endIndex = startIndex + Math.ceil(this.listHeight / this.itemHeight) + 1;
+
+        for (let i = startIndex; i < endIndex; i++) {
+            const itemIndex = i % this.totalItems;
+            const y = (i - startIndex) * this.itemHeight - (this.scrollY % this.itemHeight);
+
+            const itemBounds = {
+                x: this.listX,
+                y: this.listY + y,
+                width: this.listWidth,
+                height: this.itemHeight
+            };
+
+            if (mousePos.x >= itemBounds.x &&
+                mousePos.x <= itemBounds.x + itemBounds.width &&
+                mousePos.y >= itemBounds.y &&
+                mousePos.y <= itemBounds.y + itemBounds.height) {
+                return itemIndex
+            }
+        }
+    }
+
 
     drawItems() {
         const startIndex = Math.floor(this.scrollY / this.itemHeight);
@@ -177,9 +204,6 @@ class inventory {
             ctx.fillStyle = "rgb(255, 255, 255)";
             ctx.drawImage(menuInv, this.pos.x - 290, this.pos.y - 125, this.size.width + 580, this.size.height + 250); //antes
             this.drawItems(); //depois
-            
-            
-
         }
     }
 
