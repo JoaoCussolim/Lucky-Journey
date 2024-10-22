@@ -212,7 +212,6 @@ class Mage extends Player {
             frameBuffer: 1,
             frameRate: 1,
             image: new Image()
-
         },
         IdleSide: {
             source: './assets/mage/idle/side.png',
@@ -338,9 +337,9 @@ class Mage extends Player {
 
 
         // ctx.fillStyle = 'green'; 
-        //ctx.fillRect(this.attackbox.position.x, this.attackbox.position.y, this.attackbox.dimensions.width, this.attackbox.dimensions.height)
-        //ctx.fillStyle = 'purple';
-        //ctx.fillRect(this.hitbox.position.x, this.hitbox.position.y, this.hitbox.dimensions.width, this.hitbox.dimensions.height)
+        // ctx.fillRect(this.attackbox.position.x, this.attackbox.position.y, this.attackbox.dimensions.width, this.attackbox.dimensions.height)
+        // ctx.fillStyle = 'purple';
+        // ctx.fillRect(this.hitbox.position.x, this.hitbox.position.y, this.hitbox.dimensions.width, this.hitbox.dimensions.height)
 
         ctx.drawImage(
             this.image,
@@ -353,6 +352,21 @@ class Mage extends Player {
             this.width,
             this.height
         );
+    }
+
+    attackCooldown() {
+        setTimeout(() => {
+            this.attackInCooldown = false;
+        }, 2000);
+        setTimeout(() => {
+            this.attacking = false
+            switch (player.direction) {
+                case 'behind': player.switchSprite('IdleBehind'); break;
+                case 'forward': player.switchSprite('IdleForward'); break;
+                case 'side': player.switchSprite('IdleSide'); break;
+                case 'sideLeft': player.switchSprite('IdleSideLeft'); break;
+            }
+        }, 500);
     }
 
     update() {
@@ -502,9 +516,9 @@ class Archer extends Player {
 
 
         // ctx.fillStyle = 'green'; 
-        //ctx.fillRect(this.attackbox.position.x, this.attackbox.position.y, this.attackbox.dimensions.width, this.attackbox.dimensions.height)
-        //ctx.fillStyle = 'purple';
-        //ctx.fillRect(this.hitbox.position.x, this.hitbox.position.y, this.hitbox.dimensions.width, this.hitbox.dimensions.height)
+        // ctx.fillRect(this.attackbox.position.x, this.attackbox.position.y, this.attackbox.dimensions.width, this.attackbox.dimensions.height)
+        // ctx.fillStyle = 'purple';
+        // ctx.fillRect(this.hitbox.position.x, this.hitbox.position.y, this.hitbox.dimensions.width, this.hitbox.dimensions.height)
 
         ctx.drawImage(
             this.image,
@@ -512,11 +526,26 @@ class Archer extends Player {
             cropbox.position.y,
             cropbox.width,
             cropbox.height,
-            screenToWorldX(this.position.x - this.width / 2 + this.width / 3),
+            screenToWorldX(this.position.x - this.width / 1.6 + this.width / 3),
             screenToWorldY(this.position.y - this.height / 2 + this.height / 5),
             this.width,
             this.height
         );
+    }
+
+    attackCooldown() {
+        setTimeout(() => {
+            this.attackInCooldown = false;
+        }, 1000);
+        setTimeout(() => {
+            this.attacking = false
+            switch (player.direction) {
+                case 'behind': player.switchSprite('IdleBehind'); break;
+                case 'forward': player.switchSprite('IdleForward'); break;
+                case 'side': player.switchSprite('IdleSide'); break;
+                case 'sideLeft': player.switchSprite('IdleSideLeft'); break;
+            }
+        }, 500);
     }
 
     update() {
@@ -534,7 +563,7 @@ class Archer extends Player {
 }
 
 class Cleric extends Player {
-    constructor({ position = { x: 0, y: 0 }, dimensions = { width: 0, height: 0 }, source = './assets/cleric/menu/forward.png', frameRate = 1, frameBuffer = 1, scale = 0.3, name = 'Delta', animations = {
+    constructor({ position = { x: 0, y: 0 }, dimensions = { width: 0, height: 0 }, source = './assets/cleric/Idle/forward.png', frameRate = 1, frameBuffer = 1, scale = 0.3, name = 'Delta', animations = {
         IdleForward: {
             source: './assets/cleric/Idle/forward.png',
             frameBuffer: 1,
@@ -594,7 +623,7 @@ class Cleric extends Player {
         AttackingForward: {
             source: './assets/cleric/attacking/forward.png',
             frameBuffer: 10,
-            frameRate: 5,
+            frameRate: 8,
             image: new Image()
         },
 
@@ -627,7 +656,7 @@ class Cleric extends Player {
         const UIimage = new Image();
         const playerImage = new Image();
         UIimage.src = './assets/ui/healthUI.png';
-        playerImage.src = './assets/cleric/idle/forward.png';
+        playerImage.src = './assets/cleric/menu/forward.png';
         
         ctx.fillStyle = 'rgb(100,100,100)';
         ctx.fillRect(150,75,317.1,45);
@@ -666,9 +695,9 @@ class Cleric extends Player {
 
 
         // ctx.fillStyle = 'green'; 
-        //ctx.fillRect(this.attackbox.position.x, this.attackbox.position.y, this.attackbox.dimensions.width, this.attackbox.dimensions.height)
-        //ctx.fillStyle = 'purple';
-        //ctx.fillRect(this.hitbox.position.x, this.hitbox.position.y, this.hitbox.dimensions.width, this.hitbox.dimensions.height)
+        // ctx.fillRect(this.attackbox.position.x, this.attackbox.position.y, this.attackbox.dimensions.width, this.attackbox.dimensions.height)
+        // ctx.fillStyle = 'purple';
+        // ctx.fillRect(this.hitbox.position.x, this.hitbox.position.y, this.hitbox.dimensions.width, this.hitbox.dimensions.height)
 
         ctx.drawImage(
             this.image,
@@ -676,11 +705,26 @@ class Cleric extends Player {
             cropbox.position.y,
             cropbox.width,
             cropbox.height,
-            screenToWorldX(this.position.x - this.width / 2 + this.width / 3),
+            screenToWorldX(this.position.x - this.width / 1.6 + this.width / 3),
             screenToWorldY(this.position.y - this.height / 2 + this.height / 5),
             this.width,
             this.height
         );
+    }
+
+        attackCooldown() {
+        setTimeout(() => {
+            this.attackInCooldown = false;
+        }, 1000);
+        setTimeout(() => {
+            this.attacking = false
+            switch (player.direction) {
+                case 'behind': player.switchSprite('IdleBehind'); break;
+                case 'forward': player.switchSprite('IdleForward'); break;
+                case 'side': player.switchSprite('IdleSide'); break;
+                case 'sideLeft': player.switchSprite('IdleSideLeft'); break;
+            }
+        }, 500);
     }
 
     update() {
@@ -698,30 +742,29 @@ class Cleric extends Player {
 }
 
 class Warrior extends Player {
-    constructor({ position = { x: 0, y: 0 }, dimensions = { width: 0, height: 0 }, source = './assets/warrior/Idle/forward.png', frameRate = 1, frameBuffer = 1, scale = 0.3, name = 'Delta', animations = {
+    constructor({ position = { x: 0, y: 0 }, dimensions = { width: 0, height: 0 }, source = './assets/warrior/Parado/forward.png', frameRate = 1, frameBuffer = 1, scale = 0.3, name = 'Delta', animations = {
         IdleForward: {
-            source: './assets/warrior/Idle/forward.png',
+            source: './assets/warrior/Parado/forward.png',
             frameBuffer: 1,
             frameRate: 1,
             image: new Image()
-
         },
         IdleSide: {
-            source: './assets/warrior/Idle/side.png',
+            source: './assets/warrior/Parado/side.png',
             frameBuffer: 1,
             frameRate: 1,
             image: new Image()
 
         },
         IdleSideLeft: {
-            source: './assets/warrior/Idle/sideleft.png',
+            source: './assets/warrior/Parado/sideleft.png',
             frameBuffer: 1,
             frameRate: 1,
             image: new Image()
 
         },
         IdleBehind: {
-            source: './assets/warrior/Idle/behind.png',
+            source: './assets/warrior/Parado/behind.png',
             frameBuffer: 1,
             frameRate: 1,
             image: new Image()
@@ -765,14 +808,14 @@ class Warrior extends Player {
         AttackingSide: {
             source: './assets/warrior/attacking/side.png',
             frameBuffer: 10,
-            frameRate: 8,
+            frameRate: 5,
             image: new Image()
         },
 
         AttackingSideLeft: {
             source: './assets/warrior/attacking/sideLeft.png',
             frameBuffer: 10,
-            frameRate: 8,
+            frameRate: 5,
             image: new Image()
         },
 
@@ -786,12 +829,12 @@ class Warrior extends Player {
     } }) {
         super({ position, dimensions, source, frameRate, frameBuffer, scale, animations,name });
     }
-
+    
     HealthUI(){
         const UIimage = new Image();
         const playerImage = new Image();
         UIimage.src = './assets/ui/healthUI.png';
-        playerImage.src = './assets/cleric/idle/forward.png';
+        playerImage.src = './assets/warrior/idle/icon.png';
         
         ctx.fillStyle = 'rgb(100,100,100)';
         ctx.fillRect(150,75,317.1,45);
@@ -830,9 +873,9 @@ class Warrior extends Player {
 
 
         // ctx.fillStyle = 'green'; 
-        //ctx.fillRect(this.attackbox.position.x, this.attackbox.position.y, this.attackbox.dimensions.width, this.attackbox.dimensions.height)
-        //ctx.fillStyle = 'purple';
-        //ctx.fillRect(this.hitbox.position.x, this.hitbox.position.y, this.hitbox.dimensions.width, this.hitbox.dimensions.height)
+        // ctx.fillRect(this.attackbox.position.x, this.attackbox.position.y, this.attackbox.dimensions.width, this.attackbox.dimensions.height)
+        // ctx.fillStyle = 'purple';
+        // ctx.fillRect(this.hitbox.position.x, this.hitbox.position.y, this.hitbox.dimensions.width, this.hitbox.dimensions.height)
 
         ctx.drawImage(
             this.image,
@@ -845,6 +888,21 @@ class Warrior extends Player {
             this.width,
             this.height
         );
+    }
+
+    attackCooldown() {
+        setTimeout(() => {
+            this.attackInCooldown = false;
+        }, 2000);
+        setTimeout(() => {
+            this.attacking = false
+            switch (player.direction) {
+                case 'behind': player.switchSprite('IdleBehind'); break;
+                case 'forward': player.switchSprite('IdleForward'); break;
+                case 'side': player.switchSprite('IdleSide'); break;
+                case 'sideLeft': player.switchSprite('IdleSideLeft'); break;
+            }
+        }, 500);
     }
 
     update() {
@@ -860,6 +918,8 @@ class Warrior extends Player {
         // this.applyVelocity()
     };
 }
+
+
 
 let player;
 

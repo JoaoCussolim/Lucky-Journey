@@ -14,7 +14,7 @@ addEventListener("click", (e) => {
         inCharacterSelect = false;
     }
     if (GuerreiroButton.mouseOn) {
-        player = new Mage({ position: { x: 950, y: 600 }, dimensions: { width: 50, height: 50 }, name:'guerre' });
+        player = new Warrior({ position: { x: 950, y: 600 }, dimensions: { width: 50, height: 50 }, name:'guerre' });
         inCharacterSelect = false;
     }
     }else if(!inNameSelect){
@@ -30,22 +30,30 @@ addEventListener("click", (e) => {
         controlsbtnClicked()
     }
 
-    
+    if(player instanceof Mage){
     if (!player.attackInCooldown && player.mana >= 10) {
-        if(player instanceof Mage){
+        
         projectiles.push(new magePower({
             position: { x: screenToWorldX(player.position.x), y: screenToWorldY(player.position.y) },
             dimensions: { width: 100, height: 100 },
-            velocity: { x: Math.cos(shootAngle) * 5, y: Math.sin(shootAngle) * 5 }
-        }))
-    }else if(player instanceof Archer){
-        projectiles.push(new Arrow({
-            position: { x: screenToWorldX(player.position.x), y: screenToWorldY(player.position.y) },
-            dimensions: { width: 50, height: 50 },
             velocity: { x: Math.cos(shootAngle) * 5, y: Math.sin(shootAngle) * 5 },
-            angle: shootAngle,
+            damage: 10
         }))
-    }
+    // }else if(player instanceof Archer){
+    //     projectiles.push(new Arrow({
+    //         position: { x: screenToWorldX(player.position.x), y: screenToWorldY(player.position.y) },
+    //         dimensions: { width: 50, height: 50 },
+    //         velocity: { x: Math.cos(shootAngle) * 5, y: Math.sin(shootAngle) * 5 },
+    //         angle: shootAngle,
+    //     }))
+    // }
+    // else if(player instanceof Cleric){
+    //     projectiles.push(new Raio({
+    //         position: { x: e.clientX - 150, y: e.clientY - 130},
+    //         dimensions: { width: 50, height: 50 },
+    //         velocity: { x: 0, y: 0 },
+    //     }))
+    // }
 
         switch (player.direction) {
             case 'behind': player.switchSprite('AttackingBehind'); break;
@@ -59,6 +67,57 @@ addEventListener("click", (e) => {
         player.attackCooldown()
         player.mana -= 10;
     }
+
+}else if(player instanceof Archer){
+    if (!player.attackInCooldown && player.mana >= 10) {
+ 
+        projectiles.push(new Arrow({
+            position: { x: screenToWorldX(player.position.x), y: screenToWorldY(player.position.y) },
+            dimensions: { width: 50, height: 50 },
+            velocity: { x: Math.cos(shootAngle) * 5, y: Math.sin(shootAngle) * 5 },
+            angle: shootAngle,
+            damage: 5,
+        }))
+
+        switch (player.direction) {
+            case 'behind': player.switchSprite('AttackingBehind'); break;
+            case 'forward': player.switchSprite('AttackingForward'); break;
+            case 'side': player.switchSprite('AttackingSide'); break;
+            case 'sideLeft': player.switchSprite('AttackingSideLeft'); break;
+        }
+
+        player.attacking = true;
+        player.attackInCooldown = true;
+        player.attackCooldown()
+        player.mana -= 10;
+}
+}
+else if (player instanceof Cleric){
+    if (!player.attackInCooldown && player.mana >= 50) {
+ 
+        projectiles.push(new Raio({
+                    position: { x: e.clientX - 150, y: e.clientY - 130},
+                    dimensions: { width: 50, height: 50 },
+                    velocity: { x: 0, y: 0 },
+                    damage: 1
+                }))
+
+        switch (player.direction) {
+            case 'behind': player.switchSprite('AttackingBehind'); break;
+            case 'forward': player.switchSprite('AttackingForward'); break;
+            case 'side': player.switchSprite('AttackingSide'); break;
+            case 'sideLeft': player.switchSprite('AttackingSideLeft'); break;
+        }
+
+        player.attacking = true;
+        player.attackInCooldown = true;
+        player.attackCooldown()
+        player.mana -= 50;
+}
+}
+else if(player instanceof Warrior){
+
+}
 
     if (dialogActive) {
         if (canvasPrompResponse != '') {
