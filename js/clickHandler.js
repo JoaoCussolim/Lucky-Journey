@@ -1,16 +1,16 @@
 addEventListener("click", (e) => {
     if(inCharacterSelect){
     if (mageButton.mouseOn) {
-        player = new Mage({ position: { x: 950, y: 600 }, dimensions: { width: 50, height: 50 }, name:'mago' });
+        player = new Mage({ position: { x: 950, y: 600 }, dimensions: { width: 50, height: 50 }, name: playerName });
         inCharacterSelect = false;
         
     }
     if (clericButton.mouseOn) {
-        player = new Cleric({ position: { x: 950, y: 600 }, dimensions: { width: 50, height: 50 }, name:'cleric' });
+        player = new Cleric({ position: { x: 950, y: 600 }, dimensions: { width: 50, height: 50 }, name: playerName });
         inCharacterSelect = false;
     }
     if (ArqueiroButton.mouseOn) {
-        player = new Archer({ position: { x: 950, y: 600 }, dimensions: { width: 50, height: 50 }, name:'arqu' });
+        player = new Archer({ position: { x: 950, y: 600 }, dimensions: { width: 50, height: 50 }, name: playerName});
         inCharacterSelect = false;
     }
     if (GuerreiroButton.mouseOn) {
@@ -128,6 +128,7 @@ else if(player instanceof Warrior){
     }
     }else{
         if(ConfirmButton.mouseOn){
+            playerName = canvasPrompText;
             inNameSelect = false;
             inCharacterSelect = true;
         }
@@ -174,7 +175,6 @@ addEventListener('mouseup', () => {
 });
 
 
-// Handle mouse wheel scrolling
 addEventListener('wheel', (e) => {
     if (player.inventory.visible) {
         const scrollAmount = e.deltaY;
@@ -189,7 +189,6 @@ addEventListener('wheel', (e) => {
         player.inventory.updateScrollbarPosition();
     }
 });
-
 
 
 

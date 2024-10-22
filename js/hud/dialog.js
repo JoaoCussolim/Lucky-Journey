@@ -143,18 +143,11 @@ let canvasPrompText = ''
 let canvasPrompQuestion = ''
 let canvasPrompResponse = ''
 
-function canvasPrompt(text) {
-    canvasPromptActive = true
-    canvasPrompQuestion = text
-}
-
 function loadCanvasPrompt() {
     ctx.font = `60px Tales`
-    ctx.fillStyle = 'black'
-    ctx.fillRect(canvas.width / 2 - 400, canvas.height / 2 - 400, 800, 800)
     ctx.fillStyle = 'white'
-    ctx.fillText(canvasPrompQuestion, canvas.width / 2 - 250, canvas.height / 2 - 300)
-    ctx.fillText(canvasPrompText, canvas.width / 2 - 250, canvas.height / 2)
+    ctx.textAlign = 'center'
+    ctx.fillText(canvasPrompText, canvas.width / 2 - 20, canvas.height / 2 - 160)
 }
 
 async function query(data) {

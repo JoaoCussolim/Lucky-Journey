@@ -5,7 +5,6 @@ background.src = "./assets/background.png"
 
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
-let Typename = false;
 let playerName;
 
 let backgroundPositions = {
@@ -13,8 +12,8 @@ let backgroundPositions = {
     y: 0
 };
 
-let inCharacterSelect = true;
-let inNameSelect = false;
+let inCharacterSelect = false;
+let inNameSelect = true;
 
 let backgroundVelocity = {
     x: 0,
@@ -215,7 +214,6 @@ let game = (currentTime) => {
         }
 
         if (dialogActive) actualDialogBox.draw()
-        if (canvasPromptActive) loadCanvasPrompt()
         if (player.inventory.visible) player.inventory.draw()
 
 
@@ -229,6 +227,7 @@ let game = (currentTime) => {
     }
     else if (inNameSelect) {
         nameSelect();
+        loadCanvasPrompt()
     } else {
         characterSelection();
     }
