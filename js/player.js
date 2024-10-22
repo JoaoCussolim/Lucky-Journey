@@ -534,7 +534,7 @@ class Archer extends Player {
 }
 
 class Cleric extends Player {
-    constructor({ position = { x: 0, y: 0 }, dimensions = { width: 0, height: 0 }, source = './assets/cleric/Idle/forward.png', frameRate = 1, frameBuffer = 1, scale = 0.3, name = 'Delta', animations = {
+    constructor({ position = { x: 0, y: 0 }, dimensions = { width: 0, height: 0 }, source = './assets/cleric/menu/forward.png', frameRate = 1, frameBuffer = 1, scale = 0.3, name = 'Delta', animations = {
         IdleForward: {
             source: './assets/cleric/Idle/forward.png',
             frameBuffer: 1,
