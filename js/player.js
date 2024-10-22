@@ -834,7 +834,7 @@ class Warrior extends Player {
         const UIimage = new Image();
         const playerImage = new Image();
         UIimage.src = './assets/ui/healthUI.png';
-        playerImage.src = './assets/warrior/idle/icon.png';
+        playerImage.src = './assets/warrior/idle/forward.png';
         
         ctx.fillStyle = 'rgb(100,100,100)';
         ctx.fillRect(150,75,317.1,45);
