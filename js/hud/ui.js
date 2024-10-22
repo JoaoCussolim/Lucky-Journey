@@ -4,6 +4,28 @@ function RandomInt(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
 };
 
+let nameSelect = () => {
+    ctx.fillStyle = "rgba(0,0,0,0.5)";
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    ctx.fillStyle = "rgba(46, 70, 89, 1)";
+    ctx.fillRect(30, 30, canvas.width - 60, canvas.height - 60);
+    ctx.fillStyle = "rgba(237, 172, 74, 1)";
+    ctx.font = "50px Pixeloid";
+    ctx.textAlign = "center";
+    ctx.fillText("Qual o seu Nome?", canvas.width / 2, 100);
+    ctx.strokeStyle = 'rgb(237, 172, 74)'
+    ctx.rect(200, 200, canvas.width / 1.25, 100)
+    ctx.lineWidth = 10
+    ctx.stroke();
+    ctx.fillStyle = 'rgb(94, 120, 140)'
+    ctx.fillRect(200, 200, canvas.width / 1.25, 100)
+
+
+
+    ConfirmButton.update();
+
+}
+
 
 let characterSelection = () => {
     ctx.fillStyle = "rgba(0,0,0,0.5)";
@@ -13,12 +35,12 @@ let characterSelection = () => {
     ctx.fillStyle = "rgba(237, 172, 74, 1)";
     ctx.font = "50px Pixeloid";
     ctx.textAlign = "center";
-    ctx.fillText("Escolha Seu Personagem", canvas.width / 2, 100)
-    ctx.font = "25px Pixeloid";
-    ctx.fillText("Mago", 200, 700)
-    ctx.fillText("Clérigo", 600, 700)
-    ctx.fillText("Arqueiro", 1000, 700)
-    ctx.fillText("Guerreiro", 1400, 700)
+    ctx.fillText("Escolha Seu Personagem", canvas.width / 2, 100);
+    ctx.font = "50px Pixeloid";
+    ctx.fillText("Mago", 225, 700);
+    ctx.fillText("Clérigo", 650, 700);
+    ctx.fillText("Arqueiro", 1150, 700);
+    ctx.fillText("Guerreiro", 1600, 700);
 
     mageButton.update();
     clericButton.update();
@@ -96,10 +118,10 @@ let playedClicked_UI = () => {
 
 }
 
-let deathScreen = () =>{
+let deathScreen = () => {
     ctx.fillStyle = 'black';
-    ctx.fillRect(0,0,canvas.width,canvas.height)
+    ctx.fillRect(0, 0, canvas.width, canvas.height)
     ctx.fillStyle = 'white';
     ctx.font = '100px Tales';
-    ctx.fillText('VOCÊ   MORREU!',canvas.width/2,canvas.height/2)
+    ctx.fillText('VOCÊ   MORREU!', canvas.width / 2, canvas.height / 2)
 }

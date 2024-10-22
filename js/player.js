@@ -1,5 +1,5 @@
 class Player extends AnimatedSprite {
-    constructor({ position = { x: 0, y: 0 }, dimensions = { width: 0, height: 0 }, source, frameRate = 1, frameBuffer = 3, scale = 1, animations = {} }) {
+    constructor({ position = { x: 0, y: 0 }, dimensions = { width: 0, height: 0 }, source, frameRate = 1, frameBuffer = 3, scale = 1, animations = {}, name = 'Delta'}) {
         super({ position, dimensions, source, frameRate, frameBuffer, scale, animations });
         this.center = {
             x: this.position.x - this.dimensions.width / 2,
@@ -30,6 +30,7 @@ class Player extends AnimatedSprite {
         this.attacking = false;
         this.attackInCooldown = false;
         this.inCombat = false;
+        this.name = name;
 
         this.inventory = new inventory()
         this.health = 100;
@@ -113,20 +114,32 @@ class Player extends AnimatedSprite {
         if(this.mana < this.maxmana){
             this.mana += deltaTime_Mult * 0.03;
         }
+        if(this.mana > this.maxmana){
+            this.mana = this.maxmana
+        }
+        if(this.health > this.maxhealth){
+            this.health = this.maxhealth
+        }
     }
 
     HealthUI(){
         const UIimage = new Image();
         const playerImage = new Image();
         UIimage.src = './assets/ui/healthUI.png';
-        playerImage.src = './assets/mage/menu/icon.png';
-
-        ctx.fillStyle = 'rgb(100,100,100)'
-        ctx.fillRect(150,75,317.1,45)
+        playerImage.src = '';
+        
+        ctx.fillStyle = 'rgb(100,100,100)';
+        ctx.fillRect(150,75,317.1,45);
         ctx.fillStyle = 'red';
         ctx.fillRect(150,75,(this.health/this.maxhealth)*317.1,45);
-        ctx.drawImage(UIimage,0,0,500,250)
-        ctx.drawImage(playerImage,50,50,130,130)
+        ctx.fillStyle = 'rgb(150,150,150)';
+        ctx.fillRect(150,45,166.5,25.5);
+        ctx.drawImage(UIimage,0,0,500,250);
+        ctx.drawImage(playerImage,50,50,130,130);
+        ctx.fillStyle = 'black';
+        ctx.textAlign ='center'
+        ctx.font ="20px Pixeloid"
+        ctx.fillText(this.name,250,65)
 
         
     }
@@ -193,7 +206,7 @@ class Player extends AnimatedSprite {
 };
 
 class Mage extends Player {
-    constructor({ position = { x: 0, y: 0 }, dimensions = { width: 0, height: 0 }, source = './assets/mage/idle/forward.png', frameRate = 1, frameBuffer = 1, scale = 0.3, animations = {
+    constructor({ position = { x: 0, y: 0 }, dimensions = { width: 0, height: 0 }, source = './assets/mage/idle/forward.png', frameRate = 1, frameBuffer = 1, scale = 0.3, name = 'Delta', animations = {
         IdleForward: {
             source: './assets/mage/idle/forward.png',
             frameBuffer: 1,
@@ -279,7 +292,29 @@ class Mage extends Player {
         },
 
     } }) {
-        super({ position, dimensions, source, frameRate, frameBuffer, scale, animations });
+        super({ position, dimensions, source, frameRate, frameBuffer, scale, animations,name });
+    }
+    
+    HealthUI(){
+        const UIimage = new Image();
+        const playerImage = new Image();
+        UIimage.src = './assets/ui/healthUI.png';
+        playerImage.src = './assets/mage/menu/icon.png';
+        
+        ctx.fillStyle = 'rgb(100,100,100)';
+        ctx.fillRect(150,75,317.1,45);
+        ctx.fillStyle = 'red';
+        ctx.fillRect(150,75,(this.health/this.maxhealth)*317.1,45);
+        ctx.fillStyle = 'rgb(150,150,150)';
+        ctx.fillRect(150,45,166.5,25.5);
+        ctx.drawImage(UIimage,0,0,500,250);
+        ctx.drawImage(playerImage,50,50,130,130);
+        ctx.fillStyle = 'black';
+        ctx.textAlign ='center'
+        ctx.font ="20px Pixeloid"
+        ctx.fillText(this.name,250,65)
+
+        
     }
 
     draw() {
@@ -334,7 +369,499 @@ class Mage extends Player {
     };
 }
 
-let player = new Mage({ position: { x: 950, y: 600 }, dimensions: { width: 50, height: 50 } });
+class Archer extends Player {
+    constructor({ position = { x: 0, y: 0 }, dimensions = { width: 0, height: 0 }, source = './assets/archer/Parado/forward.png', frameRate = 1, frameBuffer = 1, scale = 0.3, name = 'Delta', animations = {
+        IdleForward: {
+            source: './assets/archer/Parado/forward.png',
+            frameBuffer: 1,
+            frameRate: 1,
+            image: new Image()
+
+        },
+        IdleSide: {
+            source: './assets/archer/Parado/side.png',
+            frameBuffer: 1,
+            frameRate: 1,
+            image: new Image()
+
+        },
+        IdleSideLeft: {
+            source: './assets/archer/Parado/sideleft.png',
+            frameBuffer: 1,
+            frameRate: 1,
+            image: new Image()
+
+        },
+        IdleBehind: {
+            source: './assets/archer/Parado/behind.png',
+            frameBuffer: 1,
+            frameRate: 1,
+            image: new Image()
+        },
+
+        WalkingForward: {
+            source: './assets/archer/Andando/forward.png',
+            frameBuffer: 8,
+            frameRate: 4,
+            image: new Image()
+        },
+
+        WalkingSide: {
+            source: './assets/archer/Andando/side.png',
+            frameBuffer: 8,
+            frameRate: 4,
+            image: new Image()
+        },
+
+        WalkingSideLeft: {
+            source: './assets/archer/Andando/sideLeft.png',
+            frameBuffer: 8,
+            frameRate: 4,
+            image: new Image()
+        },
+
+        WalkingBehind: {
+            source: './assets/archer/Andando/behind.png',
+            frameBuffer: 8,
+            frameRate: 4,
+            image: new Image()
+        },
+
+        AttackingForward: {
+            source: './assets/archer/attacking/forward.png',
+            frameBuffer: 10,
+            frameRate: 5,
+            image: new Image()
+        },
+
+        AttackingSide: {
+            source: './assets/archer/attacking/side.png',
+            frameBuffer: 10,
+            frameRate: 8,
+            image: new Image()
+        },
+
+        AttackingSideLeft: {
+            source: './assets/archer/attacking/sideLeft.png',
+            frameBuffer: 10,
+            frameRate: 8,
+            image: new Image()
+        },
+
+        AttackingBehind: {
+            source: './assets/archer/attacking/behind.png',
+            frameBuffer: 10,
+            frameRate: 5,
+            image: new Image()
+        },
+
+    } }) {
+        super({ position, dimensions, source, frameRate, frameBuffer, scale, animations,name });
+    }
+
+    HealthUI(){
+        const UIimage = new Image();
+        const playerImage = new Image();
+        UIimage.src = './assets/ui/healthUI.png';
+        playerImage.src = './assets/archer/idle/forward.png';
+        
+        ctx.fillStyle = 'rgb(100,100,100)';
+        ctx.fillRect(150,75,317.1,45);
+        ctx.fillStyle = 'red';
+        ctx.fillRect(150,75,(this.health/this.maxhealth)*317.1,45);
+        ctx.fillStyle = 'rgb(150,150,150)';
+        ctx.fillRect(150,45,166.5,25.5);
+        ctx.drawImage(UIimage,0,0,500,250);
+        ctx.drawImage(playerImage,50,50,130,130);
+        ctx.fillStyle = 'black';
+        ctx.textAlign ='center'
+        ctx.font ="20px Pixeloid"
+        ctx.fillText(this.name,250,65)
+
+        
+    }
+
+    draw() {
+        this.ManaUI();
+        this.HealthUI();
+        this.center = {
+            x: this.position.x - this.dimensions.width / 2,
+            y: this.position.y - this.dimensions.height / 2,
+        }
+
+        if (!this.image) return;
+
+        let cropbox = {
+            position: {
+                x: this.currentFrame * (this.image.width / this.frameRate),
+                y: 0
+            },
+            width: this.image.width / this.frameRate,
+            height: this.image.height
+        };
+
+
+        // ctx.fillStyle = 'green'; 
+        //ctx.fillRect(this.attackbox.position.x, this.attackbox.position.y, this.attackbox.dimensions.width, this.attackbox.dimensions.height)
+        //ctx.fillStyle = 'purple';
+        //ctx.fillRect(this.hitbox.position.x, this.hitbox.position.y, this.hitbox.dimensions.width, this.hitbox.dimensions.height)
+
+        ctx.drawImage(
+            this.image,
+            cropbox.position.x,
+            cropbox.position.y,
+            cropbox.width,
+            cropbox.height,
+            screenToWorldX(this.position.x - this.width / 2 + this.width / 3),
+            screenToWorldY(this.position.y - this.height / 2 + this.height / 5),
+            this.width,
+            this.height
+        );
+    }
+
+    update() {
+        this.draw();
+        this.updateBoxes();
+        this.death();
+        this.updateFrames();
+        this.shouldPanCameraHorizontal();
+        this.shouldPanCameraVertical();
+        this.handleCollision();
+        this.Regen();
+        this.inventory.update();
+        // this.applyVelocity()
+    };
+}
+
+class Cleric extends Player {
+    constructor({ position = { x: 0, y: 0 }, dimensions = { width: 0, height: 0 }, source = './assets/cleric/Idle/forward.png', frameRate = 1, frameBuffer = 1, scale = 0.3, name = 'Delta', animations = {
+        IdleForward: {
+            source: './assets/cleric/Idle/forward.png',
+            frameBuffer: 1,
+            frameRate: 1,
+            image: new Image()
+
+        },
+        IdleSide: {
+            source: './assets/cleric/Idle/side.png',
+            frameBuffer: 1,
+            frameRate: 1,
+            image: new Image()
+
+        },
+        IdleSideLeft: {
+            source: './assets/cleric/Idle/sideleft.png',
+            frameBuffer: 1,
+            frameRate: 1,
+            image: new Image()
+
+        },
+        IdleBehind: {
+            source: './assets/cleric/Idle/behind.png',
+            frameBuffer: 1,
+            frameRate: 1,
+            image: new Image()
+        },
+
+        WalkingForward: {
+            source: './assets/cleric/walking/forward.png',
+            frameBuffer: 8,
+            frameRate: 4,
+            image: new Image()
+        },
+
+        WalkingSide: {
+            source: './assets/cleric/walking/side.png',
+            frameBuffer: 8,
+            frameRate: 4,
+            image: new Image()
+        },
+
+        WalkingSideLeft: {
+            source: './assets/cleric/walking/sideLeft.png',
+            frameBuffer: 8,
+            frameRate: 4,
+            image: new Image()
+        },
+
+        WalkingBehind: {
+            source: './assets/cleric/walking/behind.png',
+            frameBuffer: 8,
+            frameRate: 4,
+            image: new Image()
+        },
+
+        AttackingForward: {
+            source: './assets/cleric/attacking/forward.png',
+            frameBuffer: 10,
+            frameRate: 5,
+            image: new Image()
+        },
+
+        AttackingSide: {
+            source: './assets/cleric/attacking/side.png',
+            frameBuffer: 10,
+            frameRate: 8,
+            image: new Image()
+        },
+
+        AttackingSideLeft: {
+            source: './assets/cleric/attacking/sideLeft.png',
+            frameBuffer: 10,
+            frameRate: 8,
+            image: new Image()
+        },
+
+        AttackingBehind: {
+            source: './assets/cleric/attacking/behind.png',
+            frameBuffer: 10,
+            frameRate: 5,
+            image: new Image()
+        },
+
+    } }) {
+        super({ position, dimensions, source, frameRate, frameBuffer, scale, animations,name });
+    }
+
+    HealthUI(){
+        const UIimage = new Image();
+        const playerImage = new Image();
+        UIimage.src = './assets/ui/healthUI.png';
+        playerImage.src = './assets/cleric/idle/forward.png';
+        
+        ctx.fillStyle = 'rgb(100,100,100)';
+        ctx.fillRect(150,75,317.1,45);
+        ctx.fillStyle = 'red';
+        ctx.fillRect(150,75,(this.health/this.maxhealth)*317.1,45);
+        ctx.fillStyle = 'rgb(150,150,150)';
+        ctx.fillRect(150,45,166.5,25.5);
+        ctx.drawImage(UIimage,0,0,500,250);
+        ctx.drawImage(playerImage,50,50,130,130);
+        ctx.fillStyle = 'black';
+        ctx.textAlign ='center'
+        ctx.font ="20px Pixeloid"
+        ctx.fillText(this.name,250,65)
+
+        
+    }
+
+    draw() {
+        this.ManaUI();
+        this.HealthUI();
+        this.center = {
+            x: this.position.x - this.dimensions.width / 2,
+            y: this.position.y - this.dimensions.height / 2,
+        }
+
+        if (!this.image) return;
+
+        let cropbox = {
+            position: {
+                x: this.currentFrame * (this.image.width / this.frameRate),
+                y: 0
+            },
+            width: this.image.width / this.frameRate,
+            height: this.image.height
+        };
+
+
+        // ctx.fillStyle = 'green'; 
+        //ctx.fillRect(this.attackbox.position.x, this.attackbox.position.y, this.attackbox.dimensions.width, this.attackbox.dimensions.height)
+        //ctx.fillStyle = 'purple';
+        //ctx.fillRect(this.hitbox.position.x, this.hitbox.position.y, this.hitbox.dimensions.width, this.hitbox.dimensions.height)
+
+        ctx.drawImage(
+            this.image,
+            cropbox.position.x,
+            cropbox.position.y,
+            cropbox.width,
+            cropbox.height,
+            screenToWorldX(this.position.x - this.width / 2 + this.width / 3),
+            screenToWorldY(this.position.y - this.height / 2 + this.height / 5),
+            this.width,
+            this.height
+        );
+    }
+
+    update() {
+        this.draw();
+        this.updateBoxes();
+        this.death();
+        this.updateFrames();
+        this.shouldPanCameraHorizontal();
+        this.shouldPanCameraVertical();
+        this.handleCollision();
+        this.Regen();
+        this.inventory.update();
+        // this.applyVelocity()
+    };
+}
+
+class Warrior extends Player {
+    constructor({ position = { x: 0, y: 0 }, dimensions = { width: 0, height: 0 }, source = './assets/warrior/Idle/forward.png', frameRate = 1, frameBuffer = 1, scale = 0.3, name = 'Delta', animations = {
+        IdleForward: {
+            source: './assets/warrior/Idle/forward.png',
+            frameBuffer: 1,
+            frameRate: 1,
+            image: new Image()
+
+        },
+        IdleSide: {
+            source: './assets/warrior/Idle/side.png',
+            frameBuffer: 1,
+            frameRate: 1,
+            image: new Image()
+
+        },
+        IdleSideLeft: {
+            source: './assets/warrior/Idle/sideleft.png',
+            frameBuffer: 1,
+            frameRate: 1,
+            image: new Image()
+
+        },
+        IdleBehind: {
+            source: './assets/warrior/Idle/behind.png',
+            frameBuffer: 1,
+            frameRate: 1,
+            image: new Image()
+        },
+
+        WalkingForward: {
+            source: './assets/warrior/walking/forward.png',
+            frameBuffer: 8,
+            frameRate: 4,
+            image: new Image()
+        },
+
+        WalkingSide: {
+            source: './assets/warrior/walking/side.png',
+            frameBuffer: 8,
+            frameRate: 4,
+            image: new Image()
+        },
+
+        WalkingSideLeft: {
+            source: './assets/warrior/walking/sideLeft.png',
+            frameBuffer: 8,
+            frameRate: 4,
+            image: new Image()
+        },
+
+        WalkingBehind: {
+            source: './assets/warrior/walking/behind.png',
+            frameBuffer: 8,
+            frameRate: 4,
+            image: new Image()
+        },
+
+        AttackingForward: {
+            source: './assets/warrior/attacking/forward.png',
+            frameBuffer: 10,
+            frameRate: 5,
+            image: new Image()
+        },
+
+        AttackingSide: {
+            source: './assets/warrior/attacking/side.png',
+            frameBuffer: 10,
+            frameRate: 8,
+            image: new Image()
+        },
+
+        AttackingSideLeft: {
+            source: './assets/warrior/attacking/sideLeft.png',
+            frameBuffer: 10,
+            frameRate: 8,
+            image: new Image()
+        },
+
+        AttackingBehind: {
+            source: './assets/warrior/attacking/behind.png',
+            frameBuffer: 10,
+            frameRate: 5,
+            image: new Image()
+        },
+
+    } }) {
+        super({ position, dimensions, source, frameRate, frameBuffer, scale, animations,name });
+    }
+
+    HealthUI(){
+        const UIimage = new Image();
+        const playerImage = new Image();
+        UIimage.src = './assets/ui/healthUI.png';
+        playerImage.src = './assets/cleric/idle/forward.png';
+        
+        ctx.fillStyle = 'rgb(100,100,100)';
+        ctx.fillRect(150,75,317.1,45);
+        ctx.fillStyle = 'red';
+        ctx.fillRect(150,75,(this.health/this.maxhealth)*317.1,45);
+        ctx.fillStyle = 'rgb(150,150,150)';
+        ctx.fillRect(150,45,166.5,25.5);
+        ctx.drawImage(UIimage,0,0,500,250);
+        ctx.drawImage(playerImage,50,50,130,130);
+        ctx.fillStyle = 'black';
+        ctx.textAlign ='center'
+        ctx.font ="20px Pixeloid"
+        ctx.fillText(this.name,250,65)
+
+        
+    }
+
+    draw() {
+        this.ManaUI();
+        this.HealthUI();
+        this.center = {
+            x: this.position.x - this.dimensions.width / 2,
+            y: this.position.y - this.dimensions.height / 2,
+        }
+
+        if (!this.image) return;
+
+        let cropbox = {
+            position: {
+                x: this.currentFrame * (this.image.width / this.frameRate),
+                y: 0
+            },
+            width: this.image.width / this.frameRate,
+            height: this.image.height
+        };
+
+
+        // ctx.fillStyle = 'green'; 
+        //ctx.fillRect(this.attackbox.position.x, this.attackbox.position.y, this.attackbox.dimensions.width, this.attackbox.dimensions.height)
+        //ctx.fillStyle = 'purple';
+        //ctx.fillRect(this.hitbox.position.x, this.hitbox.position.y, this.hitbox.dimensions.width, this.hitbox.dimensions.height)
+
+        ctx.drawImage(
+            this.image,
+            cropbox.position.x,
+            cropbox.position.y,
+            cropbox.width,
+            cropbox.height,
+            screenToWorldX(this.position.x - this.width / 2 + this.width / 3),
+            screenToWorldY(this.position.y - this.height / 2 + this.height / 5),
+            this.width,
+            this.height
+        );
+    }
+
+    update() {
+        this.draw();
+        this.updateBoxes();
+        this.death();
+        this.updateFrames();
+        this.shouldPanCameraHorizontal();
+        this.shouldPanCameraVertical();
+        this.handleCollision();
+        this.Regen();
+        this.inventory.update();
+        // this.applyVelocity()
+    };
+}
+
+let player;
 
 let acceptedKeys = {
     ArrowUp(player) {

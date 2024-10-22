@@ -10,6 +10,28 @@ function drawBorder(x, y, width, height, borderSize, borderColor) {
     ctx.closePath()
 }
 
+function wrapText(text, maxWidth) {
+    let lines = [];
+    let words = text.split(' ');
+    let line = '';
+
+    for (let i = 0; i < words.length; i++) {
+        let testLine = line + words[i] + ' ';
+        let metrics = ctx.measureText(testLine);
+        let testWidth = metrics.width;
+
+        if (testWidth > maxWidth && i > 0) {
+            lines.push(line);
+            line = words[i] + ' ';
+        } else {
+            line = testLine;
+        }
+    }
+    lines.push(line);
+
+    return lines;
+}
+
 let itemsTodos = {
     botaDeSlime: { name: "Bota de Slime", sorce: './assets/items/boots/slimeboot.png', description: 'uma bota feita de slimes', type: "botas", effect: () => { } },
     BotaABencoada: { name: "Bota Abençoada", source: './assets/items/boots/blessedboots.png', description: 'Ai Meu Deus', type: "botas", effect: () => { } },
@@ -59,8 +81,8 @@ class inventory {
             { name: "Calça Invisível", source: '', description: 'Tinha alguma coisa pra ver?', type: "calcas", effect: () => { } },
             { name: "Rabo de gato", source: '', description: 'por onde isso entra?', type: "calcas", effect: () => { } },
             { name: "Calça Multi-colorida", source: '', description: '🏳️‍🌈🤨❓', type: "calcas", effect: () => { } },
-            { name: "Óculos de nerd", source: '', description: 'if(oculos_de_nerd){INT++}', type: "capacete", effect: () => { } },
-            { name: "Capacete de Futebol Americano", source: '', description: 'Meu lema é: FORÇA, FORÇA, BURRO', type: "capacete", effect: () => { } },
+            { name: "Óculos de nerd", source: '', description: 'if(oculos_de_nerd) {INT++}', type: "capacete", effect: () => { } },
+            { name: "Capacete de Futebol", source: '', description: 'Meu lema é: FORÇA, FORÇA, BURRO', type: "capacete", effect: () => { } },
             { name: "Capacete de Motoqueiro", source: '', description: 'já estou furioso... agora só falta ficar veloz', type: "capacete", effect: () => { } },
             { name: "Mascara de Caveira", source: '', description: '💀💀💀💀💀', type: "capacete", effect: () => { } },
             { name: "Chapéu Seletivo", source: '', description: 'Pegue eles Parry Hotter!', type: "capacete", effect: () => { } },
@@ -104,15 +126,19 @@ class inventory {
 
 
             ctx.drawImage(itemBox, this.listX, this.listY + y, this.listWidth, this.itemHeight);
+            let fontSz = 20;
             ctx.fillStyle = 'white';
-            ctx.font = '20px Pixeloid';
+            ctx.font = fontSz + 'px Pixeloid';
             ctx.textAlign = 'center';
             ctx.textBaseline = 'alphabetic';
             let image = new Image();
             image.src = this.items[itemIndex].sorce;
             ctx.drawImage(image, this.listX + 22, this.listY + y + this.itemHeight / 5, 80, 80)
-            ctx.fillText(this.items[itemIndex].name, this.listX + 250, this.listY + y + this.itemHeight / 3);
-            ctx.fillText(this.items[itemIndex].description, this.listX + 310, this.listY + y + this.itemHeight / 2);
+            ctx.fillText(this.items[itemIndex].name, this.listX + 300, this.listY + y + this.itemHeight / 3);
+            const description = wrapText(this.items[itemIndex].description,300)
+            for (let i = 0; i < description.length; i++) {
+                ctx.fillText(description[i], this.listX + 310, this.listY + y + (i * (fontSz * 1.2)) + this.itemHeight / 2);
+            }
 
 
             ctx.drawImage(menuInvTop, 930, 96.6, 500, 150)
@@ -152,6 +178,8 @@ class inventory {
             ctx.fillStyle = "rgb(255, 255, 255)";
             ctx.drawImage(menuInv, this.pos.x - 290, this.pos.y - 125, this.size.width + 580, this.size.height + 250); //antes
             this.drawItems(); //depois
+            
+            
 
         }
     }

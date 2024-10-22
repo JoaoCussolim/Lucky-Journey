@@ -123,7 +123,7 @@ let mageButton = new Button({
     size: { w: 200, h: 200 },
     originalSz: { w: 200, h: 200 },
     border: 5,
-    source: "./assets/mage/idle/forward.png",
+    source: "./assets/mage/menu/icon.png",
     effect: { w: 220, h: 220 },
     borderColor: 'rgba(237, 172, 74, 1)',
     backgroundColor: 'rgba(67, 93, 115, 1)'
@@ -132,20 +132,19 @@ let mageButton = new Button({
 
 let clericButton = new Button({
     txtType: false,
-    position: { x: 500, y: 300 },
+    position: { x: 550, y: 300 },
     size: { w: 200, h: 200 },
     originalSz: { w: 200, h: 200 },
     border: 5,
-    source: "./assets/mage/idle/forward.png",
+    source: "./assets/cleric/menu/forward.png",
     effect: { w: 220, h: 220 },
     borderColor: 'rgba(237, 172, 74, 1)',
     backgroundColor: 'rgba(67, 93, 115, 1)'
-
 });
 
 let ArqueiroButton = new Button({
     txtType: false,
-    position: { x: 900, y: 300 },
+    position: { x: 1050, y: 300 },
     size: { w: 200, h: 200 },
     originalSz: { w: 200, h: 200 },
     border: 5,
@@ -158,7 +157,7 @@ let ArqueiroButton = new Button({
 
 let GuerreiroButton = new Button({
     txtType: false,
-    position: { x: 1300, y: 300 },
+    position: { x: 1500, y: 300 },
     size: { w: 200, h: 200 },
     originalSz: { w: 200, h: 200 },
     border: 5,
@@ -166,6 +165,19 @@ let GuerreiroButton = new Button({
     effect: { w: 220, h: 220 },
     borderColor: 'rgba(237, 172, 74, 1)',
     backgroundColor: 'rgba(67, 93, 115, 1)'
+
+});
+
+let ConfirmButton = new Button({
+    txtType: true,
+    text: { writing: 'CONFIRM', size: 50, color: "black" },
+    position: { x: 1500, y: 350 },
+    size: { w: 300, h: 100 },
+    border: 5,
+    borderColor: 'rgba(237, 172, 74, 1)',
+    backgroundColor: 'rgba(67, 93, 115, 1)',
+    color: 'rgb(94, 120, 140)',
+    color2: 'rgb(84, 110, 130)'
 
 });
 

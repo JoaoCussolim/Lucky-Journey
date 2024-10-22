@@ -156,7 +156,7 @@ class Boss extends Enemy {
             height: this.image.height
         };
 
-        ctx.drawImage(this.image, (cropbox.position.x), (cropbox.position.y), cropbox.width, cropbox.height, worldToScreenX(this.center.x - this.width / 2 + this.width / 10), worldToScreenY(this.center.y - this.height / 2 + this.height / 10), this.width, this.height)
+        ctx.drawImage(this.image, (cropbox.position.x), (cropbox.position.y), cropbox.width, cropbox.height, worldToScreenX(this.center.x - this.width / 2 + this.width / 10), worldToScreenY(this.center.y - this.height / 2 + this.height / 10), this.width, this.height);
 
         //healthBar
         this.healthbar.update();
@@ -171,35 +171,35 @@ class Boss extends Enemy {
     update() {
         this.velocity.x = 0;
         this.velocity.y = 0;
-        this.checkAttack()
-        this.updateBoxes()
+        this.checkAttack();
+        this.updateBoxes();
         this.draw();
-        this.detectPlayer()
-        this.followPlayer()
+        this.detectPlayer();
+        this.followPlayer();
         this.updateFrames();
-        this.DestroyEnemies()
-        this.handleCollision()
+        this.DestroyEnemies();
+        this.handleCollision();
         this.healthbar.updateValues({ pos: { x: worldToScreenX(this.position.x - 110), y: worldToScreenY(this.position.y - 200) }, health: this.health });
     };
 }
 
-let kingGoblin = new Boss({
-    position: { x: 200, y: 200 },
-    dimensions: { width: 100, height: 100 },
-    source: './assets/enemies/kinggoblin/fullset.png',
-    frameRate: 4,
-    frameBuffer: 12,
-    scale: 0.5,
-    animations: {
-        Idle: {
-            source: "./assets/enemies/kinggoblin/fullset.png",
-            frameBuffer: 12,
-            frameRate: 4,
-            image: new Image()
-        },
-    }
-})
+// let kingGoblin = new Boss({
+//     position: { x: 200, y: 200 },
+//     dimensions: { width: 100, height: 100 },
+//     source: './assets/enemies/kinggoblin/fullset.png',
+//     frameRate: 4,
+//     frameBuffer: 12,
+//     scale: 0.5,
+//     animations: {
+//         Idle: {
+//             source: "./assets/enemies/kinggoblin/fullset.png",
+//             frameBuffer: 12,
+//             frameRate: 4,
+//             image: new Image()
+//         },
+//     }
+// })
 
-let activeAttacks = []
+let activeAttacks = [];
 
-enemies.push(kingGoblin)
+// enemies.push(kingGoblin)

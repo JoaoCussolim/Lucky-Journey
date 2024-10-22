@@ -1,9 +1,24 @@
 addEventListener("click", (e) => {
+    if(inCharacterSelect){
     if (mageButton.mouseOn) {
+        player = new Mage({ position: { x: 950, y: 600 }, dimensions: { width: 50, height: 50 }, name:'mago' });
+        inCharacterSelect = false;
         
     }
-
-    if(player.dead){
+    if (clericButton.mouseOn) {
+        player = new Cleric({ position: { x: 950, y: 600 }, dimensions: { width: 50, height: 50 }, name:'cleric' });
+        inCharacterSelect = false;
+    }
+    if (ArqueiroButton.mouseOn) {
+        player = new Archer({ position: { x: 950, y: 600 }, dimensions: { width: 50, height: 50 }, name:'arqu' });
+        inCharacterSelect = false;
+    }
+    if (GuerreiroButton.mouseOn) {
+        player = new Mage({ position: { x: 950, y: 600 }, dimensions: { width: 50, height: 50 }, name:'guerre' });
+        inCharacterSelect = false;
+    }
+    }else if(!inNameSelect){
+    if (player.dead) {
         location.reload();
     }
 
@@ -15,12 +30,22 @@ addEventListener("click", (e) => {
         controlsbtnClicked()
     }
 
+    
     if (!player.attackInCooldown && player.mana >= 10) {
+        if(player instanceof Mage){
         projectiles.push(new magePower({
             position: { x: screenToWorldX(player.position.x), y: screenToWorldY(player.position.y) },
             dimensions: { width: 100, height: 100 },
             velocity: { x: Math.cos(shootAngle) * 5, y: Math.sin(shootAngle) * 5 }
         }))
+    }else if(player instanceof Archer){
+        projectiles.push(new Arrow({
+            position: { x: screenToWorldX(player.position.x), y: screenToWorldY(player.position.y) },
+            dimensions: { width: 50, height: 50 },
+            velocity: { x: Math.cos(shootAngle) * 5, y: Math.sin(shootAngle) * 5 },
+            angle: shootAngle,
+        }))
+    }
 
         switch (player.direction) {
             case 'behind': player.switchSprite('AttackingBehind'); break;
@@ -42,7 +67,12 @@ addEventListener("click", (e) => {
         }
         actualDialogBox.updateDialog()
     }
-
+    }else{
+        if(ConfirmButton.mouseOn){
+            inNameSelect = false;
+            inCharacterSelect = true;
+        }
+    }
 })
 
 let isDragging = false;

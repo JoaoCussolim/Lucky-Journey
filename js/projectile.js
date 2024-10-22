@@ -93,3 +93,29 @@ class magePower extends Projectile{
         this.autoRemove();
     };
 }
+
+class Arrow extends Projectile{
+    constructor({ position = { x: 0, y: 0 }, dimensions = { width: 0, height: 0 }, velocity = { x: 0, y: 0 }, angle }){
+    super({ position, dimensions,velocity });
+    this.angle = angle
+    }
+
+    draw(){
+        ctx.save();
+        ctx.translate(this.position.x,this.position.y)
+        ctx.rotate(this.angle - Math.PI)
+
+        let image = new Image();
+        image.src = './assets/projectiles/arrow.png';
+        ctx.drawImage(image,0,0, this.dimensions.width, this.dimensions.height)
+        ctx.restore()
+    }
+
+    update() {
+        this.updateHitbox();
+        this.applyVelocity();
+        this.draw();
+        this.aim();
+        this.autoRemove();
+    };
+}

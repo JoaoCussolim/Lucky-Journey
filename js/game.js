@@ -5,11 +5,16 @@ background.src = "./assets/background.png"
 
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
+let Typename = false;
+let playerName;
 
 let backgroundPositions = {
     x: 0,
     y: 0
 };
+
+let inCharacterSelect = true;
+let inNameSelect = false;
 
 let backgroundVelocity = {
     x: 0,
@@ -18,7 +23,7 @@ let backgroundVelocity = {
 
 let backgroundLocked = false
 
-let started = true
+let started = true;
 let SPnum1 = new SpinningNumber({
     pos: { x: canvas.width / 2 - 205, y: canvas.height / 2 - 350 },
     finalValue: "P",
@@ -138,91 +143,97 @@ let game = (currentTime) => {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
     biome.draw();
+    if (!inCharacterSelect && !inNameSelect) {
 
-    if (player.inCombat) {
-        musicControl.changeMusic({ local: '', name: 'combat' })
-    } else {
-        musicControl.changeMusic({ local: CurrentMusicLocal, name: CurrentMusicName })
-    }
+        if (player.inCombat) {
+            musicControl.changeMusic({ local: '', name: 'combat' })
+        } else {
+            musicControl.changeMusic({ local: CurrentMusicLocal, name: CurrentMusicName })
+        }
 
-    getMouseAngle();
+        getMouseAngle();
 
-    for (let i = projectiles.length - 1; i >= 0; i--) {
-        projectile = projectiles[i];
-        projectile.update();
-        if (enemies.length > 0) {
-            let hittedEnemies = enemies.filter(enemy => {
-                return projectile.hitbox.position.x + projectile.hitbox.dimensions.width >= enemy.hitbox.position.x
-                    && projectile.hitbox.position.x <= enemy.hitbox.position.x + enemy.hitbox.dimensions.width
-                    && projectile.hitbox.position.y + projectile.hitbox.dimensions.height >= enemy.hitbox.position.y
-                    && projectile.hitbox.position.y <= enemy.hitbox.position.y + enemy.hitbox.dimensions.height
-            });
-            if (hittedEnemies.length > 0) {
-                for (let i = hittedEnemies.length - 1; i >= 0; i--) {
-                    hittedEnemies[i].receivingDamage(projectile.damage);
+        for (let i = projectiles.length - 1; i >= 0; i--) {
+            projectile = projectiles[i];
+            projectile.update();
+            if (enemies.length > 0) {
+                let hittedEnemies = enemies.filter(enemy => {
+                    return projectile.hitbox.position.x + projectile.hitbox.dimensions.width >= enemy.hitbox.position.x
+                        && projectile.hitbox.position.x <= enemy.hitbox.position.x + enemy.hitbox.dimensions.width
+                        && projectile.hitbox.position.y + projectile.hitbox.dimensions.height >= enemy.hitbox.position.y
+                        && projectile.hitbox.position.y <= enemy.hitbox.position.y + enemy.hitbox.dimensions.height
+                });
+                if (hittedEnemies.length > 0) {
+                    for (let i = hittedEnemies.length - 1; i >= 0; i--) {
+                        hittedEnemies[i].receivingDamage(projectile.damage);
+                    };
+                    player.combatMode();
                 };
-                player.combatMode();
             };
+            if (projectile.shouldRemove) projectiles.splice(i, 1);
         };
-        if (projectile.shouldRemove) projectiles.splice(i, 1);
-    };
 
-    for (let i = 0; i <= npcs.length - 1; i++) {
-        const npc = npcs[i]
-        npc.update()
+        for (let i = 0; i <= npcs.length - 1; i++) {
+            const npc = npcs[i];
+            npc.update();
 
-        const stwPlayerX = screenToWorldX(player.position.x);
-        const stwPlayerY = screenToWorldY(player.position.y);
-        const stwPlayerWidth = screenToWorldX(player.position.x + player.dimensions.width);
-        const stwPlayerHeight = screenToWorldY(player.position.y + player.dimensions.height);
+            const stwPlayerX = screenToWorldX(player.position.x);
+            const stwPlayerY = screenToWorldY(player.position.y);
+            const stwPlayerWidth = screenToWorldX(player.position.x + player.dimensions.width);
+            const stwPlayerHeight = screenToWorldY(player.position.y + player.dimensions.height);
 
-        const bonusSize = 30
+            const bonusSize = 30;
 
-        const wtsNpcX = worldToScreenX(npc.position.x + bonusSize);
-        const wtsNpcY = worldToScreenY(npc.position.y + bonusSize);
-        const wtsNpcWidth = worldToScreenX(npc.position.x + npc.dimensions.width + bonusSize);
-        const wtsNpcHeight = worldToScreenY(npc.position.y + npc.dimensions.height + bonusSize);
+            const wtsNpcX = worldToScreenX(npc.position.x + bonusSize);
+            const wtsNpcY = worldToScreenY(npc.position.y + bonusSize);
+            const wtsNpcWidth = worldToScreenX(npc.position.x + npc.dimensions.width + bonusSize);
+            const wtsNpcHeight = worldToScreenY(npc.position.y + npc.dimensions.height + bonusSize);
 
-        if (stwPlayerX < wtsNpcWidth &&
-            stwPlayerWidth > wtsNpcX &&
-            stwPlayerY < wtsNpcHeight &&
-            stwPlayerHeight > wtsNpcY) {
-            actualNpc = npc
+            if (stwPlayerX < wtsNpcWidth &&
+                stwPlayerWidth > wtsNpcX &&
+                stwPlayerY < wtsNpcHeight &&
+                stwPlayerHeight > wtsNpcY) {
+                actualNpc = npc
+            }
+        }
+
+
+        for (let i = enemies.length - 1; i >= 0; i--) {
+            enemy = enemies[i];
+            enemy.update();
+        };
+
+        player.update();
+
+        for (let i = activeAttacks.length - 1; i >= 0; i--) {
+            const attack = activeAttacks[i];
+            attack.update()
+        }
+
+        if (actualMission != '') {
+            actualMission.update()
+        }
+
+        if (dialogActive) actualDialogBox.draw()
+        if (canvasPromptActive) loadCanvasPrompt()
+        if (player.inventory.visible) player.inventory.draw()
+
+
+
+        generateNPC()
+
+        if (dice.doAction == true) {
+            dice.doAction = false;
+            makeEnemies(dice.numberDisplay)
         }
     }
-
-
-    for (let i = enemies.length - 1; i >= 0; i--) {
-        enemy = enemies[i];
-        enemy.update();
-    };
-
-    player.update();
-
-    for (let i = activeAttacks.length - 1; i >= 0; i--) {
-        const attack = activeAttacks[i];
-        attack.update()
-    }
-
-    if (actualMission != '') {
-        actualMission.update()
-    }
-
-    if (dialogActive) actualDialogBox.draw()
-    if (canvasPromptActive) loadCanvasPrompt()
-    if (player.inventory.visible) player.inventory.draw()
-
-
-    dice.update();
-    generateNPC()
-
-    if (dice.doAction == true) {
-        dice.doAction = false;
-        makeEnemies(dice.numberDisplay)
+    else if (inNameSelect) {
+        nameSelect();
+    } else {
+        characterSelection();
     }
 
 
-    // characterSelection();
 
     lastTime = currentTime;
     requestAnimationFrame(game);
