@@ -116,7 +116,6 @@ addEventListener('mouseup', () => {
 });
 
 
-// Handle mouse wheel scrolling
 addEventListener('wheel', (e) => {
     if (player.inventory.visible) {
         const scrollAmount = e.deltaY;

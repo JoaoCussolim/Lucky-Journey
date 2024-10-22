@@ -33,29 +33,27 @@ function wrapText(text, maxWidth) {
 }
 
 let itemsTodos = {
-    botaDeSlime: { name: "Bota de Slime", sorce: './assets/items/boots/slimeboot.png', description: 'uma bota feita de slimes', type: "botas", effect: () => { } },
+    botaDeSlime: { name: "Bota de Slime", source: './assets/items/boots/slimeboot.png', description: 'uma bota feita de slimes', type: "botas", effect: () => { } },
     BotaABencoada: { name: "Bota Abençoada", source: './assets/items/boots/blessedboots.png', description: 'Ai Meu Deus', type: "botas", effect: () => { } },
     Bota7leguas: { name: "Bota de sete léguas", source: './assets/items/boots/herculesboots.png', description: 'FUI EU BARRY!', type: "botas", effect: () => { } },
-    CalcaInvisivel: { name: "Calça Invisível", source: '', description: 'Tinha alguma coisa pra ver?', type: "calcas", effect: () => { } },
-    RaboGato: { name: "Rabo de gato", source: '', description: 'por onde isso entra?', type: "calcas", effect: () => { } },
-    CalçaMultiCor: { name: "Calça Multi-colorida", source: '', description: '🏳️‍🌈🤨❓', type: "calcas", effect: () => { } },
-    oculosNerd: { name: "Óculos de nerd", source: '', description: 'if(oculos_de_nerd){INT++}', type: "capacete", effect: () => { } },
-    CapaceteFutebol: { name: "Capacete de Futebol Americano", source: '', description: 'Meu lema é: FORÇA, FORÇA, BURRO', type: "capacete", effect: () => { } },
-    CapaceteMotoqueiro: { name: "Capacete de Motoqueiro", source: '', description: 'já estou furioso... agora só falta ficar veloz', type: "capacete", effect: () => { } },
-    MascaraCaveira: { name: "Mascara de Caveira", source: '', description: '💀💀💀💀💀', type: "capacete", effect: () => { } },
-    ChapeuSeletivo: { name: "Chapéu Seletivo", source: '', description: 'Pegue eles Parry Hotter!', type: "capacete", effect: () => { } },
-    CamisaForca: { name: "Camisa de Força", source: '', description: '', type: "peitoral", effect: () => { } },
-    PeitoralDiamante: { name: "Peitoral de Diamante", source: '', description: 'Quadradamente Familiar...', type: "peitoral", effect: () => { } },
-    MaquinaCostura: { name: "Máquina de Costura", source: '', description: 'Quê?', type: "peitoral", effect: () => { } },
-    EspadaFerro: { name: "Espada de Ferro", source: '', description: '', type: "espada", effect: () => { } },
-    EspadaFogo: { name: "Espada de Fogo", source: '', description: '', type: "espada", effect: () => { } },
-    LaminaBarbear: { name: "Lâmina de Barbear", source: '', description: 'Corta não só sua barba😨', type: "espada", effect: () => { } },
-    LaminaBarbear: { name: "Lâmina de Barbear", source: '', description: 'Corta não só sua barba😨', type: "espada", effect: () => { } },
-    Guardachuva: { name: "Guarda chuva", source: '', description: 'Nem chove nesse jogo...', type: "espada", effect: () => { } },
-    Escalibur: { name: "Iskalibur", source: '', description: 'Acho que não era assim que usava não', type: "escudo", effect: () => { } },
-    TampaGigante: { name: "Tampa de Panela Gigante", source: '', description: 'Voce pega e PAAA nela', type: "escudo", effect: () => { } },
-    EscudoMadeira: { name: "Escudo de Madeira", source: '', description: 'Cadê a criatividade?', type: "escudo", effect: () => { } },
-    EscudoFerro: { name: "Escudo de Ferro", source: '', description: 'É tipo madeira, só que mais dura', type: "escudo", effect: () => { } },
+    CalcaInvisivel: { name: "Calça Invisível", source: './assets/items/pants/pantTransparent.png', description: 'Tinha alguma coisa pra ver?', type: "calcas", effect: () => { } },
+    RaboGato: { name: "Rabo de gato", source: './assets/items/pants/cat.png', description: 'por onde isso entra?', type: "calcas", effect: () => { } },
+    CalçaMultiCor: { name: "Calça Multi-colorida", source: './assets/items/pants/pantGay.png', description: '🏳️‍🌈🤨❓', type: "calcas", effect: () => { } },
+    oculosNerd: { name: "Óculos de nerd", source: './assets/items/helmets/glasses.png', description: 'if(oculos_de_nerd){ INT++ }', type: "capacete", effect: () => { } },
+    CapaceteFutebol: { name: "Capacete de Futebol", source: './assets/items/helmets/helmet.png', description: 'Meu lema é: FORÇA, FORÇA, BURRO', type: "capacete", effect: () => { } },
+    CapaceteMotoqueiro: { name: "Capacete de Motoqueiro", source: './assets/items/helmets/helmet2.png', description: 'já estou furioso... agora só falta ficar veloz', type: "capacete", effect: () => { } },
+    MascaraCaveira: { name: "Mascara de Caveira", source: './assets/items/helmets/skull.png', description: '💀💀💀💀💀', type: "capacete", effect: () => { } },
+    CamisaForca: { name: "Camisa de Força", source: './assets/items/chestplates/camisaDeForca.png', description: 'Louco? Eu já fui louco uma vez...', type: "peitoral", effect: () => { } },
+    PeitoralDiamante: { name: "Peitoral de Diamante", source: './assets/items/chestplates/diamondChestplate.png', description: 'Quadradamente Familiar...', type: "peitoral", effect: () => { } },
+    MaquinaCostura: { name: "Máquina de Costura", source: './assets/items/chestplates/seewingMachine.png', description: 'Quê?', type: "peitoral", effect: () => { } },
+    EspadaFerro: { name: "Espada de Ferro", source: './assets/items/swords/sword.png', description: '', type: "espada", size: {x: 40, y: 90}, space: 40, effect: () => { } },
+    EspadaFogo: { name: "Espada de Fogo", source: './assets/items/swords/firesword.png', description: '', type: "espada", size: {x: 40, y: 90}, space: 40, effect: () => { } },
+    LaminaBarbear: { name: "Lâmina de Barbear", source: './assets/items/swords/barbear.png', description: 'Corta não só sua barba😨', type: "espada", size: {x: 19, y: 90}, space: 50, effect: () => { } },
+    Guardachuva: { name: "Guarda chuva", source: './assets/items/swords/umbrella.png', description: 'Nem chove nesse jogo...', type: "espada", effect: () => { } },
+    Escalibur: { name: "Iskalibur", source: './assets/items/shields/iskalibur.png', description: 'Acho que não era assim que usava não', type: "escudo", size: {x: 40, y: 90}, space: 40, effect: () => { } },
+    TampaGigante: { name: "Tampa de Panela Gigante", source: './assets/items/shields/tampadepanela.png', description: 'Voce pega e PAAA nela', type: "escudo", effect: () => { } },
+    EscudoMadeira: { name: "Escudo de Madeira", source: './assets/items/shields/woodshield.png', description: 'Cadê a criatividade?', type: "escudo", effect: () => { } },
+    EscudoFerro: { name: "Escudo de Ferro", source: './assets/items/shields/ironshield.png', description: 'É tipo madeira, só que mais dura', type: "escudo", effect: () => { } },
 }
 
 let itemBox = new Image()
@@ -75,29 +73,27 @@ class inventory {
         this.size = { width: 1000, height: 750 };
         this.visible = false;
         this.items = [
-            { name: "Bota de Slime", sorce: './assets/items/boots/slimeboot.png', description: 'uma bota feita de slimes', type: "botas", effect: () => { } },
+            { name: "Bota de Slime", source: './assets/items/boots/slimeboot.png', description: 'uma bota feita de slimes', type: "botas", effect: () => { } },
             { name: "Bota Abençoada", source: './assets/items/boots/herculesboot.png', description: 'Ai Meu Deus', type: "botas", effect: () => { } },
             { name: "Bota de sete léguas", source: './assets/items/boots/blessedboots.png', description: 'FUI EU BARRY!', type: "botas", effect: () => { } },
-            { name: "Calça Invisível", source: '', description: 'Tinha alguma coisa pra ver?', type: "calcas", effect: () => { } },
-            { name: "Rabo de gato", source: '', description: 'por onde isso entra?', type: "calcas", effect: () => { } },
-            { name: "Calça Multi-colorida", source: '', description: '🏳️‍🌈🤨❓', type: "calcas", effect: () => { } },
-            { name: "Óculos de nerd", source: '', description: 'if(oculos_de_nerd) {INT++}', type: "capacete", effect: () => { } },
-            { name: "Capacete de Futebol", source: '', description: 'Meu lema é: FORÇA, FORÇA, BURRO', type: "capacete", effect: () => { } },
-            { name: "Capacete de Motoqueiro", source: '', description: 'já estou furioso... agora só falta ficar veloz', type: "capacete", effect: () => { } },
-            { name: "Mascara de Caveira", source: '', description: '💀💀💀💀💀', type: "capacete", effect: () => { } },
-            { name: "Chapéu Seletivo", source: '', description: 'Pegue eles Parry Hotter!', type: "capacete", effect: () => { } },
-            { name: "Camisa de Força", source: '', description: '', type: "peitoral", effect: () => { } },
-            { name: "Peitoral de Diamante", source: '', description: 'Quadradamente Familiar...', type: "peitoral", effect: () => { } },
-            { name: "Máquina de Costura", source: '', description: 'Quê?', type: "peitoral", effect: () => { } },
-            { name: "Espada de Ferro", source: '', description: '', type: "espada", effect: () => { } },
-            { name: "Espada de Fogo", source: '', description: '', type: "espada", effect: () => { } },
-            { name: "Lâmina de Barbear", source: '', description: 'Corta não só sua barba😨', type: "espada", effect: () => { } },
-            { name: "Lâmina de Barbear", source: '', description: 'Corta não só sua barba😨', type: "espada", effect: () => { } },
-            { name: "Guarda chuva", source: '', description: 'Nem chove nesse jogo...', type: "espada", effect: () => { } },
-            { name: "Iskalibur", source: '', description: 'Acho que não era assim que usava não', type: "escudo", effect: () => { } },
-            { name: "Tampa de Panela Gigante", source: '', description: 'Voce pega e PAAA nela', type: "escudo", effect: () => { } },
-            { name: "Escudo de Madeira", source: '', description: 'Cadê a criatividade?', type: "escudo", effect: () => { } },
-            { name: "Escudo de Ferro", source: '', description: 'É tipo madeira, só que mais dura', type: "escudo", effect: () => { } },
+            { name: "Calça Invisível", source: './assets/items/pants/pantTransparent.png', description: 'Tinha alguma coisa pra ver?', type: "calcas", effect: () => { } },
+            { name: "Rabo de gato", source: './assets/items/pants/cat.png', description: 'por onde isso entra?', type: "calcas", effect: () => { } },
+            { name: "Calça Multi-colorida", source: './assets/items/pants/pantGay.png', description: '🏳️‍🌈🤨❓', type: "calcas", effect: () => { } },
+            { name: "Óculos de nerd", source: './assets/items/helmets/glasses.png', description: 'if(oculos_de_nerd){ INT++ }', type: "capacete", effect: () => { } },
+            { name: "Capacete de Futebol", source: './assets/items/helmets/helmet.png', description: 'Meu lema é: FORÇA, FORÇA, BURRO', type: "capacete", effect: () => { } },
+            { name: "Capacete de Motoqueiro", source: './assets/items/helmets/helmet2.png', description: 'já estou furioso... agora só falta ficar veloz', type: "capacete", effect: () => { } },
+            { name: "Mascara de Caveira", source: './assets/items/helmets/skull.png', description: '💀💀💀💀💀', type: "capacete", effect: () => { } },
+            { name: "Camisa de Força", source: './assets/items/chestplates/camisaDeForca.png', description: 'Louco? Eu já fui louco uma vez...', type: "peitoral", effect: () => { } },
+            { name: "Peitoral de Diamante", source: './assets/items/chestplates/diamondChestplate.png', description: 'Quadradamente Familiar...', type: "peitoral", effect: () => { } },
+            { name: "Máquina de Costura", source: './assets/items/chestplates/seewingMachine.png', description: 'Quê?', type: "peitoral", effect: () => { } },
+            { name: "Espada de Ferro", source: './assets/items/swords/sword.png', description: '', type: "espada", size: {x: 40, y: 90}, space: 40, effect: () => { } },
+            { name: "Espada de Fogo", source: './assets/items/swords/firesword.png', description: '', type: "espada", size: {x: 40, y: 90}, space: 40, effect: () => { } },
+            { name: "Lâmina de Barbear", source: './assets/items/swords/barbear.png', description: 'Corta não só sua barba😨', type: "espada", size: {x: 19, y: 90}, space: 50, effect: () => { } },
+            { name: "Guarda chuva", source: './assets/items/swords/umbrella.png', description: 'Nem chove nesse jogo...', type: "espada", effect: () => { } },
+            { name: "Iskalibur", source: './assets/items/shields/iskalibur.png', description: 'Acho que não era assim que usava não', type: "escudo", size: {x: 40, y: 90}, space: 40, effect: () => { } },
+            { name: "Tampa de Panela Gigante", source: './assets/items/shields/tampadepanela.png', description: 'Voce pega e PAAA nela', type: "escudo", effect: () => { } },
+            { name: "Escudo de Madeira", source: './assets/items/shields/woodshield.png', description: 'Cadê a criatividade?', type: "escudo", effect: () => { } },
+            { name: "Escudo de Ferro", source: './assets/items/shields/ironshield.png', description: 'É tipo madeira, só que mais dura', type: "escudo", effect: () => { } },
         ]
 
         this.totalItems = this.items.length;
@@ -132,10 +128,13 @@ class inventory {
             ctx.textAlign = 'center';
             ctx.textBaseline = 'alphabetic';
             let image = new Image();
-            image.src = this.items[itemIndex].sorce;
-            ctx.drawImage(image, this.listX + 22, this.listY + y + this.itemHeight / 5, 80, 80)
-            ctx.fillText(this.items[itemIndex].name, this.listX + 300, this.listY + y + this.itemHeight / 3);
-            const description = wrapText(this.items[itemIndex].description,300)
+            const item = this.items[itemIndex]
+            const size = item.size  || {x: 80, y: 80 };
+            const itemSpace = item.space || 22 
+            image.src = item.source;
+            ctx.drawImage(image, this.listX + itemSpace, this.listY + y + this.itemHeight / 5, size.x, size.y)
+            ctx.fillText(item.name, this.listX + 300, this.listY + y + this.itemHeight / 3);
+            const description = wrapText(item.description,300)
             for (let i = 0; i < description.length; i++) {
                 ctx.fillText(description[i], this.listX + 310, this.listY + y + (i * (fontSz * 1.2)) + this.itemHeight / 2);
             }
