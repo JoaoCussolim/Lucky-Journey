@@ -21,13 +21,14 @@ class bossAttack extends AnimatedSprite {
         ctx.drawImage(this.image, cropbox.position.x, cropbox.position.y, cropbox.width, cropbox.height, worldToScreenX(this.position.x - this.width / 2 + this.width / 10), worldToScreenY(this.position.y - this.height / 2 + this.height / 10), this.width, this.height)
     }
 
-
     update() {
         this.draw()
         this.updateFrames()
     }
 
 }
+
+let activeAttacks = [];
 
 class Boss extends Enemy {
     constructor({ position = { x: 0, y: 0 }, dimensions = { width: 0, height: 0 }, source, frameRate = 1, frameBuffer = 3, scale = 1, animations = {} }) {
@@ -182,24 +183,3 @@ class Boss extends Enemy {
         this.healthbar.updateValues({ pos: { x: worldToScreenX(this.position.x - 110), y: worldToScreenY(this.position.y - 200) }, health: this.health });
     };
 }
-
-// let kingGoblin = new Boss({
-//     position: { x: 200, y: 200 },
-//     dimensions: { width: 100, height: 100 },
-//     source: './assets/enemies/kinggoblin/fullset.png',
-//     frameRate: 4,
-//     frameBuffer: 12,
-//     scale: 0.5,
-//     animations: {
-//         Idle: {
-//             source: "./assets/enemies/kinggoblin/fullset.png",
-//             frameBuffer: 12,
-//             frameRate: 4,
-//             image: new Image()
-//         },
-//     }
-// })
-
-let activeAttacks = [];
-
-// enemies.push(kingGoblin)
