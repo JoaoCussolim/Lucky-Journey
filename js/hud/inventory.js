@@ -202,7 +202,9 @@ class inventory {
     drawPlayerImage() {
         const playerImage = new Image()
         playerImage.src = player.animations['IdleForward'].source
-        ctx.drawImage(playerImage, this.pos.x - 85, this.pos.y - 15, 700, 700);
+        if(player instanceof Mage){
+            ctx.drawImage(playerImage, this.pos.x + 30, this.pos.y - 15, 700, 700);
+        }else ctx.drawImage(playerImage, this.pos.x - 85, this.pos.y - 15, 700, 700);
     }
 
     drawItemBuffs() {

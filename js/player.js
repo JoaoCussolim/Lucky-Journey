@@ -107,6 +107,7 @@ class Player extends AnimatedSprite {
     death() {
         if (this.dead) {
             deathScreen();
+            newItemAdded = false;
         }
     }
 
@@ -884,11 +885,34 @@ class Warrior extends Player {
             cropbox.position.y,
             cropbox.width,
             cropbox.height,
-            screenToWorldX(this.position.x - this.width / 2 + this.width / 3),
+            screenToWorldX(this.position.x - this.width / 2 + this.width / 5),
             screenToWorldY(this.position.y - this.height / 2 + this.height / 5),
             this.width,
             this.height
         );
+    }
+
+    updateBoxes() {
+        this.hitbox = {
+            position: {
+                x: screenToWorldX(this.center.x - 20),
+                y: screenToWorldY(this.center.y - 20),
+            },
+            dimensions: {
+                width: this.dimensions.width + 20 * 2,
+                height: this.dimensions.height + 20 * 2,
+            }
+        };
+        this.attackbox = {
+            position: {
+                x: screenToWorldX(this.center.x - 50),
+                y: screenToWorldY(this.center.y - 50),
+            },
+            dimensions: {
+                width: this.dimensions.width + 50 * 2,
+                height: this.dimensions.height + 50 * 2,
+            }
+        }
     }
 
     attackCooldown() {

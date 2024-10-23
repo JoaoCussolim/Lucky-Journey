@@ -120,6 +120,7 @@ let menu = (currentTime) => {
 
     ctx.imageSmoothingEnabled = false;
     ctx.textAlign = 'center';
+    
 
 
 
@@ -131,6 +132,8 @@ let menu = (currentTime) => {
 
     let frame = requestAnimationFrame(menu);
     if (started) {
+        CurrentMusicLocal = 'grass';
+        CurrentMusicName = 'Lucky Pixels';
         cancelAnimationFrame(frame);
         requestAnimationFrame(game);
     }

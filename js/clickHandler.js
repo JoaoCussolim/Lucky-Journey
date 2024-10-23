@@ -181,6 +181,7 @@ let mousePos = { x: 0, y: 0 }
 addEventListener('mousemove', (e) => {
     mousePos.x = e.clientX;
     mousePos.y = e.clientY;
+    musicControl.playMusic()
 
     if (isDragging) {
         const deltaY = mousePos.y - startY;

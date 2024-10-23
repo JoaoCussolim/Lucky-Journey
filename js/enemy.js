@@ -54,16 +54,15 @@ class Enemy extends AnimatedSprite {
         } else if (this.colliding.up || this.colliding.down) {
             this.velocity.y = 0;
         } else if (!this.colliding.up && !this.colliding.down && !this.colliding.right && !this.colliding.left) {
-            this.position.x += this.velocity.x - player.velocity.x * 1.5 * deltaTime_Mult;
-            this.position.y += this.velocity.y - player.velocity.y * 1.5 * deltaTime_Mult;
-
             if (player.colliding.left || player.colliding.right) {
                 this.position.x += this.velocity.x;
-            }
+            }else this.position.x += this.velocity.x - player.velocity.x * 1.5 * deltaTime_Mult;
 
             if (player.colliding.up || player.colliding.down) {
                 this.position.y += this.velocity.y;
-            }
+            }else this.position.y += this.velocity.y - player.velocity.y * 1.5 * deltaTime_Mult;
+            
+
         }
     }
 
