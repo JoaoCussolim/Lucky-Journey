@@ -189,3 +189,30 @@ class Raio extends Projectile{
         this.updateFrames();
     };
 }
+
+class Swing extends Projectile{
+    constructor({ position = { x: 0, y: 0 }, dimensions = { width: 0, height: 0 }, velocity = { x: 0, y: 0 } }){
+    super({ position, dimensions,velocity });
+    }
+
+    draw(){
+        // ctx.fillStyle = 'yellow';
+        // ctx.fillRect(this.hitbox.position.x, this.hitbox.position.y, this.hitbox.dimensions.width, this.hitbox.dimensions.height);
+    }
+    autoRemove() {
+        if (!this.shouldRemove) {
+            setTimeout(() => {
+                this.shouldRemove = true;
+            }, 1000);
+        };
+    };
+
+    update() {
+        this.updateHitbox();
+        this.applyVelocity();
+        this.draw();
+        this.aim();
+        this.autoRemove();
+    };
+
+}

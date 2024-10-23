@@ -31,6 +31,8 @@ class Player extends AnimatedSprite {
         this.attackInCooldown = false;
         this.inCombat = false;
         this.name = name;
+        this.baseDamage = 10;
+        this.resistence = 1;
 
         this.inventory = new inventory()
         this.health = 100;
@@ -70,7 +72,7 @@ class Player extends AnimatedSprite {
 
 
     receivingDamage(damage) {
-        this.health -= damage;
+        this.health -= damage * this.resistence;
         if (this.health <= 0) {
             this.health = 0;
             this.dead = true;
@@ -801,28 +803,28 @@ class Warrior extends Player {
         AttackingForward: {
             source: './assets/warrior/attacking/forward.png',
             frameBuffer: 10,
-            frameRate: 5,
+            frameRate: 4,
             image: new Image()
         },
 
         AttackingSide: {
             source: './assets/warrior/attacking/side.png',
             frameBuffer: 10,
-            frameRate: 5,
+            frameRate: 4,
             image: new Image()
         },
 
         AttackingSideLeft: {
             source: './assets/warrior/attacking/sideLeft.png',
             frameBuffer: 10,
-            frameRate: 5,
+            frameRate: 4,
             image: new Image()
         },
 
         AttackingBehind: {
             source: './assets/warrior/attacking/behind.png',
             frameBuffer: 10,
-            frameRate: 5,
+            frameRate: 6,
             image: new Image()
         },
 
@@ -848,8 +850,6 @@ class Warrior extends Player {
         ctx.textAlign ='center'
         ctx.font ="20px Pixeloid"
         ctx.fillText(this.name,250,65)
-
-        
     }
 
     draw() {
@@ -893,7 +893,7 @@ class Warrior extends Player {
     attackCooldown() {
         setTimeout(() => {
             this.attackInCooldown = false;
-        }, 2000);
+        }, 4000);
         setTimeout(() => {
             this.attacking = false
             switch (player.direction) {
@@ -922,29 +922,30 @@ class Warrior extends Player {
 
 
 let player;
+let playerSpeedBuff;
 
 let acceptedKeys = {
     ArrowUp(player) {
         player.velocity.x = 0;
-        player.velocity.y = -5 * deltaTime_Mult;
+        player.velocity.y = -5 * deltaTime_Mult * playerSpeedBuff;
         if (!player.attacking) player.switchSprite('WalkingBehind')
         player.direction = 'behind'
     },
     ArrowDown(player) {
         player.velocity.x = 0;
-        player.velocity.y = 5 * deltaTime_Mult;
+        player.velocity.y = 5 * deltaTime_Mult * playerSpeedBuff;
         if (!player.attacking) player.switchSprite('WalkingForward')
         player.direction = 'forward'
     },
     ArrowLeft(player) {
         player.velocity.y = 0;
-        player.velocity.x = -5 * deltaTime_Mult;
+        player.velocity.x = -5 * deltaTime_Mult * playerSpeedBuff;
         if (!player.attacking) player.switchSprite('WalkingSide')
         player.direction = 'side'
     },
     ArrowRight(player) {
         player.velocity.y = 0;
-        player.velocity.x = 5 * deltaTime_Mult;
+        player.velocity.x = 5 * deltaTime_Mult * playerSpeedBuff;
         if (!player.attacking) player.switchSprite('WalkingSideLeft')
         player.direction = 'sideLeft'
     }

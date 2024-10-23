@@ -37,23 +37,8 @@ addEventListener("click", (e) => {
                     position: { x: screenToWorldX(player.position.x), y: screenToWorldY(player.position.y) },
                     dimensions: { width: 100, height: 100 },
                     velocity: { x: Math.cos(shootAngle) * 5, y: Math.sin(shootAngle) * 5 },
-                    damage: 10
+                    damage: player.baseDamage
                 }))
-                // }else if(player instanceof Archer){
-                //     projectiles.push(new Arrow({
-                //         position: { x: screenToWorldX(player.position.x), y: screenToWorldY(player.position.y) },
-                //         dimensions: { width: 50, height: 50 },
-                //         velocity: { x: Math.cos(shootAngle) * 5, y: Math.sin(shootAngle) * 5 },
-                //         angle: shootAngle,
-                //     }))
-                // }
-                // else if(player instanceof Cleric){
-                //     projectiles.push(new Raio({
-                //         position: { x: e.clientX - 150, y: e.clientY - 130},
-                //         dimensions: { width: 50, height: 50 },
-                //         velocity: { x: 0, y: 0 },
-                //     }))
-                // }
 
                 switch (player.direction) {
                     case 'behind': player.switchSprite('AttackingBehind'); break;
@@ -76,7 +61,7 @@ addEventListener("click", (e) => {
                     dimensions: { width: 50, height: 50 },
                     velocity: { x: Math.cos(shootAngle) * 5, y: Math.sin(shootAngle) * 5 },
                     angle: shootAngle,
-                    damage: 5,
+                    damage: player.baseDamage/2,
                 }))
 
                 switch (player.direction) {
@@ -99,7 +84,7 @@ addEventListener("click", (e) => {
                     position: { x: e.clientX - 150, y: e.clientY - 130 },
                     dimensions: { width: 50, height: 50 },
                     velocity: { x: 0, y: 0 },
-                    damage: 1
+                    damage: player.baseDamage / 10
                 }))
 
                 switch (player.direction) {
@@ -116,7 +101,27 @@ addEventListener("click", (e) => {
             }
         }
         else if (player instanceof Warrior) {
+            if (!player.attackInCooldown && player.mana >= 5) {
 
+                projectiles.push(new Swing({
+                    position: { x: screenToWorldX(player.position.x), y: screenToWorldY(player.position.y) },
+                    dimensions: { width: 50, height: 50 },
+                    velocity: { x: 0, y: 0 },
+                    damage: player.baseDamage * 2,
+                }))
+
+                switch (player.direction) {
+                    case 'behind': player.switchSprite('AttackingBehind'); break;
+                    case 'forward': player.switchSprite('AttackingForward'); break;
+                    case 'side': player.switchSprite('AttackingSide'); break;
+                    case 'sideLeft': player.switchSprite('AttackingSideLeft'); break;
+                }
+
+                player.attacking = true;
+                player.attackInCooldown = true;
+                player.attackCooldown()
+                player.mana -= 5;
+            }
         }
 
         if (dialogActive) {
@@ -140,6 +145,7 @@ let startY;
 let startScrollY;
 
 addEventListener('mousedown', (e) => {
+    if(!inNameSelect && !inCharacterSelect){
     if (player.inventory.visible) {
         const scrollbarWidth = 20;
         const scrollbarHeight = Math.max(player.inventory.listHeight / (player.inventory.itemHeight * player.inventory.totalItems) * player.inventory.listHeight, 30); // Minimum height of the scrollbar
@@ -157,9 +163,10 @@ addEventListener('mousedown', (e) => {
         const playerEquipItemIndex = player.inventory.getHoveredItemIndex();
         const playerItem = player.inventory.items[playerEquipItemIndex];
         if (playerItem != null) {
-            equipItemType[playerItem.type](playerItem)
+            equipItemType[playerItem.type](playerItem);
         }
     }
+}
 });
 
 let mousePos = { x: 0, y: 0 }

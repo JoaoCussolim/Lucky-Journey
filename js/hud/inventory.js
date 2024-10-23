@@ -33,27 +33,27 @@ function wrapText(text, maxWidth) {
 }
 
 let itemsTodos = {
-    botaDeSlime: { name: "Bota de Slime", source: './assets/items/boots/slimeboot.png', description: 'uma bota feita de slimes', type: "botas", effect: () => { } },
-    BotaABencoada: { name: "Bota Abençoada", source: './assets/items/boots/blessedboots.png', description: 'Ai Meu Deus', type: "botas", effect: () => { } },
-    Bota7leguas: { name: "Bota de sete léguas", source: './assets/items/boots/herculesboots.png', description: 'FUI EU BARRY!', type: "botas", effect: () => { } },
+    botaDeSlime: { name: "Bota de Slime", source: './assets/items/boots/slimeboot.png', description: 'uma bota feita de slimes', type: "botas", effect: (colocando) => { } },
+    BotaABencoada: { name: "Bota Abençoada", source: './assets/items/boots/blessedboots.png', description: 'Ai Meu Deus', type: "botas", effect: (colocando) => { } },
+    Bota7leguas: { name: "Bota de sete léguas", source: './assets/items/boots/herculesboots.png', description: 'FUI EU BARRY!', type: "botas", effect: (colocando) => { } },
     CalcaInvisivel: { name: "Calça Invisível", source: './assets/items/pants/pantTransparent.png', description: 'Tinha alguma coisa pra ver?', type: "calcas", effect: () => { } },
-    RaboGato: { name: "Rabo de gato", source: './assets/items/pants/cat.png', description: 'por onde isso entra?', type: "calcas", effect: () => { } },
-    CalçaMultiCor: { name: "Calça Multi-colorida", source: './assets/items/pants/pantGay.png', description: '🏳️‍🌈🤨❓', type: "calcas", effect: () => { } },
-    oculosNerd: { name: "Óculos de nerd", source: './assets/items/helmets/glasses.png', description: 'if(oculos_de_nerd){ INT++ }', type: "capacete", effect: () => { } },
-    CapaceteFutebol: { name: "Capacete de Futebol", source: './assets/items/helmets/helmet.png', description: 'Meu lema é: FORÇA, FORÇA, BURRO', type: "capacete", effect: () => { } },
+    RaboGato: { name: "Rabo de gato", source: './assets/items/pants/cat.png', description: 'por onde isso entra?', type: "calcas", effect: (colocando) => { } },
+    CalçaMultiCor: { name: "Calça Multi-colorida", source: './assets/items/pants/pantGay.png', description: '🏳️‍🌈🤨❓', type: "calcas", effect: (colocando) => { } },
+    oculosNerd: { name: "Óculos de nerd", source: './assets/items/helmets/glasses.png', description: 'if(oculos_de_nerd){ INT++ }', type: "capacete", effect: (colocando) => { } },
+    CapaceteFutebol: { name: "Capacete de Futebol", source: './assets/items/helmets/helmet.png', description: 'Meu lema é: FORÇA, FORÇA, BURRO', type: "capacete", effect: (colocando) => { } },
     CapaceteMotoqueiro: { name: "Capacete de Motoqueiro", source: './assets/items/helmets/helmet2.png', description: 'já estou furioso... agora só falta ficar veloz', type: "capacete", effect: () => { } },
-    MascaraCaveira: { name: "Mascara de Caveira", source: './assets/items/helmets/skull.png', description: '💀💀💀💀💀', type: "capacete", effect: () => { } },
-    CamisaForca: { name: "Camisa de Força", source: './assets/items/chestplates/camisaDeForca.png', description: 'Louco? Eu já fui louco uma vez...', type: "peitoral", effect: () => { } },
-    PeitoralDiamante: { name: "Peitoral de Diamante", source: './assets/items/chestplates/diamondChestplate.png', description: 'Quadradamente Familiar...', type: "peitoral", effect: () => { } },
-    MaquinaCostura: { name: "Máquina de Costura", source: './assets/items/chestplates/seewingMachine.png', description: 'Quê?', type: "peitoral", effect: () => { } },
-    EspadaFerro: { name: "Espada de Ferro", source: './assets/items/swords/sword.png', description: '', type: "espada", size: { x: 40, y: 90 }, space: 40, effect: () => { } },
-    EspadaFogo: { name: "Espada de Fogo", source: './assets/items/swords/firesword.png', description: '', type: "espada", size: { x: 40, y: 90 }, space: 40, effect: () => { } },
-    LaminaBarbear: { name: "Lâmina de Barbear", source: './assets/items/swords/barbear.png', description: 'Corta não só sua barba😨', type: "espada", size: { x: 19, y: 90 }, space: 50, effect: () => { } },
-    Guardachuva: { name: "Guarda chuva", source: './assets/items/swords/umbrella.png', description: 'Nem chove nesse jogo...', type: "espada", effect: () => { } },
-    Escalibur: { name: "Iskalibur", source: './assets/items/shields/iskalibur.png', description: 'Acho que não era assim que usava não', type: "escudo", size: { x: 40, y: 90 }, space: 40, effect: () => { } },
-    TampaGigante: { name: "Tampa de Panela Gigante", source: './assets/items/shields/tampadepanela.png', description: 'Voce pega e PAAA nela', type: "escudo", effect: () => { } },
-    EscudoMadeira: { name: "Escudo de Madeira", source: './assets/items/shields/woodshield.png', description: 'Cadê a criatividade?', type: "escudo", effect: () => { } },
-    EscudoFerro: { name: "Escudo de Ferro", source: './assets/items/shields/ironshield.png', description: 'É tipo madeira, só que mais dura', type: "escudo", effect: () => { } },
+    MascaraCaveira: { name: "Mascara de Caveira", source: './assets/items/helmets/skull.png', description: '💀💀💀💀💀', type: "capacete", effect: (colocando) => { } },
+    CamisaForca: { name: "Camisa de Força", source: './assets/items/chestplates/camisaDeForca.png', description: 'Louco? Eu já fui louco uma vez...', type: "peitoral", effect: (colocando) => { } },
+    PeitoralDiamante: { name: "Peitoral de Diamante", source: './assets/items/chestplates/diamondChestplate.png', description: 'Quadradamente Familiar...', type: "peitoral", effect: (colocando) => { } },
+    MaquinaCostura: { name: "Máquina de Costura", source: './assets/items/chestplates/seewingMachine.png', description: 'Quê?', type: "peitoral", effect: (colocando) => { } },
+    EspadaFerro: { name: "Espada de Ferro", source: './assets/items/swords/sword.png', description: '', type: "espada", size: { x: 40, y: 90 }, space: 40, effect: (colocando) => { } },
+    EspadaFogo: { name: "Espada de Fogo", source: './assets/items/swords/firesword.png', description: '', type: "espada", size: { x: 40, y: 90 }, space: 40, effect: (colocando) => { } },
+    LaminaBarbear: { name: "Lâmina de Barbear", source: './assets/items/swords/barbear.png', description: 'Corta não só sua barba😨', type: "espada", size: { x: 19, y: 90 }, space: 50, effect: (colocando) => { } },
+    Guardachuva: { name: "Guarda chuva", source: './assets/items/swords/umbrella.png', description: 'Nem chove nesse jogo...', type: "espada", effect: (colocando) => { } },
+    Escalibur: { name: "Iskalibur", source: './assets/items/shields/iskalibur.png', description: 'Acho que não era assim que usava não', type: "escudo", size: { x: 40, y: 90 }, space: 40, effect: (colocando) => { } },
+    TampaGigante: { name: "Tampa de Panela Gigante", source: './assets/items/shields/tampadepanela.png', description: 'Voce pega e PAAA nela', type: "escudo", effect: (colocando) => { } },
+    EscudoMadeira: { name: "Escudo de Madeira", source: './assets/items/shields/woodshield.png', description: 'Cadê a criatividade?', type: "escudo", effect: (colocando) => { } },
+    EscudoFerro: { name: "Escudo de Ferro", source: './assets/items/shields/ironshield.png', description: 'É tipo madeira, só que mais dura', type: "escudo", effect: (colocando) => { } },
 }
 
 let itemBox = new Image()
@@ -73,30 +73,37 @@ class inventory {
         this.size = { width: 1000, height: 750 };
         this.visible = false;
         this.items = [
-            { name: "Bota de Slime", source: './assets/items/boots/slimeboot.png', description: 'uma bota feita de slimes', type: "botas", effect: () => { } },
-            { name: "Bota Abençoada", source: './assets/items/boots/herculesboot.png', description: 'Ai Meu Deus', type: "botas", effect: () => { } },
-            { name: "Bota de sete léguas", source: './assets/items/boots/blessedboots.png', description: 'FUI EU BARRY!', type: "botas", effect: () => { } },
+            { name: "Bota de Slime", source: './assets/items/boots/slimeboot.png', description: 'uma bota feita de slimes', type: "botas", effect: (colocando) => {},effectDesc: "vida em 20" },
+            { name: "Bota Abençoada", source: './assets/items/boots/herculesboot.png', description: 'Ai Meu Deus', type: "botas", effect: (colocando) => { } },
+            { name: "Bota de sete léguas", source: './assets/items/boots/blessedboots.png', description: 'FUI EU BARRY!', type: "botas", effect: (colocando) => { } },
             { name: "Calça Invisível", source: './assets/items/pants/pantTransparent.png', description: 'Tinha alguma coisa pra ver?', type: "calcas", effect: () => { } },
-            { name: "Rabo de gato", source: './assets/items/pants/cat.png', description: 'por onde isso entra?', type: "calcas", effect: () => { } },
-            { name: "Calça Multi-colorida", source: './assets/items/pants/pantGay.png', description: '🏳️‍🌈🤨❓', type: "calcas", effect: () => { } },
-            { name: "Óculos de nerd", source: './assets/items/helmets/glasses.png', description: 'if(oculos_de_nerd){ INT++ }', type: "capacete", effect: () => { } },
-            { name: "Capacete de Futebol", source: './assets/items/helmets/helmet.png', description: 'Meu lema é: FORÇA, FORÇA, BURRO', type: "capacete", effect: () => { } },
+            { name: "Rabo de gato", source: './assets/items/pants/cat.png', description: 'por onde isso entra?', type: "calcas", effect: (colocando) => { } },
+            { name: "Calça Multi-colorida", source: './assets/items/pants/pantGay.png', description: '🏳️‍🌈🤨❓', type: "calcas", effect: (colocando) => { } },
+            { name: "Óculos de nerd", source: './assets/items/helmets/glasses.png', description: 'if(oculos_de_nerd){ INT++ }', type: "capacete", effect: (colocando) => {if(colocando){if(player instanceof Mage || player instanceof Cleric){player.baseDamage += 5}}else{if(player instanceof Mage || player instanceof Cleric){player.baseDamage -= 5}}},effectDesc:'Dano Magico +5' },
+            { name: "Capacete de Futebol", source: './assets/items/helmets/helmet.png', description: 'Meu lema é: FORÇA, FORÇA, BURRO', type: "capacete", effect: (colocando) => { } },
             { name: "Capacete de Motoqueiro", source: './assets/items/helmets/helmet2.png', description: 'já estou furioso... agora só falta ficar veloz', type: "capacete", effect: () => { } },
-            { name: "Mascara de Caveira", source: './assets/items/helmets/skull.png', description: '💀💀💀💀💀', type: "capacete", effect: () => { } },
-            { name: "Camisa de Força", source: './assets/items/chestplates/camisaDeForca.png', description: 'Louco? Eu já fui louco uma vez...', type: "peitoral", effect: () => { } },
-            { name: "Peitoral de Diamante", source: './assets/items/chestplates/diamondChestplate.png', description: 'Quadradamente Familiar...', type: "peitoral", effect: () => { } },
-            { name: "Máquina de Costura", source: './assets/items/chestplates/seewingMachine.png', description: 'Quê?', type: "peitoral", effect: () => { } },
-            { name: "Espada de Ferro", source: './assets/items/swords/sword.png', description: '', type: "espada", size: { x: 40, y: 90 }, space: 40, effect: () => { } },
-            { name: "Espada de Fogo", source: './assets/items/swords/firesword.png', description: '', type: "espada", size: { x: 40, y: 90 }, space: 40, effect: () => { } },
-            { name: "Lâmina de Barbear", source: './assets/items/swords/barbear.png', description: 'Corta não só sua barba😨', type: "espada", size: { x: 19, y: 90 }, space: 50, effect: () => { } },
-            { name: "Guarda chuva", source: './assets/items/swords/umbrella.png', description: 'Nem chove nesse jogo...', type: "espada", effect: () => { } },
-            { name: "Iskalibur", source: './assets/items/shields/iskalibur.png', description: 'Acho que não era assim que usava não', type: "escudo", size: { x: 40, y: 90 }, space: 40, effect: () => { } },
-            { name: "Tampa de Panela Gigante", source: './assets/items/shields/tampadepanela.png', description: 'Voce pega e PAAA nela', type: "escudo", effect: () => { } },
-            { name: "Escudo de Madeira", source: './assets/items/shields/woodshield.png', description: 'Cadê a criatividade?', type: "escudo", effect: () => { } },
-            { name: "Escudo de Ferro", source: './assets/items/shields/ironshield.png', description: 'É tipo madeira, só que mais dura', type: "escudo", effect: () => { } },
+            { name: "Mascara de Caveira", source: './assets/items/helmets/skull.png', description: '💀💀💀💀💀', type: "capacete", effect: (colocando) => { } },
+            { name: "Camisa de Força", source: './assets/items/chestplates/camisaDeForca.png', description: 'Louco? Eu já fui louco uma vez...', type: "peitoral", effect: () => {if(colocando){player.resistence -= 0.15}else{player.resistence += 0.15}},effectDesc:'resistencia +3' },
+            { name: "Peitoral de Diamante", source: './assets/items/chestplates/diamondChestplate.png', description: 'Quadradamente Familiar...', type: "peitoral", effect: () => {if(colocando){player.resistence -= 0.25}else{player.resistence += 0.25}},effectDesc:'resistencia +5'},
+            { name: "Máquina de Costura", source: './assets/items/chestplates/seewingMachine.png', description: 'Quê?', type: "peitoral", effect: (colocando) => {if(colocando){player.resistence -= 0.5}else{player.resistence += 0.5}},effectDesc:'resistencia +10' },
+            { name: "Espada de Ferro", source: './assets/items/swords/sword.png', description: '', type: "espada", size: { x: 40, y: 90 }, space: 40, effect: (colocando) => {if(colocando){player.baseDamage += 1}else{player.baseDamage -= 1}},effectDesc:"Dano +1" },
+            { name: "Espada de Fogo", source: './assets/items/swords/firesword.png', description: '', type: "espada", size: { x: 40, y: 90 }, space: 40, effect: (colocando) => {if(colocando){player.baseDamage += 2}else{player.baseDamage -= 2}},effectDesc:"Dano +2" },
+            { name: "Lâmina de Barbear", source: './assets/items/swords/barbear.png', description: 'Corta não só sua barba😨', type: "espada", size: { x: 19, y: 90 }, space: 50, effect: () => {if(colocando){player.baseDamage += 3}else{player.baseDamage -= 3}},effectDesc:"Dano +3" },
+            { name: "Guarda chuva", source: './assets/items/swords/umbrella.png', description: 'Nem chove nesse jogo...', type: "espada", effect: (colocando) => {if(colocando){player.baseDamage += 5}else{player.baseDamage -= 5}},effectDesc:"Dano +5" },
+            { name: "Iskalibur", source: './assets/items/shields/iskalibur.png', description: 'Acho que não era assim que usava não', type: "escudo", size: { x: 40, y: 90 }, space: 40, effect: (colocando) => {if(colocando){player.resistence -= 0.3}else{player.resistence += 0.3}},effectDesc:'resistencia +6' },
+            { name: "Tampa de Panela Gigante", source: './assets/items/shields/tampadepanela.png', description: 'Voce pega e PAAA nela', type: "escudo", effect: (colocando) => {if(colocando){player.resistence -= 0.15}else{player.resistence += 0.15}},effectDesc:'resistencia +3' },
+            { name: "Escudo de Madeira", source: './assets/items/shields/woodshield.png', description: 'Cadê a criatividade?', type: "escudo", effect: (colocando) => {if(colocando){player.resistence -= 0.05}else{player.resistence += 0.05}},effectDesc:'resistencia +1'},
+            { name: "Escudo de Ferro", source: './assets/items/shields/ironshield.png', description: 'É tipo madeira, só que mais dura', type: "escudo", effect: (colocando) => {if(colocando){player.resistence -= 0.1}else{player.resistence += 0.1}},effectDesc:'resistencia +2'},
         ]
 
-        this.equippedItems = []
+        this.equippedItems = {
+            boots:"",
+            pants:"",
+            chest:"",
+            helmet:"",
+            sword:"",
+            shield:""
+        }
 
         this.totalItems = this.items.length;
         this.listWidth = 500;  // Width of the scrollable list area
@@ -221,12 +228,18 @@ class inventory {
         ctx.textAlign='left';
         const spaceBetween = 30
         const start = 450
-        ctx.fillText('Botas aumentam X', this.pos.x + 30, this.pos.y + start)
-        ctx.fillText('Calças aumentam X', this.pos.x + 30, this.pos.y + start + spaceBetween * 1)
-        ctx.fillText('Peitoral aumenta X', this.pos.x + 30, this.pos.y + start + spaceBetween * 2)
-        ctx.fillText('Capacete aumenta X', this.pos.x + 30, this.pos.y + start + spaceBetween * 3)
-        ctx.fillText('Espada aumenta X', this.pos.x + 30, this.pos.y + start + spaceBetween * 4)
-        ctx.fillText('Escudo aumenta X', this.pos.x + 30, this.pos.y + start + spaceBetween * 5)
+        const bootDesc = this.equippedItems['boots'].effectDesc || 'nada'
+        const pantDesc = this.equippedItems['pants'].effectDesc || 'nada'
+        const chestDesc = this.equippedItems['chest'].effectDesc || 'nada'
+        const helmetDesc = this.equippedItems['helmet'].effectDesc || 'nada'
+        const swordDesc = this.equippedItems['sword'].effectDesc || 'nada'
+        const shieldDesc = this.equippedItems['shield'].effectDesc || 'nada'
+        ctx.fillText('Botas aumentam ' + bootDesc, this.pos.x + 30, this.pos.y + start)
+        ctx.fillText('Calças aumentam ' + pantDesc, this.pos.x + 30, this.pos.y + start + spaceBetween * 1)
+        ctx.fillText('Peitoral aumenta ' + chestDesc, this.pos.x + 30, this.pos.y + start + spaceBetween * 2)
+        ctx.fillText('Capacete aumenta ' + helmetDesc, this.pos.x + 30, this.pos.y + start + spaceBetween * 3)
+        ctx.fillText('Espada aumenta ' + swordDesc, this.pos.x + 30, this.pos.y + start + spaceBetween * 4)
+        ctx.fillText('Escudo aumenta ' + shieldDesc, this.pos.x + 30, this.pos.y + start + spaceBetween * 5)
     }
 
     drawEquippedItems() {
@@ -273,27 +286,51 @@ let actualBoots, actualPants, actualChest, actualHelmet, actualSword, actualShie
 
 const equipItemType = {
     botas: (item) => {
+        if(player.inventory.equippedItems['boots'] != ""){
+            player.inventory.equippedItems['boots'].effect(false)
+        }
+        player.inventory.equippedItems['boots'] = item
         actualBoots = item.source;
-        item.effect();
+        item.effect(true);
     },
     calcas: (item) => {
+        if(player.inventory.equippedItems['pants'] != ""){
+            player.inventory.equippedItems['pants'].effect(false)
+        }
+        player.inventory.equippedItems['pants'] = item
         actualPants = item.source;
-        item.effect();
+        item.effect(true);
     },
     peitoral: (item) => {
+        if(player.inventory.equippedItems['chest'] != ""){
+            player.inventory.equippedItems['chest'].effect(false)
+        }
+        player.inventory.equippedItems['chest'] = item
         actualChest = item.source;
-        item.effect();
+        item.effect(true);
     },
     capacete: (item) => {
+        if(player.inventory.equippedItems['helmet'] != ""){
+            player.inventory.equippedItems['helmet'].effect(false)
+        }
+        player.inventory.equippedItems['helmet'] = item
         actualHelmet = item.source;
-        item.effect();
+        item.effect(true);
     },
     espada: (item) => {
+        if(player.inventory.equippedItems['sword'] != ""){
+            player.inventory.equippedItems['sword'].effect(false)
+        }
+        player.inventory.equippedItems['sword'] = item
         actualSword = item.source;
-        item.effect();
+        item.effect(true);
     },
     escudo: (item) => {
+        if(player.inventory.equippedItems['shield'] != ""){
+            player.inventory.equippedItems['shield'].effect(false)
+        }
+        player.inventory.equippedItems['shield'] = item
         actualShield = item.source;
-        item.effect();
+        item.effect(true);
     },
 }
