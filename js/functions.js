@@ -98,3 +98,13 @@ function drawTriangle(x1, y1, x2, y2, x3, y3) {
     ctx.stroke(); // Draw the outline of the triangle
     ctx.fill();   // Fill the triangle (optional)
 }
+
+
+const canvasResize = () => {
+    canvas.width = window.innerWidth
+    canvas.height = window.innerHeight
+    playerPosition.x = window.innerWidth / 2 - 25;
+    playerPosition.y = window.innerHeight / 2 - 25;
+    width = screenToWorldX(canvas.width) + lineSpace;
+    height = screenToWorldY(canvas.height) + lineSpace;
+}

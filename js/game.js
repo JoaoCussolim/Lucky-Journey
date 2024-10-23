@@ -249,3 +249,7 @@ let game = (currentTime) => {
 setTimeout(() => {
     menu();
 }, 500);
+
+canvas.onresize((e) => {
+    canvasResize()
+})

@@ -116,57 +116,57 @@ class Button {
 
 }
 
+let buttonSize = 200; // Tamanho padrão do botão
+let buttonSpacing = 300; // Espaçamento entre os botões
 
 let mageButton = new Button({
     txtType: false,
-    position: { x: 130, y: 300 },
-    size: { w: 200, h: 200 },
-    originalSz: { w: 200, h: 200 },
+    position: { x: window.innerWidth / 5 - buttonSize / 2, y: 300 },
+    size: { w: buttonSize, h: buttonSize },
+    originalSz: { w: buttonSize, h: buttonSize },
     border: 5,
     source: "./assets/mage/menu/icon.png",
-    effect: { w: 220, h: 220 },
+    effect: { w: buttonSize + 20, h: buttonSize + 20 }, // Ajuste para efeito
     borderColor: 'rgba(237, 172, 74, 1)',
     backgroundColor: 'rgba(67, 93, 115, 1)'
-
 });
 
 let clericButton = new Button({
     txtType: false,
-    position: { x: 550, y: 300 },
-    size: { w: 200, h: 200 },
-    originalSz: { w: 200, h: 200 },
+    position: { x: (window.innerWidth / 5) * 2 - buttonSize / 2, y: 300 },
+    size: { w: buttonSize, h: buttonSize },
+    originalSz: { w: buttonSize, h: buttonSize },
     border: 5,
     source: "./assets/cleric/menu/forward.png",
-    effect: { w: 220, h: 220 },
+    effect: { w: buttonSize + 20, h: buttonSize + 20 },
     borderColor: 'rgba(237, 172, 74, 1)',
     backgroundColor: 'rgba(67, 93, 115, 1)'
 });
 
 let ArqueiroButton = new Button({
     txtType: false,
-    position: { x: 1050, y: 300 },
-    size: { w: 200, h: 200 },
-    originalSz: { w: 200, h: 200 },
+    position: { x: (window.innerWidth / 5) * 3 - buttonSize / 2, y: 300 },
+    size: { w: buttonSize, h: buttonSize },
+    originalSz: { w: buttonSize, h: buttonSize },
     border: 5,
     source: "./assets/archer/idle/forward.png",
-    effect: { w: 220, h: 220 },
+    effect: { w: buttonSize + 20, h: buttonSize + 20 },
     borderColor: 'rgba(237, 172, 74, 1)',
     backgroundColor: 'rgba(67, 93, 115, 1)'
-
 });
 
 let GuerreiroButton = new Button({
     txtType: false,
-    position: { x: 1500, y: 300 },
-    size: { w: 200, h: 200 },
-    originalSz: { w: 200, h: 200 },
+    position: { x: (window.innerWidth / 5) * 4 - buttonSize / 2, y: 300 },
+    size: { w: buttonSize, h: buttonSize },
+    originalSz: { w: buttonSize, h: buttonSize },
     border: 5,
     source: "./assets/warrior/idle/forward.png",
-    effect: { w: 220, h: 220 },
+    effect: { w: buttonSize + 20, h: buttonSize + 20 },
     borderColor: 'rgba(237, 172, 74, 1)',
     backgroundColor: 'rgba(67, 93, 115, 1)'
-
 });
+
 
 let ConfirmbuttonWidth = 300;
 let ConfirmbuttonHeight = 100;

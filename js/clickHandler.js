@@ -7,21 +7,28 @@ addEventListener("click", (e) => {
         controlsbtnClicked()
     }
     if (inCharacterSelect) {
+        let playerPosition = {
+            x: window.innerWidth / 2 - 25, // Subtrai metade da largura do jogador (50 / 2)
+            y: window.innerHeight / 2 - 25 // Subtrai metade da altura do jogador (50 / 2)
+        };
+        
         if (mageButton.mouseOn) {
-            player = new Mage({ position: { x: 950, y: 600 }, dimensions: { width: 50, height: 50 }, name: playerName });
+            player = new Mage({ position: playerPosition, dimensions: { width: 50, height: 50 }, name: playerName });
             inCharacterSelect = false;
-
         }
+        
         if (clericButton.mouseOn) {
-            player = new Cleric({ position: { x: 950, y: 600 }, dimensions: { width: 50, height: 50 }, name: playerName });
+            player = new Cleric({ position: playerPosition, dimensions: { width: 50, height: 50 }, name: playerName });
             inCharacterSelect = false;
         }
+        
         if (ArqueiroButton.mouseOn) {
-            player = new Archer({ position: { x: 950, y: 600 }, dimensions: { width: 50, height: 50 }, name: playerName });
+            player = new Archer({ position: playerPosition, dimensions: { width: 50, height: 50 }, name: playerName });
             inCharacterSelect = false;
         }
+        
         if (GuerreiroButton.mouseOn) {
-            player = new Warrior({ position: { x: 950, y: 600 }, dimensions: { width: 50, height: 50 }, name: playerName });
+            player = new Warrior({ position: playerPosition, dimensions: { width: 50, height: 50 }, name: playerName });
             inCharacterSelect = false;
         }
     } else if (!inNameSelect) {

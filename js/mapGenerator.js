@@ -30,13 +30,6 @@ let lineSpace = 30;
 let width = screenToWorldX(canvas.width) + lineSpace;
 let height = screenToWorldY(canvas.height) + lineSpace;
 
-let canvasResize = (window) => {
-    canvas.width = window.innerWidth
-    canvas.height = window.innerHeight
-    width = screenToWorldX(canvas.width) + lineSpace;
-    height = screenToWorldY(canvas.height) + lineSpace;
-}
-
 let drawSquares = (x, y) => {
     const seed = x * 100000 + y;
     let rng = new RandomNumberGenerator(seed)

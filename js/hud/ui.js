@@ -39,25 +39,38 @@ let newItemAdded = false;
 
 
 let characterSelection = () => {
+    // Estilos e retângulos de fundo
     ctx.fillStyle = "rgba(0,0,0,0.5)";
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    ctx.fillRect(0, 0, window.innerWidth, window.innerHeight);
+    
     ctx.fillStyle = "rgba(46, 70, 89, 1)";
-    ctx.fillRect(30, 30, canvas.width - 60, canvas.height - 60);
+    const boxWidth = window.innerWidth - 60;
+    const boxHeight = window.innerHeight - 60;
+    ctx.fillRect(30, 30, boxWidth, boxHeight);
+
+    // Título
     ctx.fillStyle = "rgba(237, 172, 74, 1)";
     ctx.font = "50px Pixeloid";
     ctx.textAlign = "center";
-    ctx.fillText("Escolha Seu Personagem", canvas.width / 2, 100);
-    ctx.font = "50px Pixeloid";
-    ctx.fillText("Mago", 225, 700);
-    ctx.fillText("Clérigo", 650, 700);
-    ctx.fillText("Arqueiro", 1150, 700);
-    ctx.fillText("Guerreiro", 1600, 700);
+    ctx.fillText("Escolha Seu Personagem", window.innerWidth / 2, 100);
 
+    // Nomes dos personagens
+    const characterNames = ["Mago", "Clérigo", "Arqueiro", "Guerreiro"];
+    const baseX = window.innerWidth / 5;
+    const baseY = 700;
+    const spacing = 300; // Espaçamento entre os personagens
+
+    characterNames.forEach((name, index) => {
+        ctx.fillText(name, baseX + (index * spacing), baseY);
+    });
+
+    // Atualiza os botões
     mageButton.update();
     clericButton.update();
     ArqueiroButton.update();
     GuerreiroButton.update();
-}
+};
+
 
 
 backgroundColor = RandomInt(1, 4)
