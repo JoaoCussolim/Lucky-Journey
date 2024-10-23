@@ -20,8 +20,6 @@ let nameSelect = () => {
     ctx.fillStyle = 'rgb(94, 120, 140)'
     ctx.fillRect(200, 200, canvas.width / 1.25, 100)
 
-
-
     ConfirmButton.update();
 
 }

@@ -214,7 +214,7 @@ let game = (currentTime) => {
         }
 
         if (dialogActive) actualDialogBox.draw()
-        if (player.inventory.visible) player.inventory.draw()
+        player.inventory.update()
 
 
 

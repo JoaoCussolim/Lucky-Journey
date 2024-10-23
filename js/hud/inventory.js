@@ -46,11 +46,11 @@ let itemsTodos = {
     CamisaForca: { name: "Camisa de Força", source: './assets/items/chestplates/camisaDeForca.png', description: 'Louco? Eu já fui louco uma vez...', type: "peitoral", effect: () => { } },
     PeitoralDiamante: { name: "Peitoral de Diamante", source: './assets/items/chestplates/diamondChestplate.png', description: 'Quadradamente Familiar...', type: "peitoral", effect: () => { } },
     MaquinaCostura: { name: "Máquina de Costura", source: './assets/items/chestplates/seewingMachine.png', description: 'Quê?', type: "peitoral", effect: () => { } },
-    EspadaFerro: { name: "Espada de Ferro", source: './assets/items/swords/sword.png', description: '', type: "espada", size: {x: 40, y: 90}, space: 40, effect: () => { } },
-    EspadaFogo: { name: "Espada de Fogo", source: './assets/items/swords/firesword.png', description: '', type: "espada", size: {x: 40, y: 90}, space: 40, effect: () => { } },
-    LaminaBarbear: { name: "Lâmina de Barbear", source: './assets/items/swords/barbear.png', description: 'Corta não só sua barba😨', type: "espada", size: {x: 19, y: 90}, space: 50, effect: () => { } },
+    EspadaFerro: { name: "Espada de Ferro", source: './assets/items/swords/sword.png', description: '', type: "espada", size: { x: 40, y: 90 }, space: 40, effect: () => { } },
+    EspadaFogo: { name: "Espada de Fogo", source: './assets/items/swords/firesword.png', description: '', type: "espada", size: { x: 40, y: 90 }, space: 40, effect: () => { } },
+    LaminaBarbear: { name: "Lâmina de Barbear", source: './assets/items/swords/barbear.png', description: 'Corta não só sua barba😨', type: "espada", size: { x: 19, y: 90 }, space: 50, effect: () => { } },
     Guardachuva: { name: "Guarda chuva", source: './assets/items/swords/umbrella.png', description: 'Nem chove nesse jogo...', type: "espada", effect: () => { } },
-    Escalibur: { name: "Iskalibur", source: './assets/items/shields/iskalibur.png', description: 'Acho que não era assim que usava não', type: "escudo", size: {x: 40, y: 90}, space: 40, effect: () => { } },
+    Escalibur: { name: "Iskalibur", source: './assets/items/shields/iskalibur.png', description: 'Acho que não era assim que usava não', type: "escudo", size: { x: 40, y: 90 }, space: 40, effect: () => { } },
     TampaGigante: { name: "Tampa de Panela Gigante", source: './assets/items/shields/tampadepanela.png', description: 'Voce pega e PAAA nela', type: "escudo", effect: () => { } },
     EscudoMadeira: { name: "Escudo de Madeira", source: './assets/items/shields/woodshield.png', description: 'Cadê a criatividade?', type: "escudo", effect: () => { } },
     EscudoFerro: { name: "Escudo de Ferro", source: './assets/items/shields/ironshield.png', description: 'É tipo madeira, só que mais dura', type: "escudo", effect: () => { } },
@@ -86,11 +86,11 @@ class inventory {
             { name: "Camisa de Força", source: './assets/items/chestplates/camisaDeForca.png', description: 'Louco? Eu já fui louco uma vez...', type: "peitoral", effect: () => { } },
             { name: "Peitoral de Diamante", source: './assets/items/chestplates/diamondChestplate.png', description: 'Quadradamente Familiar...', type: "peitoral", effect: () => { } },
             { name: "Máquina de Costura", source: './assets/items/chestplates/seewingMachine.png', description: 'Quê?', type: "peitoral", effect: () => { } },
-            { name: "Espada de Ferro", source: './assets/items/swords/sword.png', description: '', type: "espada", size: {x: 40, y: 90}, space: 40, effect: () => { } },
-            { name: "Espada de Fogo", source: './assets/items/swords/firesword.png', description: '', type: "espada", size: {x: 40, y: 90}, space: 40, effect: () => { } },
-            { name: "Lâmina de Barbear", source: './assets/items/swords/barbear.png', description: 'Corta não só sua barba😨', type: "espada", size: {x: 19, y: 90}, space: 50, effect: () => { } },
+            { name: "Espada de Ferro", source: './assets/items/swords/sword.png', description: '', type: "espada", size: { x: 40, y: 90 }, space: 40, effect: () => { } },
+            { name: "Espada de Fogo", source: './assets/items/swords/firesword.png', description: '', type: "espada", size: { x: 40, y: 90 }, space: 40, effect: () => { } },
+            { name: "Lâmina de Barbear", source: './assets/items/swords/barbear.png', description: 'Corta não só sua barba😨', type: "espada", size: { x: 19, y: 90 }, space: 50, effect: () => { } },
             { name: "Guarda chuva", source: './assets/items/swords/umbrella.png', description: 'Nem chove nesse jogo...', type: "espada", effect: () => { } },
-            { name: "Iskalibur", source: './assets/items/shields/iskalibur.png', description: 'Acho que não era assim que usava não', type: "escudo", size: {x: 40, y: 90}, space: 40, effect: () => { } },
+            { name: "Iskalibur", source: './assets/items/shields/iskalibur.png', description: 'Acho que não era assim que usava não', type: "escudo", size: { x: 40, y: 90 }, space: 40, effect: () => { } },
             { name: "Tampa de Panela Gigante", source: './assets/items/shields/tampadepanela.png', description: 'Voce pega e PAAA nela', type: "escudo", effect: () => { } },
             { name: "Escudo de Madeira", source: './assets/items/shields/woodshield.png', description: 'Cadê a criatividade?', type: "escudo", effect: () => { } },
             { name: "Escudo de Ferro", source: './assets/items/shields/ironshield.png', description: 'É tipo madeira, só que mais dura', type: "escudo", effect: () => { } },
@@ -156,12 +156,12 @@ class inventory {
             ctx.textBaseline = 'alphabetic';
             let image = new Image();
             const item = this.items[itemIndex]
-            const size = item.size  || {x: 80, y: 80 };
-            const itemSpace = item.space || 22 
+            const size = item.size || { x: 80, y: 80 };
+            const itemSpace = item.space || 22
             image.src = item.source;
             ctx.drawImage(image, this.listX + itemSpace, this.listY + y + this.itemHeight / 5, size.x, size.y)
             ctx.fillText(item.name, this.listX + 300, this.listY + y + this.itemHeight / 3);
-            const description = wrapText(item.description,300)
+            const description = wrapText(item.description, 300)
             for (let i = 0; i < description.length; i++) {
                 ctx.fillText(description[i], this.listX + 310, this.listY + y + (i * (fontSz * 1.2)) + this.itemHeight / 2);
             }
@@ -198,13 +198,58 @@ class inventory {
     }
 
 
-    draw() {
-        // Draw the inventory box
-        if (this.visible) {
-            ctx.fillStyle = "rgb(255, 255, 255)";
-            ctx.drawImage(menuInv, this.pos.x - 290, this.pos.y - 125, this.size.width + 580, this.size.height + 250); //antes
-            this.drawItems(); //depois
-        }
+    drawUI() {
+        ctx.fillStyle = "rgb(255, 255, 255)";
+        ctx.drawImage(menuInv, this.pos.x - 290, this.pos.y - 125, this.size.width + 580, this.size.height + 250); //antes
+        this.drawItems(); //depois
+    }
+
+    drawPlayerName(){
+        ctx.fillStyle="white";
+        ctx.textAlign='center'
+        ctx.fillText(playerName, this.pos.x + 340, this.pos.y + 52)
+    }
+
+    drawPlayerImage(){
+        const playerImage = new Image()
+        playerImage.src = player.animations['IdleForward'].source
+        ctx.drawImage(playerImage, this.pos.x - 85, this.pos.y - 15, 700, 700);
+    }
+
+    drawItemBuffs(){
+        ctx.fillStyle="white";
+        ctx.textAlign='left';
+        const spaceBetween = 30
+        const start = 450
+        ctx.fillText('Botas aumentam X', this.pos.x + 30, this.pos.y + start)
+        ctx.fillText('Calças aumentam X', this.pos.x + 30, this.pos.y + start + spaceBetween * 1)
+        ctx.fillText('Peitoral aumenta X', this.pos.x + 30, this.pos.y + start + spaceBetween * 2)
+        ctx.fillText('Capacete aumenta X', this.pos.x + 30, this.pos.y + start + spaceBetween * 3)
+        ctx.fillText('Espada aumenta X', this.pos.x + 30, this.pos.y + start + spaceBetween * 4)
+        ctx.fillText('Escudo aumenta X', this.pos.x + 30, this.pos.y + start + spaceBetween * 5)
+    }
+
+    drawEquippedItems() {
+        const boots = new Image();
+        const pants = new Image();
+        const chest = new Image();
+        const helmet = new Image();
+        const sword = new Image();
+        const shield = new Image();
+
+        boots.src = actualBoots;
+        pants.src = actualPants;
+        chest.src = actualChest;
+        helmet.src = actualHelmet;
+        sword.src = actualSword;
+        shield.src = actualShield;
+
+        ctx.drawImage(boots, this.pos.x + 375, this.pos.y + 312, 45, 45)
+        ctx.drawImage(pants, this.pos.x + 375, this.pos.y + 210, 45, 45)
+        ctx.drawImage(chest, this.pos.x + 375, this.pos.y + 110, 45, 45)
+        ctx.drawImage(helmet, this.pos.x + 257, this.pos.y + 110, 45, 45)
+        ctx.drawImage(sword, this.pos.x + 257, this.pos.y + 210, 45, 45)
+        ctx.drawImage(shield, this.pos.x + 257, this.pos.y + 310, 45, 45)
     }
 
     addItem(item) {
@@ -213,7 +258,42 @@ class inventory {
     }
 
     update() {
-        this.draw();
+        if (this.visible) {
+            this.drawUI();
+            this.drawEquippedItems();
+            this.drawPlayerImage();
+            this.drawPlayerName();
+            this.drawItemBuffs();
+        }
     }
 
+}
+
+let actualBoots, actualPants, actualChest, actualHelmet, actualSword, actualShield = ''
+
+const equipItemType = {
+    botas: (item) => {
+        actualBoots = item.source;
+        item.effect();
+    },
+    calcas: (item) => {
+        actualPants = item.source;
+        item.effect();
+    },
+    peitoral: (item) => {
+        actualChest = item.source;
+        item.effect();
+    },
+    capacete: (item) => {
+        actualHelmet = item.source;
+        item.effect();
+    },
+    espada: (item) => {
+        actualSword = item.source;
+        item.effect();
+    },
+    escudo: (item) => {
+        actualShield = item.source;
+        item.effect();
+    },
 }

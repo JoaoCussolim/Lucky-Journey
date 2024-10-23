@@ -135,8 +135,6 @@ class DialogBox {
 }
 
 let dialogActive = false
-let dialogosAleatorios = ["Eu sou aleatório"]
-let actualDialogBox = new DialogBox({ dialog: dialogosAleatorios, speaker: 'Caos', src: './assets/mage/idle/forward.png' });
 
 let canvasPromptActive = false
 let canvasPrompText = ''
@@ -147,7 +145,7 @@ function loadCanvasPrompt() {
     ctx.font = `60px Tales`
     ctx.fillStyle = 'white'
     ctx.textAlign = 'center'
-    ctx.fillText(canvasPrompText, canvas.width / 2 - 20, canvas.height / 2 - 160)
+    ctx.fillText(canvasPrompText, canvas.width / 2 - 20, canvas.height / 2 - 200)
 }
 
 async function query(data) {
