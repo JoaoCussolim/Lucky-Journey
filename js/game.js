@@ -12,6 +12,8 @@ let backgroundPositions = {
     y: 0
 };
 
+let newItemCooldown = 0;
+
 let inCharacterSelect = false;
 let inNameSelect = true;
 
@@ -22,7 +24,7 @@ let backgroundVelocity = {
 
 let backgroundLocked = false
 
-let started = true;
+let started = false;
 let SPnum1 = new SpinningNumber({
     pos: { x: canvas.width / 2 - 205, y: canvas.height / 2 - 350 },
     finalValue: "P",
@@ -217,6 +219,18 @@ let game = (currentTime) => {
         player.inventory.update()
 
 
+        if(newItemAdded){
+            ctx.fillStyle = 'white'
+            ctx.fillText('Novo Item adquirido!',800,200)
+            if(newItemCooldown <= 100){
+                newItemCooldown ++;
+            }else{
+                newItemCooldown = 0;
+                newItemAdded = false;
+            }
+        }
+
+        dice.update();
 
         generateNPC()
 

@@ -163,3 +163,5 @@ async function query(data) {
     const result = await response.json();
     return result;
 }
+
+let actualDialogBox;

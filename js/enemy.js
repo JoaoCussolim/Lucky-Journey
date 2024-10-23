@@ -126,10 +126,10 @@ class Enemy extends AnimatedSprite {
     }
 
     detectPlayer() {
-        if (screenToWorldX(this.position.x + this.dimensions.width / 2) < 0 ||
-            screenToWorldX(this.position.x - this.dimensions.width / 2) > canvas.width ||
-            screenToWorldY(this.position.y + this.dimensions.height / 2) < 0 ||
-            screenToWorldY(this.position.y - this.dimensions.height / 2) > canvas.height
+        if (screenToWorldX(this.position.x + this.dimensions.width / 2) < detectionRange ||
+            screenToWorldX(this.position.x - this.dimensions.width / 2) > canvas.width - detectionRange ||
+            screenToWorldY(this.position.y + this.dimensions.height / 2) < detectionRange ||
+            screenToWorldY(this.position.y - this.dimensions.height / 2) > canvas.height - detectionRange
         ) this.playerOnRange = false
         else this.playerOnRange = true
     }
@@ -165,20 +165,21 @@ class Enemy extends AnimatedSprite {
         }
     }
 
-    calculateDistance(){
+    calculateDistance() {
         const dx = screenToWorldX(this.position.x) - screenToWorldX(player.position.x);
         const dy = screenToWorldY(this.position.y) - screenToWorldY(player.position.y);
         return Math.sqrt(dx * dx + dy * dy);
     }
 
     CanAttack() {
-        if (this.calculateDistance() < 100 ){
-            if(this.attackCooldown > 0)this.attackCooldown -= deltaTime_Mult;
-            else {this.canAttack = true;
+        if (this.calculateDistance() < 100) {
+            if (this.attackCooldown > 0) this.attackCooldown -= deltaTime_Mult;
+            else {
+                this.canAttack = true;
                 this.attackCooldown = 100;
             }
         }
-        
+
     }
 
     Attack() {
@@ -195,6 +196,16 @@ class Enemy extends AnimatedSprite {
                 return enemy.position.x === this.position.x && enemy.position.y === this.position.y
             })
             enemies.splice(eIndex, 1);
+            if (player.inventory.items.length <= itemsTodos.length) {
+                if (RandomInt(1, 1) == 1) {
+                    let newItem = itemsTodos[RandomInt(0, itemsTodos.length)]
+                    while (player.inventory.items.findIndex(item => item === newItem) != -1) {
+                        newItem = itemsTodos[RandomInt(0, itemsTodos.length)]
+                    }
+                    player.inventory.addItem(newItem)
+                    newItemAdded = true;
+                }
+            }
         }
     }
 
@@ -344,3 +355,4 @@ class Slime extends Enemy {
 }
 
 let enemies = [];
+let detectionRange = 0;

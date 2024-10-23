@@ -171,7 +171,7 @@ let GuerreiroButton = new Button({
 let ConfirmButton = new Button({
     txtType: true,
     text: { writing: 'CONFIRM', size: 50, color: "black" },
-    position: { x: 1500, y: 350 },
+    position: { x: 1300, y: 350 },
     size: { w: 300, h: 100 },
     border: 5,
     borderColor: 'rgba(237, 172, 74, 1)',

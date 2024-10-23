@@ -1,4 +1,11 @@
 addEventListener("click", (e) => {
+    if (playbtn.mouseOn) {
+        playbtnClicked()
+    }
+    
+    if (controlsbtn.mouseOn) {
+        controlsbtnClicked()
+    }
     if (inCharacterSelect) {
         if (mageButton.mouseOn) {
             player = new Mage({ position: { x: 950, y: 600 }, dimensions: { width: 50, height: 50 }, name: playerName });
@@ -22,13 +29,6 @@ addEventListener("click", (e) => {
             location.reload();
         }
 
-        if (playbtn.mouseOn) {
-            playbtnClicked()
-        }
-
-        if (controlsbtn.mouseOn) {
-            controlsbtnClicked()
-        }
 
         if (player instanceof Mage) {
             if (!player.attackInCooldown && player.mana >= 10) {

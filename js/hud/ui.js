@@ -24,6 +24,8 @@ let nameSelect = () => {
 
 }
 
+let newItemAdded = false;
+
 
 let characterSelection = () => {
     ctx.fillStyle = "rgba(0,0,0,0.5)";

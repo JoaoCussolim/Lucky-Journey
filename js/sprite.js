@@ -42,6 +42,8 @@ class Sprite {
                     bonusSize = 0
                 }
 
+                if((collisionBlock.name === 'lake' && !walkOnWater) || collisionBlock.name === 'tree'){
+
                 const wtsCollisionBlockX = worldToScreenX(collisionBlock.position.x + bonusSize);
                 const wtsCollisionBlockY = worldToScreenY(collisionBlock.position.y + bonusSize);
                 const wtsCollisionBlockWidth = worldToScreenX(collisionBlock.position.x + collisionBlock.size + bonusSize);
@@ -68,6 +70,7 @@ class Sprite {
                         isCollidingUp = true;
                     }
                 }
+            }
             }
         }
 

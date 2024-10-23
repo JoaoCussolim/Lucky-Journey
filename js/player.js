@@ -33,6 +33,7 @@ class Player extends AnimatedSprite {
         this.name = name;
         this.baseDamage = 10;
         this.resistence = 1;
+        
 
         this.inventory = new inventory()
         this.health = 100;
@@ -922,7 +923,8 @@ class Warrior extends Player {
 
 
 let player;
-let playerSpeedBuff;
+let playerSpeedBuff = 1;
+let walkOnWater = false
 
 let acceptedKeys = {
     ArrowUp(player) {
