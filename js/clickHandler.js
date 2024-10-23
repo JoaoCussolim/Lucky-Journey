@@ -2,7 +2,7 @@ addEventListener("click", (e) => {
     if (playbtn.mouseOn) {
         playbtnClicked()
     }
-    
+
     if (controlsbtn.mouseOn) {
         controlsbtnClicked()
     }
@@ -37,7 +37,7 @@ addEventListener("click", (e) => {
                     position: { x: screenToWorldX(player.position.x), y: screenToWorldY(player.position.y) },
                     dimensions: { width: 100, height: 100 },
                     velocity: { x: Math.cos(shootAngle) * 5, y: Math.sin(shootAngle) * 5 },
-                    damage: player.baseDamage
+                    damage: player.baseDamage / 2
                 }))
 
                 switch (player.direction) {
@@ -61,7 +61,7 @@ addEventListener("click", (e) => {
                     dimensions: { width: 50, height: 50 },
                     velocity: { x: Math.cos(shootAngle) * 5, y: Math.sin(shootAngle) * 5 },
                     angle: shootAngle,
-                    damage: player.baseDamage/2,
+                    damage: player.baseDamage / 3,
                 }))
 
                 switch (player.direction) {
@@ -107,7 +107,7 @@ addEventListener("click", (e) => {
                     position: { x: screenToWorldX(player.position.x), y: screenToWorldY(player.position.y) },
                     dimensions: { width: 50, height: 50 },
                     velocity: { x: 0, y: 0 },
-                    damage: player.baseDamage * 2,
+                    damage: player.baseDamage / 5,
                 }))
 
                 switch (player.direction) {
@@ -145,28 +145,28 @@ let startY;
 let startScrollY;
 
 addEventListener('mousedown', (e) => {
-    if(!inNameSelect && !inCharacterSelect){
-    if (player.inventory.visible) {
-        const scrollbarWidth = 20;
-        const scrollbarHeight = Math.max(player.inventory.listHeight / (player.inventory.itemHeight * player.inventory.totalItems) * player.inventory.listHeight, 30); // Minimum height of the scrollbar
-        const maxScrollY = player.inventory.itemHeight * player.inventory.totalItems - player.inventory.listHeight;
-        const scrollbarTop = (player.inventory.scrollY / maxScrollY) * (player.inventory.listHeight - scrollbarHeight) + player.inventory.listY;
+    if (!inNameSelect && !inCharacterSelect) {
+        if (player.inventory.visible) {
+            const scrollbarWidth = 20;
+            const scrollbarHeight = Math.max(player.inventory.listHeight / (player.inventory.itemHeight * player.inventory.totalItems) * player.inventory.listHeight, 30); // Minimum height of the scrollbar
+            const maxScrollY = player.inventory.itemHeight * player.inventory.totalItems - player.inventory.listHeight;
+            const scrollbarTop = (player.inventory.scrollY / maxScrollY) * (player.inventory.listHeight - scrollbarHeight) + player.inventory.listY;
 
-        if (e.clientX > player.inventory.listX + player.inventory.listWidth && e.clientX < player.inventory.listX + player.inventory.listWidth + scrollbarWidth &&
-            e.clientY > scrollbarTop && e.clientY < scrollbarTop + scrollbarHeight) {
-            isDragging = true;
-            startY = e.clientY;
-            startScrollY = player.inventory.scrollY;
-            e.preventDefault();
-        }
+            if (e.clientX > player.inventory.listX + player.inventory.listWidth && e.clientX < player.inventory.listX + player.inventory.listWidth + scrollbarWidth &&
+                e.clientY > scrollbarTop && e.clientY < scrollbarTop + scrollbarHeight) {
+                isDragging = true;
+                startY = e.clientY;
+                startScrollY = player.inventory.scrollY;
+                e.preventDefault();
+            }
 
-        const playerEquipItemIndex = player.inventory.getHoveredItemIndex();
-        const playerItem = player.inventory.items[playerEquipItemIndex];
-        if (playerItem != null) {
-            equipItemType[playerItem.type](playerItem);
+            const playerEquipItemIndex = player.inventory.getHoveredItemIndex();
+            const playerItem = player.inventory.items[playerEquipItemIndex];
+            if (playerItem != null) {
+                equipItemType[playerItem.type](playerItem);
+            }
         }
     }
-}
 });
 
 let mousePos = { x: 0, y: 0 }

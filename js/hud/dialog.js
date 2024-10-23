@@ -142,11 +142,26 @@ let canvasPrompQuestion = ''
 let canvasPrompResponse = ''
 
 function loadCanvasPrompt() {
-    ctx.font = `60px Tales`
-    ctx.fillStyle = 'white'
-    ctx.textAlign = 'center'
-    ctx.fillText(canvasPrompText, canvas.width / 2 - 20, canvas.height / 2 - 200)
+    const inputBoxWidth = 50 * 0.75;
+    const inputBoxHeight = 100;
+    const inputBoxX = window.innerWidth / 2 - inputBoxWidth / 2;
+    const inputBoxY = window.innerHeight / 2 - inputBoxHeight / 2 - 150;
+
+    ctx.font = `60px Tales`;
+    ctx.fillStyle = 'white';
+    ctx.textAlign = 'center';
+
+    const metrics = ctx.measureText(canvasPrompText);
+    const textHeight = metrics.actualBoundingBoxAscent + metrics.actualBoundingBoxDescent;
+
+    const inputBoxVerticalCenter = inputBoxY + (inputBoxHeight / 2);
+
+    const textY = inputBoxVerticalCenter + (textHeight / 2);
+
+    ctx.fillText(canvasPrompText, window.innerWidth / 2, textY);
 }
+
+
 
 async function query(data) {
     const response = await fetch(

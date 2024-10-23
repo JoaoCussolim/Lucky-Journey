@@ -1,5 +1,5 @@
 class Player extends AnimatedSprite {
-    constructor({ position = { x: 0, y: 0 }, dimensions = { width: 0, height: 0 }, source, frameRate = 1, frameBuffer = 3, scale = 1, animations = {}, name = 'Delta'}) {
+    constructor({ position = { x: 0, y: 0 }, dimensions = { width: 0, height: 0 }, source, frameRate = 1, frameBuffer = 3, scale = 1, animations = {}, name = 'Delta' }) {
         super({ position, dimensions, source, frameRate, frameBuffer, scale, animations });
         this.center = {
             x: this.position.x - this.dimensions.width / 2,
@@ -105,53 +105,53 @@ class Player extends AnimatedSprite {
     }
 
     death() {
-        if(this.dead){
+        if (this.dead) {
             deathScreen();
         }
     }
 
-    Regen(){
-        if(this.health < this.maxhealth){
+    Regen() {
+        if (this.health < this.maxhealth) {
             this.health += deltaTime_Mult * 0.03;
         }
-        if(this.mana < this.maxmana){
+        if (this.mana < this.maxmana) {
             this.mana += deltaTime_Mult * 0.03;
         }
-        if(this.mana > this.maxmana){
+        if (this.mana > this.maxmana) {
             this.mana = this.maxmana
         }
-        if(this.health > this.maxhealth){
+        if (this.health > this.maxhealth) {
             this.health = this.maxhealth
         }
     }
 
-    HealthUI(){
+    HealthUI() {
         const UIimage = new Image();
         const playerImage = new Image();
         UIimage.src = './assets/ui/healthUI.png';
         playerImage.src = '';
-        
-        ctx.fillStyle = 'rgb(100,100,100)';
-        ctx.fillRect(150,75,317.1,45);
-        ctx.fillStyle = 'red';
-        ctx.fillRect(150,75,(this.health/this.maxhealth)*317.1,45);
-        ctx.fillStyle = 'rgb(150,150,150)';
-        ctx.fillRect(150,45,166.5,25.5);
-        ctx.drawImage(UIimage,0,0,500,250);
-        ctx.drawImage(playerImage,50,50,130,130);
-        ctx.fillStyle = 'black';
-        ctx.textAlign ='center'
-        ctx.font ="20px Pixeloid"
-        ctx.fillText(this.name,250,65)
 
-        
+        ctx.fillStyle = 'rgb(100,100,100)';
+        ctx.fillRect(150, 75, 317.1, 45);
+        ctx.fillStyle = 'red';
+        ctx.fillRect(150, 75, (this.health / this.maxhealth) * 317.1, 45);
+        ctx.fillStyle = 'rgb(150,150,150)';
+        ctx.fillRect(150, 45, 166.5, 25.5);
+        ctx.drawImage(UIimage, 0, 0, 500, 250);
+        ctx.drawImage(playerImage, 50, 50, 130, 130);
+        ctx.fillStyle = 'black';
+        ctx.textAlign = 'center'
+        ctx.font = "20px Pixeloid"
+        ctx.fillText(this.name, 250, 65)
+
+
     }
 
-    ManaUI(){
+    ManaUI() {
         ctx.fillStyle = 'rgb(100,100,100)';
-        ctx.fillRect(150,125,317.1,45)
+        ctx.fillRect(150, 125, 317.1, 45)
         ctx.fillStyle = 'rgb(51, 191, 226)';
-        ctx.fillRect(150,125,(this.mana/this.maxmana)*317.1,45)
+        ctx.fillRect(150, 125, (this.mana / this.maxmana) * 317.1, 45)
     }
 
 
@@ -294,29 +294,29 @@ class Mage extends Player {
         },
 
     } }) {
-        super({ position, dimensions, source, frameRate, frameBuffer, scale, animations,name });
+        super({ position, dimensions, source, frameRate, frameBuffer, scale, animations, name });
     }
-    
-    HealthUI(){
+
+    HealthUI() {
         const UIimage = new Image();
         const playerImage = new Image();
         UIimage.src = './assets/ui/healthUI.png';
         playerImage.src = './assets/mage/menu/icon.png';
-        
-        ctx.fillStyle = 'rgb(100,100,100)';
-        ctx.fillRect(150,75,317.1,45);
-        ctx.fillStyle = 'red';
-        ctx.fillRect(150,75,(this.health/this.maxhealth)*317.1,45);
-        ctx.fillStyle = 'rgb(150,150,150)';
-        ctx.fillRect(150,45,166.5,25.5);
-        ctx.drawImage(UIimage,0,0,500,250);
-        ctx.drawImage(playerImage,50,50,130,130);
-        ctx.fillStyle = 'black';
-        ctx.textAlign ='center'
-        ctx.font ="20px Pixeloid"
-        ctx.fillText(this.name,250,65)
 
-        
+        ctx.fillStyle = 'rgb(100,100,100)';
+        ctx.fillRect(150, 75, 317.1, 45);
+        ctx.fillStyle = 'red';
+        ctx.fillRect(150, 75, (this.health / this.maxhealth) * 317.1, 45);
+        ctx.fillStyle = 'rgb(150,150,150)';
+        ctx.fillRect(150, 45, 166.5, 25.5);
+        ctx.drawImage(UIimage, 0, 0, 500, 250);
+        ctx.drawImage(playerImage, 50, 50, 130, 130);
+        ctx.fillStyle = 'black';
+        ctx.textAlign = 'center'
+        ctx.font = "20px Pixeloid"
+        ctx.fillText(this.name, 250, 65)
+
+
     }
 
     draw() {
@@ -473,29 +473,29 @@ class Archer extends Player {
         },
 
     } }) {
-        super({ position, dimensions, source, frameRate, frameBuffer, scale, animations,name });
+        super({ position, dimensions, source, frameRate, frameBuffer, scale, animations, name });
     }
 
-    HealthUI(){
+    HealthUI() {
         const UIimage = new Image();
         const playerImage = new Image();
         UIimage.src = './assets/ui/healthUI.png';
         playerImage.src = './assets/archer/idle/forward.png';
-        
-        ctx.fillStyle = 'rgb(100,100,100)';
-        ctx.fillRect(150,75,317.1,45);
-        ctx.fillStyle = 'red';
-        ctx.fillRect(150,75,(this.health/this.maxhealth)*317.1,45);
-        ctx.fillStyle = 'rgb(150,150,150)';
-        ctx.fillRect(150,45,166.5,25.5);
-        ctx.drawImage(UIimage,0,0,500,250);
-        ctx.drawImage(playerImage,50,50,130,130);
-        ctx.fillStyle = 'black';
-        ctx.textAlign ='center'
-        ctx.font ="20px Pixeloid"
-        ctx.fillText(this.name,250,65)
 
-        
+        ctx.fillStyle = 'rgb(100,100,100)';
+        ctx.fillRect(150, 75, 317.1, 45);
+        ctx.fillStyle = 'red';
+        ctx.fillRect(150, 75, (this.health / this.maxhealth) * 317.1, 45);
+        ctx.fillStyle = 'rgb(150,150,150)';
+        ctx.fillRect(150, 45, 166.5, 25.5);
+        ctx.drawImage(UIimage, 0, 0, 500, 250);
+        ctx.drawImage(playerImage, 50, 50, 130, 130);
+        ctx.fillStyle = 'black';
+        ctx.textAlign = 'center'
+        ctx.font = "20px Pixeloid"
+        ctx.fillText(this.name, 250, 65)
+
+
     }
 
     draw() {
@@ -652,29 +652,29 @@ class Cleric extends Player {
         },
 
     } }) {
-        super({ position, dimensions, source, frameRate, frameBuffer, scale, animations,name });
+        super({ position, dimensions, source, frameRate, frameBuffer, scale, animations, name });
     }
 
-    HealthUI(){
+    HealthUI() {
         const UIimage = new Image();
         const playerImage = new Image();
         UIimage.src = './assets/ui/healthUI.png';
         playerImage.src = './assets/cleric/menu/forward.png';
-        
-        ctx.fillStyle = 'rgb(100,100,100)';
-        ctx.fillRect(150,75,317.1,45);
-        ctx.fillStyle = 'red';
-        ctx.fillRect(150,75,(this.health/this.maxhealth)*317.1,45);
-        ctx.fillStyle = 'rgb(150,150,150)';
-        ctx.fillRect(150,45,166.5,25.5);
-        ctx.drawImage(UIimage,0,0,500,250);
-        ctx.drawImage(playerImage,50,50,130,130);
-        ctx.fillStyle = 'black';
-        ctx.textAlign ='center'
-        ctx.font ="20px Pixeloid"
-        ctx.fillText(this.name,250,65)
 
-        
+        ctx.fillStyle = 'rgb(100,100,100)';
+        ctx.fillRect(150, 75, 317.1, 45);
+        ctx.fillStyle = 'red';
+        ctx.fillRect(150, 75, (this.health / this.maxhealth) * 317.1, 45);
+        ctx.fillStyle = 'rgb(150,150,150)';
+        ctx.fillRect(150, 45, 166.5, 25.5);
+        ctx.drawImage(UIimage, 0, 0, 500, 250);
+        ctx.drawImage(playerImage, 50, 50, 130, 130);
+        ctx.fillStyle = 'black';
+        ctx.textAlign = 'center'
+        ctx.font = "20px Pixeloid"
+        ctx.fillText(this.name, 250, 65)
+
+
     }
 
     draw() {
@@ -715,7 +715,7 @@ class Cleric extends Player {
         );
     }
 
-        attackCooldown() {
+    attackCooldown() {
         setTimeout(() => {
             this.attackInCooldown = false;
         }, 1000);
@@ -830,27 +830,27 @@ class Warrior extends Player {
         },
 
     } }) {
-        super({ position, dimensions, source, frameRate, frameBuffer, scale, animations,name });
+        super({ position, dimensions, source, frameRate, frameBuffer, scale, animations, name });
     }
-    
-    HealthUI(){
+
+    HealthUI() {
         const UIimage = new Image();
         const playerImage = new Image();
         UIimage.src = './assets/ui/healthUI.png';
         playerImage.src = './assets/warrior/idle/forward.png';
-        
+
         ctx.fillStyle = 'rgb(100,100,100)';
-        ctx.fillRect(150,75,317.1,45);
+        ctx.fillRect(150, 75, 317.1, 45);
         ctx.fillStyle = 'red';
-        ctx.fillRect(150,75,(this.health/this.maxhealth)*317.1,45);
+        ctx.fillRect(150, 75, (this.health / this.maxhealth) * 317.1, 45);
         ctx.fillStyle = 'rgb(150,150,150)';
-        ctx.fillRect(150,45,166.5,25.5);
-        ctx.drawImage(UIimage,0,0,500,250);
-        ctx.drawImage(playerImage,50,50,130,130);
+        ctx.fillRect(150, 45, 166.5, 25.5);
+        ctx.drawImage(UIimage, 0, 0, 500, 250);
+        ctx.drawImage(playerImage, 50, 50, 130, 130);
         ctx.fillStyle = 'black';
-        ctx.textAlign ='center'
-        ctx.font ="20px Pixeloid"
-        ctx.fillText(this.name,250,65)
+        ctx.textAlign = 'center'
+        ctx.font = "20px Pixeloid"
+        ctx.fillText(this.name, 250, 65)
     }
 
     draw() {
@@ -930,24 +930,28 @@ let acceptedKeys = {
     ArrowUp(player) {
         player.velocity.x = 0;
         player.velocity.y = -5 * deltaTime_Mult * playerSpeedBuff;
+        updateWalkingDistance();
         if (!player.attacking) player.switchSprite('WalkingBehind')
         player.direction = 'behind'
     },
     ArrowDown(player) {
         player.velocity.x = 0;
         player.velocity.y = 5 * deltaTime_Mult * playerSpeedBuff;
+        updateWalkingDistance();
         if (!player.attacking) player.switchSprite('WalkingForward')
         player.direction = 'forward'
     },
     ArrowLeft(player) {
         player.velocity.y = 0;
         player.velocity.x = -5 * deltaTime_Mult * playerSpeedBuff;
+        updateWalkingDistance();
         if (!player.attacking) player.switchSprite('WalkingSide')
         player.direction = 'side'
     },
     ArrowRight(player) {
         player.velocity.y = 0;
         player.velocity.x = 5 * deltaTime_Mult * playerSpeedBuff;
+        updateWalkingDistance();
         if (!player.attacking) player.switchSprite('WalkingSideLeft')
         player.direction = 'sideLeft'
     }
@@ -981,4 +985,11 @@ let keyUpKeys = {
 };
 
 let projectiles = [];
+let playerWalkingDistance = 0
 
+const updateWalkingDistance = () => {
+    if (!player.colliding.left && !player.colliding.right && !player.colliding.down && !player.colliding.up) {
+        playerWalkingDistance += Math.abs(player.velocity.x)
+        playerWalkingDistance += Math.abs(player.velocity.y)
+    }
+}

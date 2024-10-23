@@ -24,7 +24,7 @@ let backgroundVelocity = {
 
 let backgroundLocked = false
 
-let started = false;
+let started = true;
 let SPnum1 = new SpinningNumber({
     pos: { x: canvas.width / 2 - 205, y: canvas.height / 2 - 350 },
     finalValue: "P",
@@ -197,12 +197,13 @@ let game = (currentTime) => {
                 actualNpc = npc
             }
         }
-        // dice.update()
 
         for (let i = enemies.length - 1; i >= 0; i--) {
             enemy = enemies[i];
             enemy.update();
         };
+
+        enemiesAutomaticSpawn()
 
         player.update();
 
@@ -230,14 +231,7 @@ let game = (currentTime) => {
             }
         }
 
-        dice.update();
-
         generateNPC()
-
-        if (dice.doAction == true) {
-            dice.doAction = false;
-            makeEnemies(dice.numberDisplay)
-        }
     }
     else if (inNameSelect) {
         nameSelect();

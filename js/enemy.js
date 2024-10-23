@@ -49,14 +49,24 @@ class Enemy extends AnimatedSprite {
     };
 
     applyVelocity() {
-        if (this.velocity.x === 0 && this.velocity.y === 0 && player.velocity.x + player.velocity.y != 0) {
-            this.position.x += this.velocity.x - player.velocity.x * 5 * deltaTime_Mult;
-            this.position.y += this.velocity.y - player.velocity.y * 5 * deltaTime_Mult;
-        } else if (!this.colliding.left && !this.colliding.right && !this.colliding.up && !this.colliding.down) {
-            this.position.x += this.velocity.x - player.velocity.x * 1 * deltaTime_Mult;
-            this.position.y += this.velocity.y - player.velocity.y * 1 * deltaTime_Mult;
-        };
-    };
+        if (this.colliding.left || this.colliding.right) {
+            this.velocity.x = 0;
+        } else if (this.colliding.up || this.colliding.down) {
+            this.velocity.y = 0;
+        } else if (!this.colliding.up && !this.colliding.down && !this.colliding.right && !this.colliding.left) {
+            this.position.x += this.velocity.x - player.velocity.x * 1.5 * deltaTime_Mult;
+            this.position.y += this.velocity.y - player.velocity.y * 1.5 * deltaTime_Mult;
+
+            if (player.colliding.left || player.colliding.right) {
+                this.position.x += this.velocity.x;
+            }
+
+            if (player.colliding.up || player.colliding.down) {
+                this.position.y += this.velocity.y;
+            }
+        }
+    }
+
 
     receivingDamage(damage) {
         this.health -= damage;
@@ -141,26 +151,24 @@ class Enemy extends AnimatedSprite {
             const enemyWorldX = screenToWorldX(this.position.x);
             const enemyWorldY = screenToWorldY(this.position.y);
 
-            // Move Right if player is to the right, but stop if colliding on the right
             if (playerWorldX > enemyWorldX + this.dimensions.width && !this.colliding.right) {
-                this.velocity.y = 0; // Stop vertical movement
-                this.velocity.x = 5 * deltaTime_Mult; // Move right
-            }
-            // Move Left if player is to the left, but stop if colliding on the left
-            else if (playerWorldX < enemyWorldX - this.dimensions.width && !this.colliding.left) {
-                this.velocity.y = 0; // Stop vertical movement
-                this.velocity.x = -5 * deltaTime_Mult; // Move left
+                this.velocity.y = 0;
+                this.velocity.x = 5 * deltaTime_Mult;
             }
 
-            // Move Down if player is below, but stop if colliding on the bottom
-            if (playerWorldY > enemyWorldY + this.dimensions.height && !this.colliding.down) {
-                this.velocity.x = 0; // Stop horizontal movement
-                this.velocity.y = 5 * deltaTime_Mult; // Move down
+            else if (playerWorldX < enemyWorldX - this.dimensions.width && !this.colliding.left) {
+                this.velocity.y = 0;
+                this.velocity.x = -5 * deltaTime_Mult;
             }
-            // Move Up if player is above, but stop if colliding on the top
+
+            if (playerWorldY > enemyWorldY + this.dimensions.height && !this.colliding.down) {
+                this.velocity.x = 0;
+                this.velocity.y = 5 * deltaTime_Mult;
+            }
+
             else if (playerWorldY < enemyWorldY - this.dimensions.height && !this.colliding.up) {
-                this.velocity.x = 0; // Stop horizontal movement
-                this.velocity.y = -5 * deltaTime_Mult; // Move up
+                this.velocity.x = 0;
+                this.velocity.y = -5 * deltaTime_Mult;
             }
         }
     }
@@ -196,11 +204,11 @@ class Enemy extends AnimatedSprite {
                 return enemy.position.x === this.position.x && enemy.position.y === this.position.y
             })
             enemies.splice(eIndex, 1);
-            if (player.inventory.items.length <= itemsTodos.length) {
+            if (player.inventory.items.length < itemsTodos.length) {
                 if (RandomInt(1, 1) == 1) {
-                    let newItem = itemsTodos[RandomInt(0, itemsTodos.length)]
+                    let newItem = itemsTodos[RandomInt(0, itemsTodos.length - 1)]
                     while (player.inventory.items.findIndex(item => item === newItem) != -1) {
-                        newItem = itemsTodos[RandomInt(0, itemsTodos.length)]
+                        newItem = itemsTodos[RandomInt(0, itemsTodos.length - 1)]
                     }
                     player.inventory.addItem(newItem)
                     newItemAdded = true;
@@ -288,7 +296,7 @@ class Slime extends Enemy {
 
         Action: {
             source: './assets/enemies/slime/action.png',
-            frameBuffer: 11,
+            frameBuffer: 9,
             frameRate: 11,
             image: new Image()
         },

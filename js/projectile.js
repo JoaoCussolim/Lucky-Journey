@@ -1,6 +1,6 @@
 class Projectile extends AnimatedSprite {
-    constructor({ position = { x: 0, y: 0 }, dimensions = {width: 0, height: 0}, source, frameRate = 1, frameBuffer = 3, scale = 1,velocity={x:0, y:0}, animations = {},damage = 1 }) {
-        super({ position, dimensions, source, frameRate, frameBuffer, scale, animations  });
+    constructor({ position = { x: 0, y: 0 }, dimensions = { width: 0, height: 0 }, source, frameRate = 1, frameBuffer = 3, scale = 1, velocity = { x: 0, y: 0 }, animations = {}, damage = 1 }) {
+        super({ position, dimensions, source, frameRate, frameBuffer, scale, animations });
         this.damage = damage;
         this.shouldRemove = false;
         this.velocity = velocity;
@@ -74,15 +74,15 @@ class Projectile extends AnimatedSprite {
     };
 };
 
-class magePower extends Projectile{
-    constructor({ position = { x: 0, y: 0 }, dimensions = { width: 0, height: 0 }, velocity = { x: 0, y: 0 } }){
-    super({ position, dimensions,velocity });
+class magePower extends Projectile {
+    constructor({ position = { x: 0, y: 0 }, dimensions = { width: 0, height: 0 }, velocity = { x: 0, y: 0 }, damage }) {
+        super({ position, dimensions, velocity, damage });
     }
 
-    draw(){
+    draw() {
         let image = new Image();
         image.src = './assets/projectiles/MagoAtaque.png';
-        ctx.drawImage(image,this.center.x,this.center.y, this.dimensions.width, this.dimensions.height)
+        ctx.drawImage(image, this.center.x, this.center.y, this.dimensions.width, this.dimensions.height)
     }
 
     update() {
@@ -94,20 +94,20 @@ class magePower extends Projectile{
     };
 }
 
-class Arrow extends Projectile{
-    constructor({ position = { x: 0, y: 0 }, dimensions = { width: 0, height: 0 }, velocity = { x: 0, y: 0 }, angle }){
-    super({ position, dimensions,velocity });
-    this.angle = angle
+class Arrow extends Projectile {
+    constructor({ position = { x: 0, y: 0 }, dimensions = { width: 0, height: 0 }, velocity = { x: 0, y: 0 }, angle, damage }) {
+        super({ position, dimensions, velocity, damage});
+        this.angle = angle
     }
 
-    draw(){
+    draw() {
         ctx.save();
-        ctx.translate(this.position.x,this.position.y)
+        ctx.translate(this.position.x, this.position.y)
         ctx.rotate(this.angle - Math.PI)
 
         let image = new Image();
         image.src = './assets/projectiles/arrow.png';
-        ctx.drawImage(image,0,0, this.dimensions.width, this.dimensions.height)
+        ctx.drawImage(image, 0, 0, this.dimensions.width, this.dimensions.height)
         ctx.restore()
     }
 
@@ -120,8 +120,8 @@ class Arrow extends Projectile{
     };
 }
 
-class Raio extends Projectile{
-    constructor({ position = { x: 0, y: 0 }, dimensions = { width: 0, height: 0 }, source = './assets/projectiles/raio.png', frameRate = 4, frameBuffer = 4, velocity = {x:0, y:0}, scale = 3, animations = {
+class Raio extends Projectile {
+    constructor({ position = { x: 0, y: 0 }, dimensions = { width: 0, height: 0 }, source = './assets/projectiles/raio.png', frameRate = 4, frameBuffer = 4, damage, velocity = { x: 0, y: 0 }, scale = 3, animations = {
         Idle: {
             source: './assets/projectiles/raio.png',
             frameBuffer: 4,
@@ -129,11 +129,11 @@ class Raio extends Projectile{
             image: new Image()
 
         },
-    }}){
-    super({ position, dimensions,velocity, source, frameRate, frameBuffer, scale, animations  });
+    } }) {
+        super({ position, dimensions, velocity, source, frameRate, frameBuffer, scale, animations, damage});
     }
 
-    draw(){
+    draw() {
         this.center = {
             x: this.position.x - this.dimensions.width / 2,
             y: this.position.y - this.dimensions.height / 2,
@@ -190,12 +190,12 @@ class Raio extends Projectile{
     };
 }
 
-class Swing extends Projectile{
-    constructor({ position = { x: 0, y: 0 }, dimensions = { width: 0, height: 0 }, velocity = { x: 0, y: 0 } }){
-    super({ position, dimensions,velocity });
+class Swing extends Projectile {
+    constructor({ position = { x: 0, y: 0 }, dimensions = { width: 0, height: 0 }, velocity = { x: 0, y: 0 }, damage }) {
+        super({ position, dimensions, velocity, damage });
     }
 
-    draw(){
+    draw() {
         // ctx.fillStyle = 'yellow';
         // ctx.fillRect(this.hitbox.position.x, this.hitbox.position.y, this.hitbox.dimensions.width, this.hitbox.dimensions.height);
     }

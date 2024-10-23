@@ -168,20 +168,22 @@ let GuerreiroButton = new Button({
 
 });
 
+let ConfirmbuttonWidth = 300;
+let ConfirmbuttonHeight = 100;
+let ConfirmbuttonX = (window.innerWidth - ConfirmbuttonWidth) / 2; 
+let ConfirmbuttonY = window.innerHeight / 2 + 10;
+
 let ConfirmButton = new Button({
     txtType: true,
     text: { writing: 'CONFIRM', size: 50, color: "black" },
-    position: { x: 1300, y: 350 },
-    size: { w: 300, h: 100 },
+    position: { x: ConfirmbuttonX, y: ConfirmbuttonY }, // Use the calculated position
+    size: { w: ConfirmbuttonWidth, h: ConfirmbuttonHeight }, // Use fixed size
     border: 5,
     borderColor: 'rgba(237, 172, 74, 1)',
     backgroundColor: 'rgba(67, 93, 115, 1)',
     color: 'rgb(94, 120, 140)',
     color2: 'rgb(84, 110, 130)'
-
 });
-
-
 
 let playbtn = new Button({
     txtType: true,

@@ -7,24 +7,35 @@ function RandomInt(min, max) {
 let nameSelect = () => {
     ctx.fillStyle = "rgba(0,0,0,0.5)";
     ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    const boxPadding = 30;
+    const boxWidth = canvas.width - boxPadding * 2;
+    const boxHeight = canvas.height - boxPadding * 2;
+    
     ctx.fillStyle = "rgba(46, 70, 89, 1)";
-    ctx.fillRect(30, 30, canvas.width - 60, canvas.height - 60);
+    ctx.fillRect(boxPadding, boxPadding, boxWidth, boxHeight);
+
     ctx.fillStyle = "rgba(237, 172, 74, 1)";
     ctx.font = "50px Pixeloid";
     ctx.textAlign = "center";
-    ctx.fillText("Qual o seu Nome?", canvas.width / 2, 100);
-    ctx.strokeStyle = 'rgb(237, 172, 74)'
-    ctx.rect(200, 200, canvas.width / 1.25, 100)
-    ctx.lineWidth = 10
-    ctx.stroke();
-    ctx.fillStyle = 'rgb(94, 120, 140)'
-    ctx.fillRect(200, 200, canvas.width / 1.25, 100)
+    ctx.fillText("Qual o seu Nome?", canvas.width / 2, boxPadding + 70);
+
+    const inputBoxWidth = boxWidth * 0.75;
+    const inputBoxHeight = 100;
+    const inputBoxX = canvas.width / 2 - inputBoxWidth / 2;
+    const inputBoxY = canvas.height / 2 - inputBoxHeight / 2 - 150; 
+
+    ctx.strokeStyle = 'rgb(237, 172, 74)';
+    ctx.lineWidth = 10;
+    ctx.strokeRect(inputBoxX, inputBoxY, inputBoxWidth, inputBoxHeight);
+    ctx.fillStyle = 'rgb(94, 120, 140)';
+    ctx.fillRect(inputBoxX, inputBoxY, inputBoxWidth, inputBoxHeight);
 
     ConfirmButton.update();
-
 }
 
 let newItemAdded = false;
+
 
 
 let characterSelection = () => {
