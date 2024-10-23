@@ -20,6 +20,23 @@ addEventListener("click", (e) => {
         if (clericButton.mouseOn) {
             player = new Cleric({ position: playerPosition, dimensions: { width: 50, height: 50 }, name: playerName });
             inCharacterSelect = false;
+            let kingGoblin = new Boss({
+                position: { x: 200, y: 200 },
+                dimensions: { width: 100, height: 100 },
+                source: './assets/enemies/kinggoblin/fullset.png',
+                frameRate: 4,
+                frameBuffer: 12,
+                scale: 0.5,
+                animations: {
+                    Idle: {
+                        source: "./assets/enemies/kinggoblin/fullset.png",
+                        frameBuffer: 12,
+                        frameRate: 4,
+                        image: new Image()
+                    },
+                }
+            })
+            enemies.push(kingGoblin)
         }
         
         if (ArqueiroButton.mouseOn) {
@@ -30,6 +47,23 @@ addEventListener("click", (e) => {
         if (GuerreiroButton.mouseOn) {
             player = new Warrior({ position: playerPosition, dimensions: { width: 50, height: 50 }, name: playerName });
             inCharacterSelect = false;
+            let kingGoblin = new Boss({
+                position: { x: 200, y: 200 },
+                dimensions: { width: 100, height: 100 },
+                source: './assets/enemies/kinggoblin/fullset.png',
+                frameRate: 4,
+                frameBuffer: 12,
+                scale: 0.5,
+                animations: {
+                    Idle: {
+                        source: "./assets/enemies/kinggoblin/fullset.png",
+                        frameBuffer: 12,
+                        frameRate: 4,
+                        image: new Image()
+                    },
+                }
+            })
+            enemies.push(kingGoblin)
         }
     } else if (!inNameSelect) {
         if (player.dead) {

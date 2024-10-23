@@ -108,3 +108,6 @@ const canvasResize = () => {
     width = screenToWorldX(canvas.width) + lineSpace;
     height = screenToWorldY(canvas.height) + lineSpace;
 }
+
+window.addEventListener('load', canvasResize());
+window.addEventListener('resize', canvasResize());
