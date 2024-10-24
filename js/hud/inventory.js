@@ -34,7 +34,7 @@ function wrapText(text, maxWidth) {
 
 let itemsTodos = [
     { name: "Bota de Slime", source: './assets/items/boots/slimeboot.png', description: 'uma bota feita de slimes', type: "botas", effect: (colocando) => { if (colocando) { player.resistence -= 0.1 } else { player.resistence += 0.1 } }, effectDesc: "resistencia +2" },
-    { name: "Bota Abençoada", source: './assets/items/boots/blessedboots.png', description: 'Ai Meu Deus', type: "botas", effect: (colocando) => {if(colocando){walkOnWater = true}else{walkOnWater = false}}, effectDesc: "Ande sobre as águas"},
+    { name: "Bota Abençoada", source: './assets/items/boots/blessedboots.png', description: 'Ai Meu Deus', type: "botas", effect: (colocando) => { if (colocando) { walkOnWater = true } else { walkOnWater = false } }, effectDesc: "Ande sobre as águas" },
     { name: "Bota de sete léguas", source: './assets/items/boots/herculesboot.png', description: 'FUI EU BARRY!', type: "botas", effect: (colocando) => { if (colocando) { playerSpeedBuff += 2 } else { playerSpeedBuff -= 2 } }, effectDesc: "velocidade +5" },
     { name: "Calça Invisível", source: './assets/items/pants/pantTransparent.png', description: 'Tinha alguma coisa pra ver?', type: "calcas", effect: (colocando) => { if (colocando) { detectionRange += 200 } else { detectionRange -= 200 } }, effectDesc: "furtividade 5+" },
     { name: "Rabo de gato", source: './assets/items/pants/cat.png', description: 'por onde isso entra?', type: "calcas", effect: (colocando) => { if (colocando) { playerSpeedBuff += 0.2 } else { playerSpeedBuff -= 0.2 } }, effectDesc: "velocidade +1" },
@@ -54,6 +54,12 @@ let itemsTodos = [
     { name: "Tampa de Panela Gigante", source: './assets/items/shields/tampadepanela.png', description: 'Voce pega e PAAA nela', type: "escudo", effect: (colocando) => { if (colocando) { player.resistence -= 0.15 } else { player.resistence += 0.15 } }, effectDesc: 'resistencia +3' },
     { name: "Escudo de Madeira", source: './assets/items/shields/woodshield.png', description: 'Cadê a criatividade?', type: "escudo", effect: (colocando) => { if (colocando) { player.resistence -= 0.05 } else { player.resistence += 0.05 } }, effectDesc: 'resistencia +1' },
     { name: "Escudo de Ferro", source: './assets/items/shields/ironshield.png', description: 'É tipo madeira, só que mais dura', type: "escudo", effect: (colocando) => { if (colocando) { player.resistence -= 0.1 } else { player.resistence += 0.1 } }, effectDesc: 'resistencia +2' },
+]
+
+let potionIndex = 0
+const potions = [
+    { name: "Poção de Vida", source: './assets/items/potions/potionHealthMax.png', use: () => { player.health += 50 }, quantity: 2 },
+    { name: "Poção de Mana", source: './assets/items/potions/potionManaMax.png', use: () => { player.mana += 50 }, quantity: 2 }
 ]
 
 let itemBox = new Image()
@@ -119,48 +125,48 @@ class inventory {
 
     drawItems() {
         ctx.font = '50px Pixeloid'
-        ctx.fillText("Inventario",this.pos.x + 550,this.pos.y + 50)
-        if(this.items.length > 0){
-        const startIndex = Math.floor(this.scrollY / this.itemHeight);
-        const endIndex = startIndex + Math.ceil(this.listHeight / this.itemHeight) + 1;
+        ctx.fillText("Inventario", this.pos.x + 550, this.pos.y + 50)
+        if (this.items.length > 0) {
+            const startIndex = Math.floor(this.scrollY / this.itemHeight);
+            const endIndex = startIndex + Math.ceil(this.listHeight / this.itemHeight) + 1;
 
 
 
-        for (let i = startIndex; i < endIndex; i++) {
-            const itemIndex = i % this.totalItems;
-            const y = (i - startIndex) * this.itemHeight - (this.scrollY % this.itemHeight);
+            for (let i = startIndex; i < endIndex; i++) {
+                const itemIndex = i % this.totalItems;
+                const y = (i - startIndex) * this.itemHeight - (this.scrollY % this.itemHeight);
 
-            if (y > this.listHeight) break; // Stop drawing if it's beyond the visible area
+                if (y > this.listHeight) break; // Stop drawing if it's beyond the visible area
 
-            ctx.fillStyle = 'black';
+                ctx.fillStyle = 'black';
 
 
-            ctx.drawImage(itemBox, this.listX, this.listY + y, this.listWidth, this.itemHeight);
-            let fontSz = 20;
-            ctx.fillStyle = 'white';
-            ctx.font = fontSz + 'px Pixeloid';
-            ctx.textAlign = 'center';
-            ctx.textBaseline = 'alphabetic';
-            let image = new Image();
-            const item = this.items[itemIndex]
-            const size = item.size || { x: 80, y: 80 };
-            const itemSpace = item.space || 22
-            image.src = item.source;
-            ctx.drawImage(image, this.listX + itemSpace, this.listY + y + this.itemHeight / 5, size.x, size.y)
-            ctx.fillText(item.name, this.listX + 300, this.listY + y + this.itemHeight / 3);
-            const description = wrapText(item.description, 300)
-            for (let i = 0; i < description.length; i++) {
-                ctx.fillText(description[i], this.listX + 310, this.listY + y + (i * (fontSz * 1.2)) + this.itemHeight / 2);
+                ctx.drawImage(itemBox, this.listX, this.listY + y, this.listWidth, this.itemHeight);
+                let fontSz = 20;
+                ctx.fillStyle = 'white';
+                ctx.font = fontSz + 'px Pixeloid';
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'alphabetic';
+                let image = new Image();
+                const item = this.items[itemIndex]
+                const size = item.size || { x: 80, y: 80 };
+                const itemSpace = item.space || 22
+                image.src = item.source;
+                ctx.drawImage(image, this.listX + itemSpace, this.listY + y + this.itemHeight / 5, size.x, size.y)
+                ctx.fillText(item.name, this.listX + 300, this.listY + y + this.itemHeight / 3);
+                const description = wrapText(item.description, 300)
+                for (let i = 0; i < description.length; i++) {
+                    ctx.fillText(description[i], this.listX + 310, this.listY + y + (i * (fontSz * 1.2)) + this.itemHeight / 2);
+                }
+
+
+                ctx.drawImage(menuInvTop, 930, 96.6, 500, 150)
+                ctx.drawImage(menuInvBottom, 463.8, 707.9, 995, 168.5)
             }
 
-
-            ctx.drawImage(menuInvTop, 930, 96.6, 500, 150)
-            ctx.drawImage(menuInvBottom, 463.8, 707.9, 995, 168.5)
+            // Draw the scrollbar
+            this.drawScrollbar();
         }
-
-        // Draw the scrollbar
-        this.drawScrollbar();
-    }
     }
 
     drawScrollbar() {
@@ -202,9 +208,9 @@ class inventory {
     drawPlayerImage() {
         const playerImage = new Image()
         playerImage.src = player.animations['IdleForward'].source
-        if(player instanceof Mage){
+        if (player instanceof Mage) {
             ctx.drawImage(playerImage, this.pos.x + 30, this.pos.y - 15, 700, 700);
-        }else ctx.drawImage(playerImage, this.pos.x - 85, this.pos.y - 15, 700, 700);
+        } else ctx.drawImage(playerImage, this.pos.x - 85, this.pos.y - 15, 700, 700);
     }
 
     drawItemBuffs() {

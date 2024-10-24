@@ -225,7 +225,7 @@ let game = (currentTime) => {
 
         if(newItemAdded){
             ctx.fillStyle = 'white'
-            ctx.fillText('Novo Item adquirido!',800,200)
+            ctx.fillText(newItemText,800,200)
             if(newItemCooldown <= 100){
                 newItemCooldown ++;
             }else{
@@ -242,8 +242,6 @@ let game = (currentTime) => {
     } else {
         characterSelection();
     }
-
-
 
     lastTime = currentTime;
     requestAnimationFrame(game);

@@ -11,7 +11,7 @@ let nameSelect = () => {
     const boxPadding = 30;
     const boxWidth = canvas.width - boxPadding * 2;
     const boxHeight = canvas.height - boxPadding * 2;
-    
+
     ctx.fillStyle = "rgba(46, 70, 89, 1)";
     ctx.fillRect(boxPadding, boxPadding, boxWidth, boxHeight);
 
@@ -23,7 +23,7 @@ let nameSelect = () => {
     const inputBoxWidth = boxWidth * 0.75;
     const inputBoxHeight = 100;
     const inputBoxX = canvas.width / 2 - inputBoxWidth / 2;
-    const inputBoxY = canvas.height / 2 - inputBoxHeight / 2 - 150; 
+    const inputBoxY = canvas.height / 2 - inputBoxHeight / 2 - 150;
 
     ctx.strokeStyle = 'rgb(237, 172, 74)';
     ctx.lineWidth = 10;
@@ -35,6 +35,7 @@ let nameSelect = () => {
 }
 
 let newItemAdded = false;
+let newItemText = ''
 
 
 
@@ -42,7 +43,7 @@ let characterSelection = () => {
     // Estilos e retângulos de fundo
     ctx.fillStyle = "rgba(0,0,0,0.5)";
     ctx.fillRect(0, 0, window.innerWidth, window.innerHeight);
-    
+
     ctx.fillStyle = "rgba(46, 70, 89, 1)";
     const boxWidth = window.innerWidth - 60;
     const boxHeight = window.innerHeight - 60;
@@ -69,6 +70,49 @@ let characterSelection = () => {
     clericButton.update();
     ArqueiroButton.update();
     GuerreiroButton.update();
+};
+
+let potionsFrame = () => {
+    const backgroundImage = new Image();
+    const potionImage = new Image();
+    const actualPotion = potions[potionIndex];
+    
+    backgroundImage.src = './assets/ui/potionsFrame.png';
+    potionImage.src = actualPotion.source;
+    
+    // Fixed pixel values for positions and sizes
+    let posX = 50; // Offset for horizontal positioning
+    let posY = -80; // Offset for vertical positioning
+    
+    let largeFrameWidth = 150; // Fixed size for the large frame
+    let largeFrameHeight = 200;
+    
+    let smallFrameWidth = 75; // Fixed size for the small frames
+    let smallFrameHeight = 100;
+
+    // Draw the large background frame
+    ctx.drawImage(backgroundImage, window.innerWidth - 200 - posX, window.innerHeight - 300 - posY, largeFrameWidth, largeFrameHeight);
+    
+    // Draw the two small background frames
+    ctx.drawImage(backgroundImage, window.innerWidth - 275 - posX, window.innerHeight - 250 - posY, smallFrameWidth, smallFrameHeight);
+    ctx.drawImage(backgroundImage, window.innerWidth - 50 - posX, window.innerHeight - 250 - posY, smallFrameWidth, smallFrameHeight);
+    
+    // Set text properties (fixed font size)
+    ctx.fillStyle = "white";
+    ctx.font = "50px Pixeloid"; // Fixed font size
+    ctx.textAlign = "center";
+    
+    // Draw the potion control labels (A, D, W)
+    ctx.fillText('A', window.innerWidth - 235 - posX, window.innerHeight - 180 - posY);
+    ctx.fillText('D', window.innerWidth - 10 - posX, window.innerHeight - 180 - posY);
+    ctx.fillText('W', window.innerWidth - 120 - posX, window.innerHeight - 110 - posY);
+    
+    // Smaller font for potion quantity
+    ctx.font = "30px Pixeloid"; // Fixed smaller font size for quantity
+    ctx.fillText(actualPotion.quantity + 'x', window.innerWidth - 125 - posX, window.innerHeight - 260 - posY, 60);
+    
+    // Draw the potion image
+    ctx.drawImage(potionImage, window.innerWidth - 165 - posX, window.innerHeight - 245 - posY, 80, 80);
 };
 
 

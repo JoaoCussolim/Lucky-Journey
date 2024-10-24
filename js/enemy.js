@@ -204,13 +204,20 @@ class Enemy extends AnimatedSprite {
             })
             enemies.splice(eIndex, 1);
             if (player.inventory.items.length < itemsTodos.length) {
-                if (RandomInt(1, 1) == 1) {
+                if (RandomInt(1, 10) == 10) {
                     let newItem = itemsTodos[RandomInt(0, itemsTodos.length - 1)]
                     while (player.inventory.items.findIndex(item => item === newItem) != -1) {
                         newItem = itemsTodos[RandomInt(0, itemsTodos.length - 1)]
                     }
+                    newItemText = 'Novo Item adquirido!'
                     player.inventory.addItem(newItem)
                     newItemAdded = true;
+                } else if(RandomInt(1, 6) > 5){
+                    let potionIndex = RandomInt(0, potions.length - 1);
+                    const actualPotion = potions[potionIndex];
+                    newItemText = `+1 ${actualPotion.name}!`
+                    newItemAdded = true;
+                    actualPotion.quantity++;
                 }
             }
         }

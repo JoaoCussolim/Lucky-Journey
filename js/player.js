@@ -182,6 +182,7 @@ class Player extends AnimatedSprite {
     draw() {
         this.ManaUI();
         this.HealthUI();
+        potionsFrame();
         this.center = {
             x: this.position.x - this.dimensions.width / 2,
             y: this.position.y - this.dimensions.height / 2,
@@ -323,6 +324,7 @@ class Mage extends Player {
     draw() {
         this.ManaUI();
         this.HealthUI();
+        potionsFrame();
         this.center = {
             x: this.position.x - this.dimensions.width / 2,
             y: this.position.y - this.dimensions.height / 2,
@@ -502,6 +504,7 @@ class Archer extends Player {
     draw() {
         this.ManaUI();
         this.HealthUI();
+        potionsFrame();
         this.center = {
             x: this.position.x - this.dimensions.width / 2,
             y: this.position.y - this.dimensions.height / 2,
@@ -681,6 +684,7 @@ class Cleric extends Player {
     draw() {
         this.ManaUI();
         this.HealthUI();
+        potionsFrame();
         this.center = {
             x: this.position.x - this.dimensions.width / 2,
             y: this.position.y - this.dimensions.height / 2,
@@ -857,6 +861,7 @@ class Warrior extends Player {
     draw() {
         this.ManaUI();
         this.HealthUI();
+        potionsFrame();
         this.center = {
             x: this.position.x - this.dimensions.width / 2,
             y: this.position.y - this.dimensions.height / 2,
