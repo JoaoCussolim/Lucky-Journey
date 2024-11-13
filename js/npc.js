@@ -139,18 +139,14 @@ const generateNPC = () => {
             position: { x: player.position.x - 100, y: player.position.y - 20 },
             dimensions: { width: 50, height: 50 },
             imageDimensions: { width: 180, height: 180 },
-            dialog: ['Finalmente, um aventureiro!', 'Nosso mundo foi tomado por slimes, você precisa nos ajudar!', 'Se matar 100 slimes, te darei uma recompensa!'],
+            dialog: [`Olá ${playerName}!`, 'Nosso mundo foi tomado por slimes, você precisa nos ajudar!', 'Se matar 100 slimes, te darei uma recompensa!'],
             name: 'Pedro',
             src: './assets/npcs/npc1.png',
             mission: new Mission({
                 name: 'Mate slimes',
                 mission: 'Inimigos',
                 reward: {
-                    name: "Bota de Slime",
-                    sorce: './assets/items/boots/slimeboot.png',
-                    description: 'uma bota feita de slimes',
-                    type: "botas",
-                    effect: () => { }
+                    
                 },
                 maxTargets: 100
             })
