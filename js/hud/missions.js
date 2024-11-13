@@ -19,30 +19,60 @@ class Mission {
 
     drawText() {
         ctx.textBaseline = 'alphabetic';
-        const borderSize = 10;
+    
+        // Get canvas width and height for scaling
+        const canvasWidth = canvas.width;
+        const canvasHeight = canvas.height;
+    
+        // Dynamic scaling factors based on canvas size
+        const borderSize = canvasWidth * 0.01; // 1% of canvas width
         const borderColor = 'rgba(237, 172, 74, 1)';
-        const widthFix = 1200
-        const xFix = 1180
-        const yFix = -700
-        drawBorder(this.position.x + xFix, this.position.y + 5 + yFix, this.dimensions.width - widthFix, this.dimensions.height, borderSize, borderColor);
+        
+        // Dynamic positioning and dimensions
+        const xFix = canvasWidth * 0.48; // 5% of canvas width as offset
+        const yFix = -canvasHeight * 0.7; // 10% of canvas height as offset
+        const widthFix = canvasWidth * 0.5; // 10% of canvas width reduction
+        
+        // Dynamic font size based on canvas width
+        const fontSize = canvasWidth * 0.02; // 3% of canvas width
+        ctx.font = `${fontSize}px Pixeloid`;
+    
+        // Calculate responsive dimensions for the text box
+        const boxWidth = this.dimensions.width - widthFix;
+        const boxHeight = this.dimensions.height;
+        
+        // Draw border around the text box
+        drawBorder(
+            this.position.x + xFix, 
+            this.position.y + 5 + yFix, 
+            boxWidth, 
+            boxHeight, 
+            borderSize, 
+            borderColor
+        );
+    
+        // Draw background for text box
         ctx.fillStyle = 'rgba(67, 93, 115, 1)';
-        ctx.fillRect(this.position.x + xFix, this.position.y + 5 + yFix, this.dimensions.width - widthFix, this.dimensions.height);
-
+        ctx.fillRect(this.position.x + xFix, this.position.y + 5 + yFix, boxWidth, boxHeight);
+    
+        // Draw the text
         ctx.fillStyle = 'rgba(245, 203, 83, 1)';
         ctx.textAlign = 'start';
-        const fontSize = 40;
-        ctx.font = `${fontSize}px Pixeloid`;
-
+    
+        // Dynamic max width for text wrapping
+        const maxWidth = boxWidth - 10;
+    
+        // Text wrapping function
         function wrapText(text, maxWidth) {
             let lines = [];
             let words = text.split(' ');
             let line = '';
-
+    
             for (let i = 0; i < words.length; i++) {
                 let testLine = line + words[i] + ' ';
                 let metrics = ctx.measureText(testLine);
                 let testWidth = metrics.width;
-
+    
                 if (testWidth > maxWidth && i > 0) {
                     lines.push(line);
                     line = words[i] + ' ';
@@ -51,26 +81,33 @@ class Mission {
                 }
             }
             lines.push(line);
-
+    
             return lines;
         }
-
-        const text = this.missionName
-        const maxWidth = this.dimensions.width - widthFix - 10
-
+    
+        const text = this.missionName;
         const lines = wrapText(text, maxWidth);
-        const lineHeight = fontSize * 1.2; // Adjust line height if needed
-
-        // Draw each line
+    
+        // Dynamic line height based on font size
+        const lineHeight = fontSize * 1.2; 
         const startX = this.position.x + 10 + xFix;
         const startY = this.position.y + 40 + yFix;
-
+    
+        // Draw each line of text
         for (let i = 0; i < lines.length; i++) {
             ctx.fillText(lines[i], startX, startY + (i * lineHeight));
         }
-        ctx.fillText(`${this.defeatedTargets}/${this.maxTargets} ` + this.missionObjective, this.position.x + 10 + xFix, this.position.y + 190 + yFix, this.dimensions.width)
-
+    
+        // Draw additional mission information (adapted for responsive design)
+        const missionInfoY = startY + (lines.length * lineHeight) + lineHeight;
+        ctx.fillText(
+            `${this.defeatedTargets}/${this.maxTargets} ` + this.missionObjective, 
+            startX, 
+            missionInfoY, 
+            maxWidth
+        );
     }
+    
 
     checkTargets(){
         if(this.maxTargets <= this.defeatedTargets){

@@ -140,7 +140,7 @@ const generateNPC = () => {
             dimensions: { width: 50, height: 50 },
             imageDimensions: { width: 180, height: 180 },
             dialog: ['Finalmente, um aventureiro!', 'Nosso mundo foi tomado por slimes, você precisa nos ajudar!', 'Se matar 100 slimes, te darei uma recompensa!'],
-            name: 'Test',
+            name: 'Pedro',
             src: './assets/npcs/npc1.png',
             mission: new Mission({
                 name: 'Mate slimes',

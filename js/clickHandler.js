@@ -70,7 +70,7 @@ addEventListener("click", (e) => {
             location.reload();
         }
 
-
+        if(!dialogActive){
         if (player instanceof Mage) {
             if (!player.attackInCooldown && player.mana >= 10) {
 
@@ -164,6 +164,7 @@ addEventListener("click", (e) => {
                 player.mana -= 5;
             }
         }
+    }
 
         if (dialogActive) {
             if (canvasPrompResponse != '') {
